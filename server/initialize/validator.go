@@ -5,13 +5,18 @@ import "server/utils"
 func init() {
 	_ = utils.RedsiterRule("PageVerify",
 		utils.Rules{
-			"Page": {utils.NoteEmpty()},
-			"PageSize": {utils.NoteEmpty()},
+			"Page":     {utils.NotEmpty()},
+			"PageSize": {utils.NotEmpty()},
 		},
 	)
-	_ = utils.RegisterRule("IdVerify",	
+	_ = utils.RegisterRule("IdVerify",
 		utils.Rules{
-			"Id": {utils.NoteEmpty()},
-		}
+			"Id": {utils.NotEmpty()},
+		},
+	)
+	_ = utils.RegisterRule("AuthorityIdVerify",
+		utils.Rules{
+			"AuthorityId": {utils.NotEmpty()},
+		},
 	)
 }
