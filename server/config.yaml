@@ -1,4 +1,4 @@
-# Gin-Vue-Admin Global Configuration
+# testproject Global Configuration
 
 # jwt configuration
 jwt:
@@ -8,7 +8,7 @@ jwt:
 zap:
   level: 'info'
   format: 'console'
-  prefix: '[GIN-VUE-ADMIN]'
+  prefix: '[testproject]'
   director: 'log'
   link-name: 'latest_log'
   show-line: true
@@ -23,14 +23,6 @@ redis:
   password: ''
 
 # email configuration
-email:
-  to: 'xxx@qq.com'
-  port: 465
-  from: 'xxx@163.com'
-  host: 'smtp.163.com'
-  is-ssl: true
-  secret: 'xxx'
-  nickname: 'test'
 
 # casbin configuration
 casbin:
@@ -40,7 +32,7 @@ casbin:
 system:
   env: 'public'  # Change to "develop" to skip authentication for development mode
   addr: 8888
-  db-type: 'postgresql'
+  db-type: 'postgres'
   oss-type: 'local'
   use-multipoint: false # 是否开启redis
 
@@ -63,10 +55,10 @@ captcha:
 #  log-zap: false
 pg:
   host: '192.168.3.121'
+  port: '30001'
   user: 'db'
   password: 'Aa123456'
   dbname: 'testdb'
-  port: '30001'
   sslmode: disable
   timezone: 'Asia/Shanghai'
   max-idle-conns: 10
@@ -78,13 +70,3 @@ pg:
 # local configuration
 local:
   path: 'uploads/file'
-
-# qiniu configuration (请自行七牛申请对应的 公钥 私钥 bucket �?域名地址)
-qiniu:
-  zone: 'ZoneHuadong'
-  bucket: 'qm-plus-img'
-  img-path: 'http://qmplusimg.henrongyi.top'
-  use-https: false
-  access-key: '25j8dYBZ2wuiy0yhwShytjZDTX662b8xiFguwxzZ'
-  secret-key: 'pgdbqEsf7ooZh7W3xokP833h3dZ_VecFXPDeG5JY'
-  use-cdn-domains: false
