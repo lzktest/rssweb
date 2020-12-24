@@ -1,8 +1,13 @@
 package main
 
 import (
+	//"database/sql"
+
+	"fmt"
 	"server/core"
 	"server/global"
+
+	_ "github.com/lib/pq"
 )
 
 // @title Swagger Example API
@@ -14,6 +19,11 @@ import (
 // @BasePath /
 
 func main() {
+
 	global.GVA_VP = core.Viper()
+	fmt.Print(global.GVA_CONFIG)
 	global.GVA_LOG = core.Zap()
+	global.GVA_DB = core.Pgcon()
+	defer global.GVA_DB.Close()
+
 }
