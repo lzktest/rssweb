@@ -53,7 +53,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         closeLoading()
-        if (response.data.code == 0 || response.headers.success === "true"){
+        if (response.data.Code == 0 || response.headers.success === "true"){
             return response.data
         } else {
             Message({

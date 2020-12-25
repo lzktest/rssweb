@@ -3,7 +3,6 @@ package main
 import (
 	//"database/sql"
 
-	"fmt"
 	"server/core"
 	"server/global"
 
@@ -21,9 +20,8 @@ import (
 func main() {
 
 	global.GVA_VP = core.Viper()
-	fmt.Print(global.GVA_CONFIG)
 	global.GVA_LOG = core.Zap()
 	global.GVA_DB = core.Pgcon()
 	defer global.GVA_DB.Close()
-
+	core.RunWindowsServer()
 }

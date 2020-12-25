@@ -9,7 +9,7 @@
       </el-form-item>
       <el-form-item label="验证码" prop="">
         <el-input v-model="loginForm.captcha" name="logVerify" placeholder="请输入验证码"></el-input>
-        <img v-if="path" :src="path + picPath" alt="请输入验证码" @click="loginVefify()"/>
+        <img :src="picPath" alt="请输入验证码" @click="loginVefify()"/>
       </el-form-item>
       <el-form-item>
         <div class="grid-content bg-purple"><el-button type="primary" style="width:100%" @click="submitForm">登录</el-button></div><!--  -->
@@ -21,7 +21,6 @@
 <script>
 import { mapActions } from "vuex"
 import { captcha } from "@/api/user"
-const path = process.env.VUE_APP_BASE_API;
 export default {
     name: "Login",
     data(){
@@ -33,8 +32,7 @@ export default {
           captchaId: '',
         },
         picPath: '',
-        logVerify: "",
-        path: path,         
+        logVerify: "",       
         }
     },
     created(){
@@ -63,8 +61,8 @@ export default {
       },
       loginVefify(){
         captcha({}).then((ele) => {
-          this.picPath = ele.data.picPath;
-          this.loginForm.captchaId = ele.data.captchaId
+          this.picPath = ele.Data.picPath;
+          this.loginForm.captchaId = ele.Data.captchaId
         })
 
       }

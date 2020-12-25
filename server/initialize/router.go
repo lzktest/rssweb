@@ -3,9 +3,12 @@ package initialize
 import (
 	"fmt"
 	"net/http"
+	_ "server/docs"
 	"server/global"
+	"server/router"
 
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"github.com/unrolled/secure"
 )
