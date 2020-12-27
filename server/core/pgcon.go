@@ -42,3 +42,9 @@ func Pgcon() *sql.DB {
 	}
 	return db
 }
+
+func CheckErr(err error) {
+	if err != nil {
+		global.GVA_LOG.Error("sql exec err: ", zap.Any("err", err))
+	}
+}

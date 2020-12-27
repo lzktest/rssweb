@@ -4,6 +4,9 @@ go 1.15
 
 require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
+	github.com/casbin/casbin v1.9.1
+	github.com/casbin/casbin-pg-adapter v0.1.6
+	github.com/casbin/casbin/v2 v2.19.7
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/fvbock/endless v0.0.0-20170109170031-447134032cb6 // indirect
