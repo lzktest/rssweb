@@ -21,7 +21,7 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/spf13/viper v1.7.1
 	github.com/swaggo/gin-swagger v1.3.0
-	github.com/swaggo/swag v1.5.1
+	github.com/swaggo/swag v1.7.0
 	github.com/unrolled/secure v1.0.8
 	go.uber.org/zap v1.10.0
 	gorm.io/driver/mysql v1.0.3
