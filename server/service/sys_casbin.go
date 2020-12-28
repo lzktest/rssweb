@@ -2,10 +2,11 @@ package sevice
 
 import (
 	"errors"
-	"server/core"
+	"fmt"
 	"server/global"
 	"server/model"
 	"server/model/request"
+	"server/utils"
 	"strings"
 
 	pgadapter "github.com/casbin/casbin-pg-adapter"
@@ -19,9 +20,9 @@ import (
 // @description: 持久化到数据库  引入自定义规则
 // @return: *casbin.Enforcer
 
-func Casbin() *casbin.Enforce {
+func Casbin() *casbin.Enforcer {
 	a, _ := pgadapter.NewAdapter("postgresql://" + global.GVA_CONFIG.Pg.Username + ":" + global.GVA_CONFIG.Pg.Password + "@" + global.GVA_CONFIG.Pg.Host + ":" + global.GVA_CONFIG.Pg.Port + "/" + global.GVA_CONFIG.Pg.Dbname + "?sslmode=" + global.GVA_CONFIG.Pg.Sslmode)
-	e, _ := casbin.NewEnforcer(global.GVA_config.Casbin.ModelPath, a)
+	e, _ := casbin.NewEnforcer(global.GVA_CONFIG.Casbin.ModelPath, a)
 	e.AddFunction("ParamsMatch", ParamsMatchFunc)
 	_ = e.LoadPolicy()
 	return e
@@ -36,7 +37,7 @@ func GetPolicyPathByAuthorityId(authorityId string) (pathMaps []request.CasbinIn
 	e := Casbin()
 	list := e.GetFilteredPolicy(0, authorityId)
 	for _, v := range list {
-		pathMaps = append(pathMaps, request.CasbingInfo{
+		pathMaps = append(pathMaps, request.CasbinInfo{
 			Path:   v[1],
 			Method: v[2],
 		})
@@ -48,7 +49,7 @@ func GetPolicyPathByAuthorityId(authorityId string) (pathMaps []request.CasbinIn
 // @function: UpdateCasbin
 // @description: 更新casbin权限
 // @param: authorityId string, casbinInfos []request.CasbinInfo
-
+// @return: error
 func UpdateCasbin(authorityId string, casbinInfos []request.CasbinInfo) error {
 	ClearCasbin(0, authorityId)
 	rules := [][]string{}
@@ -77,11 +78,12 @@ func UpdateCasbin(authorityId string, casbinInfos []request.CasbinInfo) error {
 
 func UpdateCasbinApi(oldPath string, newPath string, oldMethod string, newMethod string) error {
 	upsql, err := global.GVA_DB.Prepare("update casbin_rule set v1=$1,v2=$2 where v1=$3 and v2 = $4")
-	core.CheckErr(err)
+	utils.CheckErr(err)
 	res, err := upsql.Exec(newPath, newMethod, oldPath, oldMethod)
-	core.CheckErr(err)
+	utils.CheckErr(err)
 	affect, err := res.RowsAffected()
-	core.CheckErr(err)
+	fmt.Print("aaa: %v", affect)
+	utils.CheckErr(err)
 	return err
 }
 
@@ -93,7 +95,7 @@ func UpdateCasbinApi(oldPath string, newPath string, oldMethod string, newMethod
 
 func ClearCasbin(v int, p ...string) bool {
 	e := Casbin()
-	success, _ := e.RemoveFileteredPolicy(v, p...)
+	success, _ := e.RemoveFilteredPolicy(v, p...)
 	return success
 }
 

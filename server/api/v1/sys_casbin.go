@@ -4,6 +4,7 @@ import (
 	"server/global"
 	"server/model/request"
 	"server/model/response"
+	service "server/service"
 	"server/utils"
 
 	"github.com/gin-gonic/gin"
@@ -29,6 +30,6 @@ func UpdateCasbin(c *gin.Context) {
 		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))
 		response.FailWithMessage("更新失败", c)
 	} else {
-		response.OkeWithMessage("更新成功", c)
+		response.OkWithMessage("更新成功", c)
 	}
 }
