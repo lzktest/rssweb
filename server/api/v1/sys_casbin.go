@@ -18,7 +18,7 @@ import (
 // @Produce application/json
 // @Param data body request.CasbinInReceive true "权限id, 权限模型列表"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
-// @Router /casbin/UpdateCasbin [post]
+// @Router /base/UpdateCasbin [post]
 func UpdateCasbin(c *gin.Context) {
 	var cmr request.CasbinInReceive
 	_ = c.ShouldBindJSON(&cmr)

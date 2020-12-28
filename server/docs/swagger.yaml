@@ -23,23 +23,7 @@ info:
   title: Swagger Example API
   version: 0.0.1
 paths:
-  /base/captcha:
-    post:
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: '{"success":true,"data":{},"msg":"验证码获取成功"}'
-          schema:
-            type: string
-      security:
-      - ApiKeyAuth: []
-      summary: 生成验证码
-      tags:
-      - Base
-  /casbin/UpdateCasbin:
+  /base/UpdateCasbin:
     post:
       consumes:
       - application/json
@@ -62,6 +46,22 @@ paths:
       summary: 更新角色api权限
       tags:
       - Casbin
+  /base/captcha:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"验证码获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 生成验证码
+      tags:
+      - Base
 securityDefinitions:
   ApiKeyAuth:
     in: header
