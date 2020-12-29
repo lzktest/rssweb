@@ -31,7 +31,9 @@ func Casbin() *casbin.Enforcer {
 		global.GVA_LOG.Error("NewEnforcer Fail, please check casbin ModelPath:", zap.Any("err",err))
 	}
 	e.AddFunction("ParamsMatch", ParamsMatchFunc)
-	_ = e.LoadPolicy()
+	if err := e.LoadPolicy(); err != nil {
+		global.GVA_LOG.Error("loadPolicy Fail, please check casbin ModelPath:", zap.Any("err",err))
+	}
 	return e
 }
 
@@ -44,13 +46,17 @@ func GetPolicyPathByAuthorityId(authorityId string) (pathMaps []request.CasbinIn
 	e := Casbin()
 	list := e.GetFilteredPolicy(0, authorityId)
 	fmt.Print(list)
+	fmt.Print("aaa",e.GetAllObjects())
+	fmt.Print("aaa",e.GetPolicy())
+	fmt.Print("ccc",e.GetAllRoles())
+	fmt.Print("ccc",e.GetAllSubjects())
 	for _, v := range list {
 		pathMaps = append(pathMaps, request.CasbinInfo{
 			Path:   v[1],
 			Method: v[2],
 		})
 	}
-	fmt.Print(list)
+	fmt.Print("bbb",list)
 	return pathMaps
 }
 
