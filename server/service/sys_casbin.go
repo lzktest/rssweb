@@ -3,6 +3,7 @@ package sevice
 import (
 	"errors"
 	"fmt"
+	"go.uber.org/zap"
 	"server/global"
 	"server/model"
 	"server/model/request"
@@ -11,7 +12,7 @@ import (
 
 	pgadapter "github.com/casbin/casbin-pg-adapter"
 	"github.com/casbin/casbin/util"
-	"github.com/casbin/casbin/v2"
+	casbin "github.com/casbin/casbin/v2"
 	_ "github.com/lib/pq"
 )
 
@@ -21,8 +22,14 @@ import (
 // @return: *casbin.Enforcer
 
 func Casbin() *casbin.Enforcer {
-	a, _ := pgadapter.NewAdapter("postgresql://" + global.GVA_CONFIG.Pg.Username + ":" + global.GVA_CONFIG.Pg.Password + "@" + global.GVA_CONFIG.Pg.Host + ":" + global.GVA_CONFIG.Pg.Port + "/" + global.GVA_CONFIG.Pg.Dbname + "?sslmode=" + global.GVA_CONFIG.Pg.Sslmode)
-	e, _ := casbin.NewEnforcer(global.GVA_CONFIG.Casbin.ModelPath, a)
+	a, err := pgadapter.NewAdapter("postgresql://" + global.GVA_CONFIG.Pg.Username + ":" + global.GVA_CONFIG.Pg.Password + "@" + global.GVA_CONFIG.Pg.Host + ":" + global.GVA_CONFIG.Pg.Port + "/" + global.GVA_CONFIG.Pg.Dbname + "?sslmode=" + global.GVA_CONFIG.Pg.Sslmode)
+	if err != nil {
+		global.GVA_LOG.Error("casbin Fail, please check pgadapter:", zap.Any("err",err))
+	}
+	e, err := casbin.NewEnforcer(global.GVA_CONFIG.Casbin.ModelPath, a)
+	if err != nil {
+		global.GVA_LOG.Error("NewEnforcer Fail, please check casbin ModelPath:", zap.Any("err",err))
+	}
 	e.AddFunction("ParamsMatch", ParamsMatchFunc)
 	_ = e.LoadPolicy()
 	return e
@@ -36,12 +43,14 @@ func Casbin() *casbin.Enforcer {
 func GetPolicyPathByAuthorityId(authorityId string) (pathMaps []request.CasbinInfo) {
 	e := Casbin()
 	list := e.GetFilteredPolicy(0, authorityId)
+	fmt.Print(list)
 	for _, v := range list {
 		pathMaps = append(pathMaps, request.CasbinInfo{
 			Path:   v[1],
 			Method: v[2],
 		})
 	}
+	fmt.Print(list)
 	return pathMaps
 }
 
@@ -62,11 +71,17 @@ func UpdateCasbin(authorityId string, casbinInfos []request.CasbinInfo) error {
 		}
 		rules = append(rules, []string{cm.AuthorityId, cm.Path, cm.Method})
 	}
+	print(rules)
 	e := Casbin()
-	success, _ := e.AddPolicies(rules)
-	if success == false {
-		return errors.New("存在相同api,添加失败,请联系管理员")
+
+	if success, err := e.AddPolicies(rules); err != nil {
+		global.GVA_LOG.Error("Addpolicies Fail:", zap.Any("err",err))
+	} else {
+		if success == false {
+			return errors.New("存在相同api,添加失败,请联系管理员")
+		}
 	}
+
 	return nil
 }
 
