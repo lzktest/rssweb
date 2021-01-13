@@ -10,10 +10,10 @@ import (
 	"server/utils"
 	"strings"
 
-	pgadapter "github.com/casbin/casbin-pg-adapter"
 	"github.com/casbin/casbin/util"
 	casbin "github.com/casbin/casbin/v2"
 	_ "github.com/lib/pq"
+	pgadapter "github.com/lzktest/casbinpgandadapter"
 )
 
 // @author: [piexlmax](https://github.com/piexlmax)
@@ -22,7 +22,8 @@ import (
 // @return: *casbin.Enforcer
 
 func Casbin() *casbin.Enforcer {
-	a, err := pgadapter.NewAdapter("postgresql://" + global.GVA_CONFIG.Pg.Username + ":" + global.GVA_CONFIG.Pg.Password + "@" + global.GVA_CONFIG.Pg.Host + ":" + global.GVA_CONFIG.Pg.Port + "/" + global.GVA_CONFIG.Pg.Dbname + "?sslmode=" + global.GVA_CONFIG.Pg.Sslmode)
+	a, err := pgadapter.NewAdapter("postgres","user=" + global.GVA_CONFIG.Pg.Username + " password=" + global.GVA_CONFIG.Pg.Password + " host=" + global.GVA_CONFIG.Pg.Host + " port=" + global.GVA_CONFIG.Pg.Port + " dbname=" + global.GVA_CONFIG.Pg.Dbname + " sslmode=" + global.GVA_CONFIG.Pg.Sslmode)
+	//a, err := pgadapter.NewAdapter(global.GVA_DB, "casbin_rule")
 	if err != nil {
 		global.GVA_LOG.Error("casbin Fail, please check pgadapter:", zap.Any("err",err))
 	}
@@ -45,18 +46,12 @@ func Casbin() *casbin.Enforcer {
 func GetPolicyPathByAuthorityId(authorityId string) (pathMaps []request.CasbinInfo) {
 	e := Casbin()
 	list := e.GetFilteredPolicy(0, authorityId)
-	fmt.Print(list)
-	fmt.Print("aaa",e.GetAllObjects())
-	fmt.Print("aaa",e.GetPolicy())
-	fmt.Print("ccc",e.GetAllRoles())
-	fmt.Print("ccc",e.GetAllSubjects())
 	for _, v := range list {
 		pathMaps = append(pathMaps, request.CasbinInfo{
 			Path:   v[1],
 			Method: v[2],
 		})
 	}
-	fmt.Print("bbb",list)
 	return pathMaps
 }
 

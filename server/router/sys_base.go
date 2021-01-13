@@ -12,8 +12,6 @@ func InitBaseRouter(Router *gin.RouterGroup) (R gin.IRoutes) {
 	{
 		//BaseRouter.POST("login", v1.Login)
 		BaseRouter.POST("captcha", v1.Captcha)
-		BaseRouter.POST("UpdateCasbin", v1.UpdateCasbin)
-		BaseRouter.POST("getPolicyPathByAuthorityId", v1.GetPolicyPathByAuthorityId)
 	}
 	return BaseRouter
 }

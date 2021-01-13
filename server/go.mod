@@ -5,8 +5,7 @@ go 1.15
 require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/casbin/casbin v1.9.1
-	github.com/casbin/casbin-pg-adapter v0.1.6
-	github.com/casbin/casbin/v2 v2.19.7
+	github.com/casbin/casbin/v2 v2.20.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/fvbock/endless v0.0.0-20170109170031-447134032cb6 // indirect
@@ -16,7 +15,8 @@ require (
 	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
 	github.com/lestrrat-go/strftime v1.0.3 // indirect
-	github.com/lib/pq v1.3.0
+	github.com/lib/pq v1.9.0
+	github.com/lzktest/casbinpgandadapter v1.0.1
 	github.com/mojocn/base64Captcha v1.3.1
 	github.com/satori/go.uuid v1.2.0
 	github.com/spf13/viper v1.7.1
@@ -29,3 +29,5 @@ require (
 	gorm.io/gorm v1.20.8
 	mellium.im/sasl v0.2.1 // indirect
 )
+
+replace casbinpgandadapter => github.com/lzktest/casbinpgandadapter v1.0.0

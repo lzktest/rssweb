@@ -29,6 +29,8 @@ func Routers() *gin.Engine {
 	PublicGroup := Router.Group("")
 	{
 		router.InitBaseRouter(PublicGroup) // 注册基础功能路由 不做鉴权
+		router.InitCasbinRouter(PublicGroup)  // 添加及修改api权限，获取api权限列表
+		router.InitAuthorityRouter(PublicGroup) // 角色操作
 	}
 	global.GVA_LOG.Info("router register success")
 	return Router

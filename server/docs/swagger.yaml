@@ -1,5 +1,20 @@
 basePath: /
 definitions:
+  model.SysAuthority:
+    properties:
+      authorityId:
+        type: string
+      authorityName:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      parentId:
+        type: string
+      updatedAt:
+        type: string
+    type: object
   request.CasbinInReceive:
     properties:
       authorityId:
@@ -19,10 +34,48 @@ definitions:
 info:
   contact: {}
   description: This is a sample Server pets
+  license: {}
   title: Swagger Example API
   version: 0.0.1
 paths:
-  /base/UpdateCasbin:
+  /authority/createAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 权限id,权限名,父角色id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysAuthority'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"创建成功"}'
+          schema:
+            type: string
+      summary: 创建角色
+      tags:
+      - Authority
+  /base/captcha:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"验证码获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 生成验证码
+      tags:
+      - Base
+  /casbin/UpdateCasbin:
     post:
       consumes:
       - application/json
@@ -45,28 +98,12 @@ paths:
       summary: 更新角色api权限
       tags:
       - Casbin
-  /base/captcha:
-    post:
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: '{"success":true,"data":{},"msg":"验证码获取成功"}'
-          schema:
-            type: string
-      security:
-      - ApiKeyAuth: []
-      summary: 生成验证码
-      tags:
-      - Base
-  /base/getPolicyPathByAuthorityId:
+  /casbin/getPolicyPathByAuthorityId:
     post:
       consumes:
       - application/json
       parameters:
-      - description: 权限id,权限模型列表
+      - description: 权限id
         in: body
         name: data
         required: true
