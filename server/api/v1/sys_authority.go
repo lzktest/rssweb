@@ -60,3 +60,52 @@ func GetAuthorityList(c *gin.Context) {
 		},"获取成功",c)
 	}
 }
+// @Tags Authority
+// @Summary 拷贝角色
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body response.SysAuthorityCopyResponse true "旧角色id, 新角色id, 新权限名, 新父角色id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"拷贝成功"}"
+// @Router /authority/copyAuthority [post]
+func CopyAuthority(c *gin.Context){
+	var copyInfo response.SysAuthorityCopyResponse
+	_ = c.ShouldBindJSON(&copyInfo)
+	if err := utils.Verify(copyInfo, utils.OldAuthorityVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err := utils.Verify(copyInfo.Authority,utils.AuthorityVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err, authBack := services.CopyAuthority(copyInfo); err != nil {
+		global.GVA_LOG.Error("拷贝失败！", zap.Any("err", err))
+		response.FailWithMessage("拷贝失败"+err.Error(), c)
+	} else {
+		response.OkWithDetailed(response.SysAuthorityResponse{Authority: authBack},"拷贝成功",c)
+	}
+}
+
+// @Tags Authority
+// @Summary 更新角色信息
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body model.SysAuthority true "权限id, 权限名, 父角色id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
+// @Router /authority/updateAuthority [post]
+func UpdateAuthority(c *gin.Context) {
+	var auth model.SysAuthority
+	_ = c.ShouldBindJSON(&auth)
+	if err := utils.Verify(auth, utils.AuthorityVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err, authority := services.UpdateAuthority(auth); err != nil {
+		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))
+		response.FailWithMessage("更新失败"+err.Error(), c)
+	} else {
+		response.OkWithDetailed(response.SysAuthorityResponse{Authority: authority}, "更新成功", c)
+	}
+}

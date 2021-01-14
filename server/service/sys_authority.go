@@ -6,7 +6,7 @@ import (
 	"server/model"
 	"server/model/request"
 	"server/model/response"
-	"server/utils"
+	//"server/utils"
 )
 
 // @author: [piexlmax]
@@ -30,8 +30,8 @@ func CreateAuthority(auth model.SysAuthority)(err error, authority model.SysAuth
 // @return: err error, authority model.SysAuthority
 func CopyAuthority(copyInfo response.SysAuthorityCopyResponse)(err error, authority model.SysAuthority){
 	var authorityBox model.SysAuthority
-	_, err = global.GVA_DB.QueryRow("select * from sys_authorities where authority_id= $1 limit 1;",copyInfo.Authority.AuthorityId).Scan(&authorityBox.CreatedAt, &authorityBox.UpdatedAt, &authorityBox.DeletedAt, &authorityBox.AuthorityId, &authorityBox.AuthorityName, &authorityBox.ParentId)
-	if err != nil {
+	err = global.GVA_DB.QueryRow("select * from sys_authorities where authority_id= $1 limit 1;",copyInfo.OldAuthorityId).Scan(&authorityBox.CreatedAt, &authorityBox.UpdatedAt, &authorityBox.DeletedAt, &authorityBox.AuthorityId, &authorityBox.AuthorityName, &authorityBox.ParentId)
+	if err == nil {
 		_, err := global.GVA_DB.Exec("insert into sys_authorities (Created_at,Updated_At,Deleted_At,Authority_Id,Authority_Name,Parent_Id) values($1,$2,$3,$4,$5,$6)")
 		return err,authority
 	}else {
@@ -75,9 +75,9 @@ func GetAuthorityInfoList(info request.PageInfo) (err error, list interface{}, t
 // @return: err error, authority model.SysAuthority
 func UpdateAuthority(auth model.SysAuthority)(err error, authority model.SysAuthority){
 	if _, err := global.GVA_DB.Exec("update sys_authorities set updated_at=$1,authority_name=$2,parent_id=$3 where authority_id = $4",auth.UpdatedAt,auth.AuthorityName,auth.ParentId,auth.AuthorityId);err != nil{
-		return err, authority
+		return err, auth
 	} else {
-		return nil, authority
+		return nil, auth
 	}
 }
 
