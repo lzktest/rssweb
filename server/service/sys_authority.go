@@ -6,6 +6,8 @@ import (
 	"server/model"
 	"server/model/request"
 	"server/model/response"
+	"time"
+
 	//"server/utils"
 )
 
@@ -16,7 +18,7 @@ import (
 func CreateAuthority(auth model.SysAuthority)(err error, authority model.SysAuthority){
 	var authorityBox model.SysAuthority
 	if err :=global.GVA_DB.QueryRow("select * from sys_authorities where authority_id = $1 limit 1;",auth.AuthorityId).Scan(&authorityBox.CreatedAt, &authorityBox.UpdatedAt, &authorityBox.DeletedAt, &authorityBox.AuthorityId, &authorityBox.AuthorityName, &authorityBox.ParentId); err !=nil{
-		_, err := global.GVA_DB.Exec("insert into sys_authorities (Created_at,Updated_At,Deleted_At,Authority_Id,Authority_Name,Parent_Id) values($1,$2,$3,$4,$5,$6)",auth.CreatedAt,auth.UpdatedAt,auth.DeletedAt,auth.AuthorityId,auth.AuthorityName,auth.ParentId)
+		_, err := global.GVA_DB.Exec("insert into sys_authorities (Created_at,Updated_At,Deleted_At,Authority_Id,Authority_Name,Parent_Id) values($1,$2,$3,$4,$5,$6)",time.Now(),time.Now(),auth.DeletedAt,auth.AuthorityId,auth.AuthorityName,auth.ParentId)
 		return err, auth
 	} else {
 		return errors.New("存在相同角色id"), auth
@@ -74,7 +76,7 @@ func GetAuthorityInfoList(info request.PageInfo) (err error, list interface{}, t
 // @param: auth model.SysAuthority
 // @return: err error, authority model.SysAuthority
 func UpdateAuthority(auth model.SysAuthority)(err error, authority model.SysAuthority){
-	if _, err := global.GVA_DB.Exec("update sys_authorities set updated_at=$1,authority_name=$2,parent_id=$3 where authority_id = $4",auth.UpdatedAt,auth.AuthorityName,auth.ParentId,auth.AuthorityId);err != nil{
+	if _, err := global.GVA_DB.Exec("update sys_authorities set updated_at=$1,authority_name=$2,parent_id=$3 where authority_id = $4",time.Now(),auth.AuthorityName,auth.ParentId,auth.AuthorityId);err != nil{
 		return err, auth
 	} else {
 		return nil, auth
@@ -106,3 +108,22 @@ func findChildrenAuthority(authority *model.SysAuthority)(err error){
 	}
 	return nil
 }
+
+// @author: [piexlmax]
+// @function: DeleteAuthority
+// @description: 删除角色
+// @param: auth *model.SysAuthority
+// @return: err error
+func DeleteAuthority(auth *model.SysAuthority)(err error){
+	return nil
+}
+
+// @author: [piexlmax]
+// @function: SetMenuAuthority
+// @description: 菜单与角色绑定
+// @param: auth *model.SysAuthority
+// @return: error
+//func SetMenuAuthority(auth *model.SysAuthority) error {
+//	var s model.SysAuthority
+//	global.GVA_DB.Query("select * from Sys_BaseMenus")
+//}
