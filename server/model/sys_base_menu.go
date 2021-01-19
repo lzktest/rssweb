@@ -12,7 +12,7 @@ type SysBaseMenu struct {
 	Meta  `json:"meta"`
 	SysAuthoritys []SysAuthority `json:"authoritys"`
 	Children []SysBaseMenu `json:"children"`
-	//Parameters []SysBaseMenuParameter `json:"parameters"`
+	Parameters []SysBaseMenuParameter `json:"parameters"`
 }
 
 type Meta struct {

@@ -19,6 +19,47 @@ definitions:
       updatedAt:
         type: string
     type: object
+  model.SysBaseMenu:
+    properties:
+      authoritys:
+        items:
+          $ref: '#/definitions/model.SysAuthority'
+        type: array
+      children:
+        items:
+          $ref: '#/definitions/model.SysBaseMenu'
+        type: array
+      component:
+        type: string
+      createdAt:
+        type: string
+      defaultMenu:
+        type: boolean
+      deletedAt:
+        type: string
+      hidden:
+        type: boolean
+      icon:
+        type: string
+      id:
+        type: integer
+      keepAlive:
+        type: boolean
+      menuLevel:
+        type: integer
+      name:
+        type: string
+      parentId:
+        type: string
+      path:
+        type: string
+      sort:
+        type: integer
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
   request.CasbinInReceive:
     properties:
       authorityId:
@@ -46,12 +87,14 @@ definitions:
     properties:
       authority:
         $ref: '#/definitions/model.SysAuthority'
+        type: object
       oldAuthorityId:
         type: string
     type: object
 info:
   contact: {}
   description: This is a sample Server pets
+  license: {}
   title: Swagger Example API
   version: 0.0.1
 paths:
@@ -207,6 +250,29 @@ paths:
       summary: 获取权限列表
       tags:
       - Casbin
+  /menu/addBaseMenu:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 路由path, 父菜单ID, 路由name, 对应前端文件路径, 排序标记
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysBaseMenu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"添加成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 新增菜单
+      tags:
+      - AuthorityMenu
 securityDefinitions:
   ApiKeyAuth:
     in: header
