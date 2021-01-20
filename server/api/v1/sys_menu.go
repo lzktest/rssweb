@@ -40,12 +40,3 @@ func AddBaseMenu(c *gin.Context){
 	}
 }
 
-// @author: [piexlmax]
-// @function: getBaseMenuTreeMap
-// @description: 获取路由总树map
-// @return: err error, treeMap map[string][]model.SysBaseMenu
-func getBaseMenuTreeMap()(err error, treeMap map[string][]model.SysBaseMenu){
-	var allMenus []model.SysBaseMenu
-	treeMap = make(map[string][]model.SysBaseMenu)
-	err = global.GVA_DB.Query("select * from ")
-}

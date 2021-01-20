@@ -199,44 +199,6 @@ var doc = `{
                 }
             }
         },
-        "/casbin/UpdateCasbin": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Casbin"
-                ],
-                "summary": "更新角色api权限",
-                "parameters": [
-                    {
-                        "description": "权限id, 权限模型列表",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/request.CasbinInReceive"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/casbin/getPolicyPathByAuthorityId": {
             "post": {
                 "security": [
@@ -268,6 +230,44 @@ var doc = `{
                 "responses": {
                     "200": {
                         "description": "{\"success\":true,\"data\":{}\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/casbin/updateCasbin": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Casbin"
+                ],
+                "summary": "更新角色api权限",
+                "parameters": [
+                    {
+                        "description": "权限id, 权限模型列表",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CasbinInReceive"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -389,6 +389,12 @@ var doc = `{
                 "name": {
                     "type": "string"
                 },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.SysBaseMenuParameter"
+                    }
+                },
                 "parentId": {
                     "type": "string"
                 },
@@ -402,6 +408,35 @@ var doc = `{
                     "type": "string"
                 },
                 "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.SysBaseMenuParameter": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "sysBaseMenuID": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "value": {
                     "type": "string"
                 }
             }

@@ -1,12 +1,12 @@
-CREATE TABLE public.sys_authorities (
-                                        created_at timestamptz NULL,
-                                        updated_at timestamptz(0) NULL,
-                                        deleted_at timestamptz(0) NULL,
-                                        authority_id varchar(90) NOT NULL, -- 角色ID
-                                        authority_name varchar(191) NULL, -- 角色名
-                                        parent_id varchar(191) NULL, -- 父角色ID
-                                        CONSTRAINT sys_authorities_pk PRIMARY KEY (authority_id)
-);
+CREATE table if not exists  public.sys_authorities (
+                                                       createed_at timestamptz NULL,
+                                                       updateed_at timestamptz(0) NULL,
+    deleteed_at timestamptz(0) NULL,
+    authority_id varchar(90) NOT NULL, -- 角色ID
+    authority_name varchar(191) NULL, -- 角色名
+    parent_id varchar(191) NULL, -- 父角色ID
+    CONSTRAINT sys_authorities_pk PRIMARY KEY (authority_id)
+    );
 
 -- Column comments
 
@@ -15,13 +15,13 @@ COMMENT ON COLUMN public.sys_authorities.authority_name IS '角色名';
 COMMENT ON COLUMN public.sys_authorities.parent_id IS '父角色ID';
 
 INSERT INTO sys_authorities
-(created_at, updated_at, deleted_at, authority_id, authority_name, parent_id)
+(createed_at, updateed_at, deleteed_at, authority_id, authority_name, parent_id)
 VALUES('2021-01-14 10:32:18', '2021-01-14 10:32:18', NULL, '888', '普通用户', '0');
 INSERT INTO sys_authorities
-(created_at, updated_at, deleted_at, authority_id, authority_name, parent_id)
+(createed_at, updateed_at, deleteed_at, authority_id, authority_name, parent_id)
 VALUES('2021-01-14 10:32:18', '2021-01-14 10:32:18', NULL, '8881', '普通用户子角色', '888');
 INSERT INTO sys_authorities
-(created_at, updated_at, deleted_at, authority_id, authority_name, parent_id)
+(createed_at, updateed_at, deleteed_at, authority_id, authority_name, parent_id)
 VALUES('2021-01-14 10:32:18', '2021-01-14 10:32:18', NULL, '9528', '测试角色', '0');
 -- casbin
 INSERT INTO public.casbin_rule
@@ -46,35 +46,35 @@ INSERT INTO public.casbin_rule
 (id, p_type, v0, v1, v2, v3, v4, v5)
 VALUES(7, 'p', '2', '/base/route', 'POST', NULL, NULL, NULL);
 
-CREATE TABLE public.sys_base_menus (
-                                       id bigserial NOT NULL,
-                                       created_at timestamptz(0) NULL,
-                                       updated_at timestamptz(0) NULL,
-                                       deleted_at timestamptz(0) NULL,
-                                       menu_level numeric NULL,
-                                       parent_id varchar(191) NULL, -- 父菜单id
-                                       routerpath varchar(191) NULL, -- 路由path
-                                       routername varchar(191) NULL, -- 路由name
-                                       hidden bool NULL, -- 是否在列表隐藏
-                                       component varchar(191) NULL, -- 对应前端文件路径
-                                       sort numeric NULL, -- 排序标记
-                                       keep_alive bool NULL, -- 附加属性
-                                       default_menu bool NULL, -- 附加属性
-                                       title varchar(191) NULL, -- 附加属性
-                                       icon varchar(191) NULL, -- 附加属性
-                                       CONSTRAINT sys_base_menus_pk PRIMARY KEY (id)
-);
+CREATE table if not exists public.sys_base_menus (
+                                                     id bigserial NOT NULL,
+                                                     created_at timestamptz(0) NULL,
+    updated_at timestamptz(0) NULL,
+    deleted_at timestamptz(0) NULL,
+    menu_level numeric NULL,
+    parent_id varchar(191) NULL, -- 父菜单id
+    routerpath varchar(191) NULL, -- 路由path
+    routername varchar(191) NULL, -- 路由name
+    hidden bool NULL, -- 是否在列表隐藏
+    component varchar(191) NULL, -- 对应前端文件路径
+    sort numeric NULL, -- 排序标记
+    keep_alive bool NULL, -- 附加属性
+    default_menu bool NULL, -- 附加属性
+    title varchar(191) NULL, -- 附加属性
+    icon varchar(191) NULL, -- 附加属性
+    CONSTRAINT sys_base_menus_pk PRIMARY KEY (id)
+    );
 
 -- Column comments
 
 COMMENT ON COLUMN public.sys_base_menus.parent_id IS '父菜单id';
-COMMENT ON COLUMN public.sys_base_menus."path" IS '路由path';
-COMMENT ON COLUMN public.sys_base_menus."name" IS '路由name';
+COMMENT ON COLUMN public.sys_base_menus.routerpath IS '路由path';
+COMMENT ON COLUMN public.sys_base_menus.routername IS '路由name';
 COMMENT ON COLUMN public.sys_base_menus.hidden IS '是否在列表隐藏';
 COMMENT ON COLUMN public.sys_base_menus.component IS '对应前端文件路径';
 COMMENT ON COLUMN public.sys_base_menus.sort IS '排序标记';
-COMMENT ON COLUMN public.sys_base_menus.keepalive IS '附加属性';
-COMMENT ON COLUMN public.sys_base_menus.defautl_menu IS '附加属性';
+COMMENT ON COLUMN public.sys_base_menus.keep_alive IS '附加属性';
+COMMENT ON COLUMN public.sys_base_menus.default_menu IS '附加属性';
 COMMENT ON COLUMN public.sys_base_menus.title IS '附加属性';
 COMMENT ON COLUMN public.sys_base_menus.icon IS '附加属性';
 INSERT INTO sys_base_menus
@@ -166,20 +166,20 @@ INSERT INTO sys_base_menus
 VALUES(29, '2021-01-14 10:32:18', '2021-01-14 10:32:18', NULL, 0, '24', 'need', 'need', false, 'view/workflow/userList/need.vue', 0, false, false, '我的待办', 's-platform');
 
 
-CREATE TABLE public.sys_base_menu_parameters (
-                                                 id bigserial NOT NULL,
-                                                 createed timestamptz(0) NULL,
-                                                 updateed timestamptz(0) NULL,
-                                                 deleteed timestamptz(0) NULL,
-                                                 sys_base_menu_id int8 NULL,
-                                                 "type" varchar(191) NULL, -- 地址栏携带参数为params还是query
-                                                 "key" varchar(191) NULL, -- 地址栏携带参数的key
-                                                 value varchar(191) NULL, -- 地址栏携带参数的值
-                                                 CONSTRAINT sys_base_menu_parameters_pk PRIMARY KEY (id)
-);
+CREATE table if not exists public.sys_base_menu_parameters (
+                                                               id bigserial NOT NULL,
+                                                               createed timestamptz(0) NULL,
+    updateed timestamptz(0) NULL,
+    deleteed timestamptz(0) NULL,
+    sys_base_menu_id int8 NULL,
+    addtype varchar(191) NULL, -- 地址栏携带参数为params还是query
+    addkey varchar(191) NULL, -- 地址栏携带参数的key
+    addvalue varchar(191) NULL, -- 地址栏携带参数的值
+    CONSTRAINT sys_base_menu_parameters_pk PRIMARY KEY (id)
+    );
 
 -- Column comments
 
-COMMENT ON COLUMN public.sys_base_menu_parameters."type" IS '地址栏携带参数为params还是query';
-COMMENT ON COLUMN public.sys_base_menu_parameters."key" IS '地址栏携带参数的key';
-COMMENT ON COLUMN public.sys_base_menu_parameters.value IS '地址栏携带参数的值';
+COMMENT ON COLUMN public.sys_base_menu_parameters.addtype IS '地址栏携带参数为params还是query';
+COMMENT ON COLUMN public.sys_base_menu_parameters.addkey IS '地址栏携带参数的key';
+COMMENT ON COLUMN public.sys_base_menu_parameters.addvalue IS '地址栏携带参数的值';

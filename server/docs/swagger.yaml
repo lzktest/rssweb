@@ -49,6 +49,10 @@ definitions:
         type: integer
       name:
         type: string
+      parameters:
+        items:
+          $ref: '#/definitions/model.SysBaseMenuParameter'
+        type: array
       parentId:
         type: string
       path:
@@ -58,6 +62,25 @@ definitions:
       title:
         type: string
       updatedAt:
+        type: string
+    type: object
+  model.SysBaseMenuParameter:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      id:
+        type: integer
+      key:
+        type: string
+      sysBaseMenuID:
+        type: integer
+      type:
+        type: string
+      updatedAt:
+        type: string
+      value:
         type: string
     type: object
   request.CasbinInReceive:
@@ -204,29 +227,6 @@ paths:
       summary: 生成验证码
       tags:
       - Base
-  /casbin/UpdateCasbin:
-    post:
-      consumes:
-      - application/json
-      parameters:
-      - description: 权限id, 权限模型列表
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/request.CasbinInReceive'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: '{"success":true,"data":{},"msg":"更新成功"}'
-          schema:
-            type: string
-      security:
-      - ApiKeyAuth: []
-      summary: 更新角色api权限
-      tags:
-      - Casbin
   /casbin/getPolicyPathByAuthorityId:
     post:
       consumes:
@@ -248,6 +248,29 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 获取权限列表
+      tags:
+      - Casbin
+  /casbin/updateCasbin:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 权限id, 权限模型列表
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.CasbinInReceive'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"更新成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新角色api权限
       tags:
       - Casbin
   /menu/addBaseMenu:
