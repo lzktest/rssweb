@@ -99,6 +99,13 @@ definitions:
       path:
         type: string
     type: object
+  request.Empty:
+    type: object
+  request.GetById:
+    properties:
+      id:
+        type: number
+    type: object
   request.PageInfo:
     properties:
       page:
@@ -295,7 +302,74 @@ paths:
       - ApiKeyAuth: []
       summary: 新增菜单
       tags:
-      - AuthorityMenu
+      - Menu
+  /menu/getBaseMenuById:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 菜单id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetById'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 根据id获取菜单
+      tags:
+      - Menu
+  /menu/getBaseMenuTree:
+    post:
+      parameters:
+      - description: 空
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.Empty'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户动态路由
+      tags:
+      - Menu
+  /menu/getMenuList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 页码, 每页大小
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.PageInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 分页获取基础menu列表
+      tags:
+      - Menu
 securityDefinitions:
   ApiKeyAuth:
     in: header

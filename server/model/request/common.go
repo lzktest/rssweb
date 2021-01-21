@@ -5,3 +5,9 @@ type PageInfo struct {
 	Page 	int `json:"page" from:"page"`
 	PageSize int `json:"pageSize" from:"pageSize"`
 }
+// Find by id structure
+type GetById struct {
+	Id float64 `json:"id" form:"id"`
+}
+
+type Empty struct{}

@@ -1,6 +1,7 @@
 package utils
 
 var (
+	IdVerify               = Rules{"ID": {NotEmpty()}}
 	AuthorityIdVerify = Rules{"AuthorityId": {NotEmpty()}}
 	AuthorityVerify   = Rules{"AuthorityId": {NotEmpty()}, "AuthorityName": {NotEmpty()}, "ParentId": {NotEmpty()}}
 	PageInfoVerify         = Rules{"Page": {NotEmpty()}, "PageSize": {NotEmpty()}}
