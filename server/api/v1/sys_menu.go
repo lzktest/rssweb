@@ -107,3 +107,42 @@ func GetBaseMenuById(c *gin.Context) {
 		response.OkWithDetailed(response.SysBaseMenusResponse{Menus: menus}, "获取成功", c)
 	}
 }
+
+// @Tags Menu
+// @Summary 获取指定角色menu
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.GetAuthorityId true "角色ID"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /menu/getMenuAuthority [post]
+func GetMenuAuthority(c *gin.Context) {
+	var param request.GetAuthorityId
+	_ = c.ShouldBindJSON(&param)
+	if err := utils.Verify(param, utils.AuthorityIdVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err, menus := services.GetMenuAuthority(&param); err != nil {
+		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
+		response.FailWithDetailed(response.SysMenusResponse{Menus: menus}, "获取失败", c)
+	} else {
+		response.OkWithDetailed(gin.H{"menus": menus}, "获取成功", c)
+	}
+}
+
+// @Tags AuthorityMenu
+// @Summary 获取用户动态路由
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Param data body request.Empty true "空"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /menu/getMenu [post]
+//func GetMenu(c *gin.Context) {
+//	if err, menus := services.GetMenuTree(getUserAuthorityId(c)); err != nil {
+//		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
+//		response.FailWithMessage("获取失败", c)
+//	} else {
+//		response.OkWithDetailed(response.SysMenusResponse{Menus: menus}, "获取成功", c)
+//	}
+//}

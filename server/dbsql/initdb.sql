@@ -183,3 +183,156 @@ CREATE table if not exists public.sys_base_menu_parameters (
 COMMENT ON COLUMN public.sys_base_menu_parameters.addtype IS '地址栏携带参数为params还是query';
 COMMENT ON COLUMN public.sys_base_menu_parameters.addkey IS '地址栏携带参数的key';
 COMMENT ON COLUMN public.sys_base_menu_parameters.addvalue IS '地址栏携带参数的值';
+
+
+CREATE TABLE public.sys_authority_menus (
+                                            sys_authority_authority_id varchar(90) NULL,
+                                            sys_base_menu_id numeric NULL
+);
+COMMENT ON COLUMN public.sys_authority_menus.sys_authority_authority_id IS '角色id';
+
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 1);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 2);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 3);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 4);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 5);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 6);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 7);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 8);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 9);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 10);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 11);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 12);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 13);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 14);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 15);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 16);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 17);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 18);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 19);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 20);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 21);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 22);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 23);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 24);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 25);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 26);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 27);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 28);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('888', 29);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('8881', 1);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('8881', 2);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('8881', 8);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 1);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 2);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 3);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 4);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 5);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 6);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 7);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 8);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 9);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 10);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 11);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 12);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 14);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 15);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 16);
+INSERT INTO sys_authority_menus
+(sys_authority_authority_id, sys_base_menu_id)
+VALUES('9528', 17);
+
