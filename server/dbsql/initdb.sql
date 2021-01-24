@@ -336,3 +336,11 @@ INSERT INTO sys_authority_menus
 (sys_authority_authority_id, sys_base_menu_id)
 VALUES('9528', 17);
 
+CREATE TABLE public.sys_jwt_blacklist (
+                                          id bigserial NOT NULL,
+                                          created_at timestamptz NULL,
+                                          updated_at timestamptz NULL,
+                                          deleted_at timestamptz NULL,
+                                          jwt text NULL,
+                                          CONSTRAINT sys_jwt_blacklist_pk PRIMARY KEY (id)
+);
