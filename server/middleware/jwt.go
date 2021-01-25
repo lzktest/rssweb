@@ -64,3 +64,43 @@ func JWTAuth() gin.HandlerFunc{
 type JWT struct {
 	SigningKey []byte
 }
+
+func NewJWT() *JWT {
+	return &JWT{
+		[]byte(global.GVA_CONFIG.JWT.SigningKey),
+	}
+}
+
+// 创建一个token
+func (j *JWT) CreateToken(claims request.CustomClaims)(string, error){
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString(j.SigningKey)
+}
+
+// 解析token
+func (j *JWT) ParseToken(tokenString string)(*request.CustomClaims, error){
+	token, err := jwtParseWithClaims(tokenString, &request.CustomClaims{}, func(token *jwt.Token)(i interface{}, e error){
+		return j.SigningKey, nil
+	})
+	if err != nil {
+		if ve, ok := err.(*jwt.ValidationError); ok {
+			if ve.Errors&jwt.ValidationErrorMalformed != 0 {
+				return nil, TokenMalformed
+			} else if ve.Errors&jwt.ValidationErrorExpired != 0 {
+				return nil, TokenExpired
+			} else if ve.Errors&jwt.ValidationErrorNotValidYet != 0 {
+				return nil, TokenNotValidYet
+			} else {
+				return nil, TokenInvalid
+			}
+		}
+	}
+	if token != nil {
+		if claims, ok := token.Claims.(*request.CustomClaims); ok && token.Valid{
+			return claims, nil
+		}
+		return nil, TokenInvalid
+	} else {
+		return nil, TokenInvalid
+	}
+}

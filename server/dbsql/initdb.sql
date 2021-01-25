@@ -344,3 +344,26 @@ CREATE TABLE public.sys_jwt_blacklist (
                                           jwt text NULL,
                                           CONSTRAINT sys_jwt_blacklist_pk PRIMARY KEY (id)
 );
+
+CREATE TABLE public.sys_users (
+                                  id bigserial NOT NULL,
+                                  createed_at timestamptz(0) NULL,
+                                  updateed_at timestamptz(0) NULL,
+                                  deleteed_at timestamptz(0) NULL,
+                                  uuid uuid NULL, -- 用户UUID
+                                  username varchar(191) NULL, -- 用户登录名
+                                  "password" varchar(191) NULL, -- 用户登录密码
+                                  nick_name varchar(191) NULL DEFAULT 'sysuser'::character varying, -- 用户昵称
+                                  hard_img varchar(191) NULL, -- 用户头像
+                                  authority_id varchar(90) NULL DEFAULT 888, -- 用户角色ID
+                                  CONSTRAINT sys_users_pk PRIMARY KEY (id)
+);
+
+-- Column comments
+
+COMMENT ON COLUMN public.sys_users.uuid IS '用户UUID';
+COMMENT ON COLUMN public.sys_users.username IS '用户登录名';
+COMMENT ON COLUMN public.sys_users."password" IS '用户登录密码';
+COMMENT ON COLUMN public.sys_users.nick_name IS '用户昵称';
+COMMENT ON COLUMN public.sys_users.hard_img IS '用户头像';
+COMMENT ON COLUMN public.sys_users.authority_id IS '用户角色ID';
