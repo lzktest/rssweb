@@ -13,8 +13,10 @@ import (
 //@description: 拉黑jwt
 //@param: jwtList model.JwtBlacklist
 //@return: err error
-func JsonInblacklist(jwtList model.JwtBlacklist)(err error){
-	_, err = global.GVA_DB.Exec("insert into sys_jwt_blacklist(id,created_at,updated_at,jwt) values($1,$2,$3,$4)",jwtList.ID,jwtList.CreatedAt,jwtList.UpdatedAt,jwtList.Jwt)
+func JsonInBlocklist(jwtList model.JwtBlocklist)(err error){
+	jwtList.CreatedAt = time.Now()
+	jwtList.UpdatedAt = jwtList.CreatedAt
+	_, err = global.GVA_DB.Exec("insert into sys_jwt_blacklist(created_at,updated_at,jwt) values($1,$2,$3)",jwtList.CreatedAt,jwtList.UpdatedAt,jwtList.Jwt)
 	return err
 }
 
@@ -23,9 +25,9 @@ func JsonInblacklist(jwtList model.JwtBlacklist)(err error){
 // @description: 判断jwt是否在黑名单内部
 // @param: jwtList model.JwtBlacklist
 // @return: err error
-func IsBlacklist(jwt string) bool {
+func IsBlocklist(jwt string) bool {
 	var jwtrow model.JwtBlocklist
-	_, err := global.GVA_DB.QueryRow("select jwt from sys_jwt_blacklist where jwt = $1 ;",jwt).Scan(&jwtrow.Jwt)
+	err := global.GVA_DB.QueryRow("select jwt from sys_jwt_blacklist where jwt = $1 ;",jwt).Scan(&jwtrow.Jwt)
 	if errors.Is(err, sql.ErrNoRows) {
 		return false
 	}
@@ -39,8 +41,9 @@ func IsBlacklist(jwt string) bool {
 //@return: err error, redisJWT string
 
 func GetRedisJWT(userName string)(err error, redisJWT string){
+	//fmt.Print(global.GVA_REDIS)
 	redisJWT, err = global.GVA_REDIS.Get(userName).Result()
-	return err, redisJwt
+	return err, redisJWT
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)

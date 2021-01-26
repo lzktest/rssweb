@@ -8,4 +8,9 @@ var (
 	OldAuthorityVerify     = Rules{"OldAuthorityId": {NotEmpty()}}
 	MenuVerify             = Rules{"Path": {NotEmpty()}, "ParentId": {NotEmpty()}, "Name": {NotEmpty()}, "Component": {NotEmpty()}, "Sort": {Ge("0")}}
 	MenuMetaVerify         = Rules{"Title": {NotEmpty()}}
+	LoginVerify            = Rules{"CaptchaId": {NotEmpty()}, "Captcha": {NotEmpty()}, "Username": {NotEmpty()}, "Password": {NotEmpty()}}
+	RegisterVerify         = Rules{"Username": {NotEmpty()}, "NickName": {NotEmpty()}, "Password": {NotEmpty()}, "AuthorityId": {NotEmpty()}}
+	ChangePasswordVerify   = Rules{"Username": {NotEmpty()}, "Password": {NotEmpty()}, "NewPassword": {NotEmpty()}}
+	SetUserAuthorityVerify = Rules{"UUID": {NotEmpty()}, "AuthorityId": {NotEmpty()}}
+
 )

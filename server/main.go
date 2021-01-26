@@ -5,6 +5,7 @@ import (
 
 	"server/core"
 	"server/global"
+	//"server/initialize"
 
 	_ "github.com/lib/pq"
 )
@@ -22,6 +23,7 @@ func main() {
 	global.GVA_VP = core.Viper()
 	global.GVA_LOG = core.Zap()
 	global.GVA_DB = core.Pgcon()
+
 	defer global.GVA_DB.Close()
 	core.RunWindowsServer()
 }

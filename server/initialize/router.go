@@ -32,6 +32,8 @@ func Routers() *gin.Engine {
 		router.InitCasbinRouter(PublicGroup)  // 添加及修改api权限，获取api权限列表
 		router.InitAuthorityRouter(PublicGroup) // 角色操作
 		router.InitMenuRouter(PublicGroup)  // 菜单操作
+		router.InitJwtRouter(PublicGroup)                   // jwt相关路由
+		router.InitUserRouter(PublicGroup)                  // 注册用户路由
 	}
 	global.GVA_LOG.Info("router register success")
 	return Router

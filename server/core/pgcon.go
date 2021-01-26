@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"server/global"
+	"server/initialize"
 
 	_ "github.com/lib/pq"
 	"go.uber.org/zap"
@@ -39,6 +40,9 @@ func Pgcon() *sql.DB {
 				os.Exit(0)
 			}
 		}
+	}
+	if global.GVA_CONFIG.System.UseMultipoint {
+		initialize.Redis()
 	}
 	return db
 }

@@ -1,13 +1,15 @@
 package middleware
 
 import (
-	"server/global"
-	"server/model"
-	"server/model/response"
-	services "server/service"
-	"github.com/dgrijalva/jwt-go"
+	"errors"
+	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"server/global"
+	"server/model"
+	"server/model/request"
+	"server/model/response"
+	services "server/service"
 	"strconv"
 	"time"
 )
@@ -21,7 +23,7 @@ func JWTAuth() gin.HandlerFunc{
 			c.Abort()
 			return
 		}
-		if services.IsBlacklist(token) {
+		if services.IsBlocklist(token) {
 			response.FailWithDetailed(gin.H{"reload": true}, "您的账户登录或令牌失效", c)
 			c.Abort()
 			return
@@ -37,7 +39,7 @@ func JWTAuth() gin.HandlerFunc{
 			}
 		}
 		if err, _ = services.FindUserByUuid(claims.UUID.String()); err != nil {
-			_ = services.JsonInBlackList(model.JwtBlacklist{Jwt: token})
+			_ = services.JsonInBlocklist(model.JwtBlocklist{Jwt: token})
 			response.FailWithDetailed(gin.H{"reload":true}, err.Error(), c)
 			c.Abort()
 		}
@@ -46,13 +48,13 @@ func JWTAuth() gin.HandlerFunc{
 			newToken, _ := j.CreateToken(*claims)
 			newClaims, _ := j.ParseToken(newToken)
 			c.Header("new-token", newToken)
-			c.Header("new-expires-at", strconv.FormatFloat(newClaims.ExpiresAt, 10))
-			if global.GVA_CONFIG.System.UserMultipoint {
-				err, RedisJwtToken := services.GetRedisJWT(newClaims.UserName)
+			c.Header("new-expires-at", strconv.FormatInt(newClaims.ExpiresAt, 10))
+			if global.GVA_CONFIG.System.UseMultipoint {
+				err, RedisJwtToken := services.GetRedisJWT(newClaims.Username)
 				if err != nil {
 					global.GVA_LOG.Error("get redis jwt failed", zap.Any("err", err))
 				} else {
-					_ = services.JsonInBlacklist(model.JwtBlacklist{Jwt: RedisJwtToken})
+					_ = services.JsonInBlocklist(model.JwtBlocklist{Jwt: RedisJwtToken})
 				}
 				_ = services.SetRedisJWT(newToken,newClaims.Username)
 			}
@@ -64,6 +66,13 @@ func JWTAuth() gin.HandlerFunc{
 type JWT struct {
 	SigningKey []byte
 }
+
+var (
+	TokenExpired = errors.New("Token is expired")
+	TokenNotValidYet = errors.New("Token not active yet")
+	TokenMalformed = errors.New("That's not even a token")
+	TokenInvalid = errors.New("Couldn't handel this token:")
+)
 
 func NewJWT() *JWT {
 	return &JWT{
@@ -79,7 +88,7 @@ func (j *JWT) CreateToken(claims request.CustomClaims)(string, error){
 
 // 解析token
 func (j *JWT) ParseToken(tokenString string)(*request.CustomClaims, error){
-	token, err := jwtParseWithClaims(tokenString, &request.CustomClaims{}, func(token *jwt.Token)(i interface{}, e error){
+	token, err := jwt.ParseWithClaims(tokenString, &request.CustomClaims{}, func(token *jwt.Token)(i interface{}, e error){
 		return j.SigningKey, nil
 	})
 	if err != nil {

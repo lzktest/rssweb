@@ -9,7 +9,7 @@ import (
 type CustomClaims struct {
 	UUID 	uuid.UUID
 	ID 		uint
-	UserName string
+	Username string
 	NickName string
 	AuthorityId string
 	BufferTime int64

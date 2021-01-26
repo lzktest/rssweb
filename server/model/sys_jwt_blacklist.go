@@ -4,7 +4,7 @@ import (
 	"server/global"
 )
 
-type JwtBlacklist struct {
+type JwtBlocklist struct {
 	global.GVA_MODEL
 	Jwt string
 }

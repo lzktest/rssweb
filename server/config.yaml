@@ -19,7 +19,7 @@ zap:
 # redis configuration
 redis:
   db: 0
-  addr: '127.0.0.1:6379'
+  addr: '192.168.3.121:30002'
   password: ''
 
 # email configuration
@@ -34,7 +34,7 @@ system:
   addr: 8888
   db-type: 'postgres'
   oss-type: 'local'
-  use-multipoint: false # 是否开启redis
+  use-multipoint: true # 是否开启redis
 
 # captcha configuration
 captcha:
