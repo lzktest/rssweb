@@ -367,3 +367,33 @@ COMMENT ON COLUMN public.sys_users."password" IS '用户登录密码';
 COMMENT ON COLUMN public.sys_users.nick_name IS '用户昵称';
 COMMENT ON COLUMN public.sys_users.hard_img IS '用户头像';
 COMMENT ON COLUMN public.sys_users.authority_id IS '用户角色ID';
+
+CREATE TABLE public.sys_operation_records (
+                                              id bigserial NOT NULL,
+                                              createed_at timestamptz(0) NULL,
+                                              updateed_at timestamptz(0) NULL,
+                                              deleteed_at timestamptz(0) NULL,
+                                              ip inet NULL,
+                                              "method" varchar(191) NULL,
+                                              "path" varchar(191) NULL,
+                                              status bigint NULL,
+                                              latency bigint NULL,
+                                              agent varchar NULL,
+                                              error_message varchar NULL,
+                                              body text NULL,
+                                              resp text NULL,
+                                              userid bigint NULL
+);
+
+-- Column comments
+
+COMMENT ON COLUMN public.sys_operation_records.ip IS '请求ip';
+COMMENT ON COLUMN public.sys_operation_records."method" IS '请求方法';
+COMMENT ON COLUMN public.sys_operation_records."path" IS '请求路径';
+COMMENT ON COLUMN public.sys_operation_records.status IS '请求状态';
+COMMENT ON COLUMN public.sys_operation_records.latency IS '延迟';
+COMMENT ON COLUMN public.sys_operation_records.agent IS '代理';
+COMMENT ON COLUMN public.sys_operation_records.error_message IS '错误信息';
+COMMENT ON COLUMN public.sys_operation_records.body IS '请求Body';
+COMMENT ON COLUMN public.sys_operation_records.resp IS '响应Body';
+COMMENT ON COLUMN public.sys_operation_records.userid IS '用户id';

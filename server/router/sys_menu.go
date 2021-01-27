@@ -3,11 +3,11 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"server/api/v1"
-
+	"server/middleware"
 )
 
 func InitMenuRouter(Router *gin.RouterGroup)(R gin.IRoutes){
-	MenuRouter := Router.Group("menu")
+	MenuRouter := Router.Group("menu").Use(middleware.OperationRecord())
 	{
 		MenuRouter.POST("addBaseMenu", v1.AddBaseMenu)           // 新增菜单
 		MenuRouter.POST("getBaseMenuTree", v1.GetBaseMenuTree)   // 获取用户动态路由

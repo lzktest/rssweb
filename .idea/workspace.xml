@@ -5,29 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="700ee6d7-c35a-4b32-8952-7a2d546ba319" name="默认的" comment="">
-      <change afterPath="$PROJECT_DIR$/server/api/v1/sys_jwt_blacklist.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/initialize/redis.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/model/response/sys_user.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/router/sys_jwt.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/router/sys_user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/middleware/casbin_rbac.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/middleware/operation.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/service/sys_operation_record.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/v1/sys_user.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/v1/sys_user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/config/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/config/jwt.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/core/pgcon.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/pgcon.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/docs/docs.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/docs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/docs/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/docs/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/global/global.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/global/global.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/dbsql/initdb.sql" beforeDir="false" afterPath="$PROJECT_DIR$/server/dbsql/initdb.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/initialize/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/initialize/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middleware/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/middleware/jwt.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/model/request/sys_jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/model/request/sys_jwt.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/model/sys_jwt_blacklist.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/model/sys_jwt_blacklist.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/router/sys_base.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/sys_base.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/service/jwt_black_list.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service/jwt_black_list.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/service/sys_user.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service/sys_user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/utils/verify.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/utils/verify.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/router/sys_menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/sys_menu.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +36,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="ProjectId" id="1mHPqkL4AfRrbbMatsb6b95Pcb8" />
   <component name="ProjectViewState">
