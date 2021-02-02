@@ -2,12 +2,11 @@ package middleware
 
 import (
 	"server/global"
-	"server/model"
+	"github.com/gin-gonic/gin"
+	//"server/model"
 	"server/model/request"
 	"server/model/response"
 	services "server/service"
-	"github.com/gin-gonic/gin"
-
 )
 
 // 拦截器

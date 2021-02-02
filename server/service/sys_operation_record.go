@@ -12,6 +12,6 @@ import (
 //@return: err error
 
 func CreateSysOperationRecord(s model.SysOperationRecord)(err error){
-	_, err = global.GVA_DB.Exec("insert into sys_operation_records(createed_at,updateed_at,ip,method,path,status,latency,) values($1,$2,$3,$4,$5,$6,$7);",s.CreatedAt,s.UpdatedAt,s.Ip,s.Method,s.Path,s.Status,Latency)
+	_, err = global.GVA_DB.Exec("insert into sys_operation_records(createed_at,updateed_at,ip,method,path,status,latency,) values($1,$2,$3,$4,$5,$6,$7);",s.CreatedAt,s.UpdatedAt,s.Ip,s.Method,s.Path,s.Status,s.Latency)
 	return err
 }
