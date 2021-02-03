@@ -105,7 +105,7 @@ func SetUserInfo(reqUser model.SysUser)(err error, user model.SysUser){
 }
 func FindUserById(id int)(err error, user *model.SysUser){
 	var u model.SysUser
-	err = global.GVA_DB.QueryRow("select * from sys_users where id = $1 limit 1;",id).Scan(&u.ID,&u.CreatedAt,&u.UpdatedAt,&u.DeletedAt,&u.UUID,&u.Username,&u.NickName,&u.HeaderImg,&u.AuthorityId)
+	err = global.GVA_DB.QueryRow("select * from sys_users where id = $1 limit 1;",id).Scan(&u.ID,&u.CreatedAt,&u.UpdatedAt,&u.DeletedAt,&u.UUID,&u.Username,&u.Password,&u.NickName,&u.HeaderImg,&u.AuthorityId)
 	return err, &u
 }
 
@@ -116,7 +116,7 @@ func FindUserById(id int)(err error, user *model.SysUser){
 // @return: err error, user *model.SysUser
 func FindUserByUuid(uuid string)(err error, user *model.SysUser){
 	var u model.SysUser
-	err = global.GVA_DB.QueryRow("select * from sys_users where id = $1 limit 1;",uuid).Scan(&u.ID,&u.CreatedAt,&u.UpdatedAt,&u.DeletedAt,&u.UUID,&u.Username,&u.NickName,&u.HeaderImg,&u.AuthorityId)
+	err = global.GVA_DB.QueryRow("select * from sys_users where uuid = $1 limit 1;",uuid).Scan(&u.ID,&u.CreatedAt,&u.UpdatedAt,&u.DeletedAt,&u.UUID,&u.Username,&u.Username,&u.NickName,&u.HeaderImg,&u.AuthorityId)
 	return err, &u
 }
 

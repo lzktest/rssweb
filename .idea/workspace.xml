@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="700ee6d7-c35a-4b32-8952-7a2d546ba319" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middleware/casbin_rbac.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/middleware/casbin_rbac.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middleware/operation.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/middleware/operation.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/initialize/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/initialize/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/router/sys_menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/sys_menu.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/service/sys_operation_record.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service/sys_operation_record.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/service/sys_user.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service/sys_user.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,16 +127,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/server/middleware/jwt.go</url>
-          <line>32</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

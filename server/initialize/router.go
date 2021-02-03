@@ -35,10 +35,12 @@ func Routers() *gin.Engine {
 
 		router.InitJwtRouter(PublicGroup)                   // jwt相关路由
 		router.InitUserRouter(PublicGroup)                  // 注册用户路由
+
 	}
 	PrivateGroup := Router.Group("")
-	PrivateGroup.Use(middleware.JWTAuth()).Use(middleware.CasbinHandler())
+	PrivateGroup.Use(middleware.JWTAuth())//.Use(middleware.CasbinHandler())
 	{
+		router.InitCccRouter(PrivateGroup)   // 测试
 		router.InitMenuRouter(PrivateGroup)  // 菜单操作
 	}
 	global.GVA_LOG.Info("router register success")
