@@ -13,7 +13,7 @@ const vuexLocal = new VuexPersistence({
 export const store = new Vuex.Store({
     modules: {
         user,
-        router
+        router,
     },
     plugins: [vuexLocal.plugin]
 })

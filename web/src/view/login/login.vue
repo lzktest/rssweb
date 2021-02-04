@@ -27,7 +27,7 @@ export default {
         return{
         loginForm:{
           username: 'admin',
-          password: '123456',
+          password: 'ccc',
           captcha: '',
           captchaId: '',
         },
@@ -41,13 +41,16 @@ export default {
     methods: {
       ...mapActions("user", ["LoginIn"]),
       async login(){
-        await this.LoginIn(this.loginForm);
+        return await this.LoginIn(this.loginForm);
       },
       async submitForm(){
         this.$refs.loginForm.validate(async (v) => {
           if (v) {
-            this.login();
-            this.loginVefify();
+            const flag = await this.login();
+            if (!flag){
+               this.loginVefify();
+            }
+            //this.$router.replace('/layout')
           } else {
             this.$message({
               type: "error",

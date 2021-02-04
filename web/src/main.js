@@ -10,6 +10,9 @@ Vue.use(ElementUI)
 import router from '@/router/index'
 import { store } from '@/store/index'
 
+// 路由守卫
+import Bus from '@/utils/bus.js'
+Vue.use(Bus)
 
 new Vue({
   render: h => h(App),

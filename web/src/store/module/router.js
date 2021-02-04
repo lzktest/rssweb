@@ -1,11 +1,15 @@
-import { asyncRouterHandle } from '@/utils/asyncRouter'
+import { asyncRouterHandle } from '@/utils/asyncRouter';
 
-//import { asyncMenu } from '@/api/menu'
+import { asyncMenu } from '@/api/menu'
 
+const routerList = []
 const formatRouter = (routes) => {
     routes && routes.map(item => {
+        if ((!item.children || item.children.every(ch => ch.hidden)) && item.name != '404') {
+            routerList.push({ label: item.meta.title, value: item.name })
+        }
         item.meta.hidden = item.hidden
-        if (item.children && item.children.length > 0 ){
+        if (item.children && item.children.length > 0) {
             formatRouter(item.children)
         }
     })
@@ -14,15 +18,21 @@ const formatRouter = (routes) => {
 export const router = {
     namespaced: true,
     state: {
-        asyncRouters: []
+        asyncRouters: [],
+        routerList: routerList,
     },
     mutations: {
-        setAsyncRouter(state, asyncRouter){
-            state.asyncRouter = asyncRouters
-        }
+        setRouterList(state, routerList) {
+            state.routerList = routerList
+        },
+        // 设置动态路由
+        setAsyncRouter(state, asyncRouters) {
+            state.asyncRouters = asyncRouters
+        },
     },
-    actions:{
-        async SetAsyncRouter({ commit }){
+    actions: {
+        // 从后台获取动态路由
+        async SetAsyncRouter({ commit }) {
             const baseRouter = [{
                 path: '/layout',
                 name: 'layout',
@@ -32,12 +42,13 @@ export const router = {
                 },
                 children: []
             }]
-            //const asyncRouterRes = await asyncMenu()
-            const asyncRouter = asyncRouterRes.data.menus
+            const asyncRouterRes = await asyncMenu()
+            console.log(asyncRouterRes)
+            const asyncRouter = asyncRouterRes.Data.menus
             asyncRouter.push({
                 path: "404",
                 name: "404",
-                hidden: "404",
+                hidden: true,
                 meta: {
                     title: "迷路了*。*",
                 },
@@ -48,16 +59,24 @@ export const router = {
             baseRouter.push({
                 path: '*',
                 redirect: '/layout/404'
+
             })
             asyncRouterHandle(baseRouter)
             commit('setAsyncRouter', baseRouter)
-            //console.log('aaa')
+            commit('setRouterList', routerList)
             return true
         }
     },
     getters: {
-        asyncRouter(state){
+        // 获取动态路由
+        asyncRouters(state) {
             return state.asyncRouters
+        },
+        routerList(state) {
+            return state.routerList
+        },
+        defaultRouter(state) {
+            return state.defaultRouter
         }
     }
 }

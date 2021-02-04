@@ -41,22 +41,25 @@ export const user = {
         }
     },
     actions: {
-        async LoginIn({ commit }, loginInfo){
+        async LoginIn({ commit, dispatch, rootGetters}, loginInfo){
             const res = await login(loginInfo)
-            commit('setUserInfo', res.data.user)
-            commit('setToken', res.data.token)
-            commit('setExpiresAt', res.data.expiresAt)
-            if (res.code == 0){
-                const redirect =router.history.current.query.redirect
+            //console.log(res)
+            if (res.Code == 0){
+                commit('setUserInfo', res.Data.user)
+                commit('setToken', res.Data.Token)
+                commit('setExpiresAt', res.Data.ExpiresAt)
+                await dispatch('router/SetAsyncRouter',{},{root: true})
+                const asyncRouters = rootGetters['router/asyncRouters']
+                router.addRoutes(asyncRouters)
+                const redirect = router.history.current.query.redirect
                 if (redirect){
-                    console.log(redirect)
-                    console.log("test")
                     router.push({ path: redirect})
                 } else {
-                    console.log(redirect)
                     router.push({ path: '/layout'})
                 }
+                return true
             }
+            
         },
         async LoginOut({ commit }){
             const res = await jsonInBlacklist()
@@ -72,8 +75,5 @@ export const user = {
         token(state){
             return state.token
         },
-        expiresAt(state){
-            return state.expiresAt
-        }
     }
 }
