@@ -14,7 +14,7 @@ func InitMenuRouter(Router *gin.RouterGroup)(R gin.IRoutes){
 		MenuRouter.POST("getMenuList", v1.GetMenuList)           // 分页获取基础menu列表
 		MenuRouter.POST("getBaseMenuById", v1.GetBaseMenuById)   // 根据id获取菜单
 		MenuRouter.POST("getMenuAuthority", v1.GetMenuAuthority) // 获取指定角色menu
-
+		MenuRouter.POST("getMenu", v1.GetMenu)  //获取所有动态路由
 	}
 	return MenuRouter
 }
