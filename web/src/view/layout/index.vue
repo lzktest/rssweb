@@ -1,52 +1,97 @@
 <template>
-    <div>
+    <div id="scrn">
         <el-container>
-          <el-aside width="200px">Aside</el-aside>
+          <el-aside width="200px">
+            <div class="title">
+              <h2 class="tit-text">test project</h2>
+              <Aside class="aside"/>
+            </div>
+          </el-aside>
           <el-container>
-            <el-header>Header</el-header>
+            <el-header>
+              <el-row>
+                <el-col>
+                  <div>
+                    <i class="el-icon-s-unfold"></i>
+                    <i class="el-icon-s-fold"></i>
+                  </div>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col>
+                  <div>
+                  bottominfo
+                  </div>
+                </el-col>
+              </el-row>
+            </el-header>
             <el-main>Main</el-main>
           </el-container>
         </el-container>
     </div>
 </template>
 <script>
+import {mapActions} from "vuex";
+import Aside from "./aside/index"
+
 export default {
-    name: "Layout"
+  name: "Layout",
+  data(){
+    return {
+      isSider: true,
+      isCollapse: false,
+    }
+  },
+  components:{
+    Aside,
+  },
+  methods: {
+    ...mapActions('user', ['LoginOut']),
+
+  }
 }
 </script>
 
 <style>
-  .el-header, .el-footer {
+  .el-header {
     background-color: #B3C0D1;
     color: #333;
     text-align: center;
-    line-height: 60px;
+    height: 30%;
   }
   
   .el-aside {
     background-color: #D3DCE6;
     color: #333;
     text-align: center;
-    line-height: 200px;
+    /*line-height: 100%;*/
+    height: auto;
   }
   
   .el-main {
     background-color: #E9EEF3;
     color: #333;
     text-align: center;
-    line-height: 160px;
+    height: 70%;
   }
   
-  body > .el-container {
-    margin-bottom: 40px;
-  } 
-  
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
+  /*body > .el-container {*/
+  /*  margin-top: 0px;*/
+  /*}*/
+  #app, body{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 100%;
   }
-  
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
+  .el-container, html,#scrn{
+    height: 100%;
   }
+  /*.el-container:nth-child(5) .el-aside,*/
+  /*.el-container:nth-child(6) .el-aside {*/
+  /*  line-height: 260px;*/
+  /*}*/
+  
+  /*.el-container:nth-child(7) .el-aside {*/
+  /*  line-height: 320px;*/
+  /*}*/
 </style>
