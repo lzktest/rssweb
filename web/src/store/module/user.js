@@ -41,7 +41,7 @@ export const user = {
         }
     },
     actions: {
-        async LoginIn({ commit, dispatch, rootGetters}, loginInfo){
+        async LoginIn({ commit, dispatch, rootGetters, getters}, loginInfo){
             const res = await login(loginInfo)
             //console.log(res)
             if (res.Code == 0){
@@ -50,12 +50,22 @@ export const user = {
                 commit('setExpiresAt', res.Data.ExpiresAt)
                 await dispatch('router/SetAsyncRouter',{},{root: true})
                 const asyncRouters = rootGetters['router/asyncRouters']
-                router.addRoutes(asyncRouters)
+                console.log(asyncRouters)
+                for(var i= 0; i<asyncRouters.length;i++){
+                    router.addRoute(asyncRouters[i])
+                }
+
+                console.log(router)
                 const redirect = router.history.current.query.redirect
+                console.log(redirect)
                 if (redirect){
-                    router.push({ path: redirect})
+                    //console.log(path)
+                    router.push({ path:redirect })
                 } else {
-                    router.push({ path: '/layout'})
+                    console.log(getters["userInfo"])
+                    //router.push({ path:getters["userInfo"].authority.defaultRouter })
+                    router.push({ path: "/layout" })
+                    console.log("ttt")
                 }
                 return true
             }
