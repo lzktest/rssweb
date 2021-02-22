@@ -4,15 +4,12 @@ arg GO111MODULE=on
 arg GOPROXY='https://goproxy.cn'
 copy . .
 workdir /go/src/app/server
-run CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go 
-run ls -al . 
-run pwd
+run CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build  main.go 
+run ls -alh . 
 
 from alpine:latest
 workdir /app/
-copy --from=build /go/src/app/server/config.yaml .
-copy --from=build /go/src/app/server/main .
-run ls -al
+copy --from=build ["/go/src/app/server/config.yaml","/go/src/app/server/main","./"]
 run chmod +x main
 expose 8888
 cmd ["./main"]
