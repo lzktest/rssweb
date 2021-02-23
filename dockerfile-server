@@ -6,9 +6,10 @@ copy . .
 workdir /go/src/app/server
 run CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build  main.go 
 run ls -alh . 
+run pwd
 
 from alpine:latest
-workdir /app/
+workdir /app
 copy --from=build ["/go/src/app/server/config.yaml","/go/src/app/server/main","./"]
 run chmod +x main
 expose 8888
