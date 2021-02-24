@@ -15,6 +15,17 @@ export  default {
       },
       type: Object
     }
-  }
+  },
+  // created(){
+  //   console.log('bbb')
+  //   console.log(this.routerInfo)
+  //   console.log('ccc')
+  // }
 }
 </script>
+<!--<style>-->
+<!--.el-menu-vertical{-->
+<!--  width: 100%;-->
+<!--  background: #191a23;-->
+<!--}-->
+<!--</style>-->

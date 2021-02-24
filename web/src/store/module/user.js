@@ -50,14 +50,14 @@ export const user = {
                 commit('setExpiresAt', res.Data.ExpiresAt)
                 await dispatch('router/SetAsyncRouter',{},{root: true})
                 const asyncRouters = rootGetters['router/asyncRouters']
-                console.log(asyncRouters)
+                //console.log(asyncRouters)
                 for(var i= 0; i<asyncRouters.length;i++){
                     router.addRoute(asyncRouters[i])
                 }
 
-                console.log(router)
+                //console.log(router)
                 const redirect = router.history.current.query.redirect
-                console.log(redirect)
+                //console.log(redirect)
                 if (redirect){
                     //console.log(path)
                     router.push({ path:redirect })
@@ -65,7 +65,7 @@ export const user = {
                     console.log(getters["userInfo"])
                     //router.push({ path:getters["userInfo"].authority.defaultRouter })
                     router.push({ path: "/layout" })
-                    console.log("ttt")
+                    //console.log("ttt")
                 }
                 return true
             }

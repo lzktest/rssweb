@@ -13,7 +13,6 @@
           unique-opened
           >
           <template v-for="item in asyncRouters[0].children">
-
             <aside-component :key="item.name" :routerInfo="item" v-if="!item.hidden" />
           </template>
         </el-menu>
@@ -79,3 +78,10 @@ export default {
   }
 };
 </script>
+<style>
+.el-menu-vertical{
+  width: 100%;
+  background: #191a23;
+  border-right: 0px;
+}
+</style>

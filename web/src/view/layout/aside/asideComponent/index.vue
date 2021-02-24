@@ -6,13 +6,16 @@
   </component>
 </template>
 <script>
-import MenuItem from './menultem'
+import MenuItem from './menuItem'
 import AsyncSubmenu from './asyncSubmenu'
 
 export default {
   name: 'AsideComponent',
   computed: {
     menuComponent() {
+      //console.log(this.routerInfo)
+      //console.log(this.routerInfo.children&&this.routerInfo.children.filter(item=>!item.hidden).length)
+      //console.log('aaaaa')
       if (this.routerInfo.children&&this.routerInfo.children.filter(item=>!item.hidden).length){
         return 'AsyncSubmenu'
       } else {

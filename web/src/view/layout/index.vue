@@ -31,7 +31,7 @@
     </div>
 </template>
 <script>
-import {mapActions} from "vuex";
+//import {mapActions} from "vuex";
 import Aside from "./aside/index"
 
 export default {
@@ -45,10 +45,10 @@ export default {
   components:{
     Aside,
   },
-  methods: {
-    ...mapActions('user', ['LoginOut']),
-
-  }
+  // methods: {
+  //   ...mapActions('user', ['LoginOut']),
+  //
+  // }
 }
 </script>
 
@@ -61,12 +61,14 @@ export default {
   }
   
   .el-aside {
-    background-color: #D3DCE6;
+    background-color: #191a23;
     color: #333;
     text-align: center;
     /*line-height: 100%;*/
     height: auto;
+    width: auto;
   }
+
   
   .el-main {
     background-color: #E9EEF3;
