@@ -1,2 +1,0 @@
-INSERT INTO public.sys_base_menu_parameters (createed_at,updateed_at,deleteed_at,sys_base_menu_id,addtype,addkey,addvalue) VALUES
-	 ('2021-01-21 13:33:02+08','2021-01-21 13:33:02+08',NULL,8,'test12','test11','test13');
