@@ -1,19 +1,19 @@
 <template>
     <div id="scrn">
         <el-container>
-          <el-aside width="200px">
+          <el-aside class="main-cont main-left" :width="[isCollapse?'100px':'240px']">
             <div class="title">
-              <h2 class="tit-text">test project</h2>
+              <h2 class="tit-text" >test project</h2>
               <Aside class="aside"/>
             </div>
           </el-aside>
           <el-container>
             <el-header>
               <el-row>
-                <el-col>
-                  <div>
-                    <i class="el-icon-s-unfold"></i>
-                    <i class="el-icon-s-fold"></i>
+                <el-col :xs="2" :lg="1" :md="1" :sm="1" :xl="1">
+                  <div @click="totalCollapse" class="menu-total">
+                    <i class="el-icon-s-unfold" v-if="isCollapse"></i>
+                    <i class="el-icon-s-fold" v-else></i>
                   </div>
                 </el-col>
               </el-row>
@@ -31,24 +31,32 @@
     </div>
 </template>
 <script>
-//import {mapActions} from "vuex";
+import {mapActions} from "vuex";
 import Aside from "./aside/index"
 
 export default {
   name: "Layout",
   data(){
     return {
-      isSider: true,
+      isSider: false,
       isCollapse: false,
+      isMobile: false,
+      isShadowBg: false,
+      value: ''
     }
   },
   components:{
     Aside,
   },
-  // methods: {
-  //   ...mapActions('user', ['LoginOut']),
-  //
-  // }
+  methods: {
+    ...mapActions('user', ['LoginOut']),
+    totalCollapse() {
+      this.isCollapse = !this.isCollapse
+      this.isSider = !this.isCollapse
+      this.isShadowBg = !this.isCollapse
+      this.$bus.emit('collapse', this.isCollapse)
+    },
+  }
 }
 </script>
 
@@ -96,4 +104,11 @@ export default {
   /*.el-container:nth-child(7) .el-aside {*/
   /*  line-height: 320px;*/
   /*}*/
+  .menu-total {
+         float: left;
+         width: 30px;
+         height: 30px;
+         line-height: 30px;
+         font-size: 30px;
+       }
 </style>

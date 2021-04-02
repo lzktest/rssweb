@@ -21,7 +21,7 @@ zap:
 # redis configuration
 redis:
   db: 0
-  addr: '192.168.3.121:30002'
+  addr: '192.168.3.50:30002'
   password: ''
 
 # email configuration
@@ -56,7 +56,7 @@ captcha:
 #  log-mode: false
 #  log-zap: false
 pg:
-  host: '192.168.3.121'
+  host: '192.168.3.50'
   port: '30001'
   username: 'db'
   password: 'Aa123456'
