@@ -1,7 +1,7 @@
 <template>
     <div id="scrn">
         <el-container>
-          <el-aside class="main-cont main-left" :width="[isCollapse?'100px':'240px']">
+          <el-aside class="main-cont main-left" :width="isCollapse?'100px':'240px'">
             <div class="title">
               <h2 class="tit-text" >test project</h2>
               <Aside class="aside"/>
@@ -10,18 +10,36 @@
           <el-container>
             <el-header>
               <el-row>
-                <el-col :xs="2" :lg="1" :md="1" :sm="1" :xl="1">
+                <el-col :xs="1" :lg="1" :md='1' :sm="1" :xl="1">
                   <div @click="totalCollapse" class="menu-total">
                     <i class="el-icon-s-unfold" v-if="isCollapse"></i>
                     <i class="el-icon-s-fold" v-else></i>
                   </div>
                 </el-col>
+                <el-col :xs="23" :lg="23" :md='23' :sm="23" :xl="23" style="text-align: right;">
+                    <el-dropdown >
+                      <span class="el-dropdown-link" style="margin-left: 5px">
+                        <img :src="userInfo.headerImg"/>
+                        {{userInfo.nickName}}<i class="el-icon-arrow-down el-icon--right"></i>
+                      </span>
+                      <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>
+                          <span>
+                            更多信息
+                            <el-badge is-dot />
+                          </span>
+                        </el-dropdown-item>
+                        <el-dropdown-item @click.native="toPerson" icon="el-icon-s-custom">个人信息</el-dropdown-item>
+                        <el-dropdown-item @click.native="LoginOut" icon="el-icon-table-lamp">登出</el-dropdown-item>
+                      </el-dropdown-menu>
+                    </el-dropdown>
+                </el-col>
               </el-row>
               <el-row>
                 <el-col>
-                  <div>
-                  bottominfo
-                  </div>
+                  <el-tag v-for="item in matched.slice(1,matched.length)" :key="item.path" closable :type="tag.type">
+                    {{item.meta.title}}
+                  </el-tag>
                 </el-col>
               </el-row>
             </el-header>
@@ -31,7 +49,7 @@
     </div>
 </template>
 <script>
-import {mapActions} from "vuex";
+import {mapActions,mapGetters} from "vuex";
 import Aside from "./aside/index"
 
 export default {
@@ -56,6 +74,18 @@ export default {
       this.isShadowBg = !this.isCollapse
       this.$bus.emit('collapse', this.isCollapse)
     },
+    toPerson(){
+      this.$router.push({ name: 'person' })
+    }
+  },
+  computed: {
+    ...mapGetters('user', ['userInfo']),
+    title(){
+      return this.$route.meta.title || '当前页面'
+    },
+    matched(){
+      return this.$route.matched
+    }
   }
 }
 </script>
