@@ -35,15 +35,20 @@
                     </el-dropdown>
                 </el-col>
               </el-row>
+              
+            </el-header>
+            <el-main>
               <el-row>
                 <el-col>
-                  <el-tag v-for="item in matched.slice(1,matched.length)" :key="item.path" closable :type="tag.type">
+                  <el-tag v-for="item in matched.slice(1,matched.length)" :key="item.path" closable >
                     {{item.meta.title}}
                   </el-tag>
                 </el-col>
               </el-row>
-            </el-header>
-            <el-main>Main</el-main>
+              <el-row>
+                Main
+              </el-row>
+            </el-main>
           </el-container>
         </el-container>
     </div>
