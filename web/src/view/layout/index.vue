@@ -38,14 +38,24 @@
               
             </el-header>
             <el-main>
-              <el-row>
+              <!-- <el-row>
                 <el-col>
                   <el-tag v-for="item in matched.slice(1,matched.length)" :key="item.path" closable >
                     {{item.meta.title}}
                   </el-tag>
                 </el-col>
-              </el-row>
+              </el-row> -->
+
+              <HistoryComponent />
               <el-row>
+                <transition mode="out-in" name="el-fade-in-linear">
+                  <keep-alive>
+                    <router-view v-loading="loadingFlag" element-loading-text="正在加载中" class="admin-box" v-if="$route.meta.keepAlive && reloadFlag"></router-view>
+                  </keep-alive>
+                </transition>
+                <transition>
+                  <router-view v-loading="loadingFlag" element-loading-text="正在加载中" class="admin-box" v-if="$route.meta.keepAlive && reloadFlag"></router-view>
+                </transition>
                 Main
               </el-row>
             </el-main>
@@ -55,8 +65,8 @@
 </template>
 <script>
 import {mapActions,mapGetters} from "vuex";
-import Aside from "./aside/index"
-
+import Aside from "@/view/layout/aside/index"
+import HistoryComponent from '@/view/layout/aside/historyComponent/history'
 export default {
   name: "Layout",
   data(){
@@ -70,6 +80,7 @@ export default {
   },
   components:{
     Aside,
+    HistoryComponent,
   },
   methods: {
     ...mapActions('user', ['LoginOut']),

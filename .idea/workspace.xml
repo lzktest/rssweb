@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="700ee6d7-c35a-4b32-8952-7a2d546ba319" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/model/sys_authority.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/model/sys_authority.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/store/module/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/store/module/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/view/layout/aside/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/view/layout/aside/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/view/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/view/layout/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +53,7 @@
     <property name="configurable.GoLibrariesConfigurable.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gin-vue-admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />

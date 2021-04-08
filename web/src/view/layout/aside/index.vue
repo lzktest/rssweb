@@ -44,9 +44,6 @@ export default {
               params[item.key] = item.value;
             }
           });
-          console.log(index);
-          console.log(this.$route.name);
-          console.log('test');
       if (index === this.$route.name) return;
       if (index.indexOf("http://") > -1 || index.indexOf("https://") > -1) {
         window.open(index);
