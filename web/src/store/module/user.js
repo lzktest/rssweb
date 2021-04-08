@@ -62,10 +62,11 @@ export const user = {
                     //console.log(path)
                     router.push({ path:redirect })
                 } else {
-                    console.log(getters["userInfo"].authority)
+                    //console.log(getters["userInfo"].authority.defaultRouter)
                     //router.push({ path:getters["userInfo"].authority.defaultRouter })
+                    router.push({ path: '/layout/dashboard' })
                     //router.push({ path: "/layout" })
-                    //console.log("ttt")
+                    //console.log(router)
                 }
                 return true
             }

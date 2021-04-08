@@ -35,8 +35,13 @@ func Register(u model.SysUser)(err error, userInter model.SysUser){
 // @return: err error, userInter *model.SysUser
 func Login(u *model.SysUser) (err error, userInter *model.SysUser){
 	var user model.SysUser
+	var authmodel model.SysAuthority
 	u.Password = utils.MD5V([]byte(u.Password))
-	err = global.GVA_DB.QueryRow("select * from sys_users where username=$1 and password = $2;",u.Username,u.Password).Scan(&user.ID,&user.CreatedAt,&user.UpdatedAt,&user.DeletedAt,&user.UUID,&user.Username,&user.Password,&user.NickName,&user.HeaderImg,&user.AuthorityId)
+	err = global.GVA_DB.QueryRow("select * from sys_users su join sys_authorities sam on su.authority_id = sam.authority_id where su.username=$1 and su.password = $2;",u.Username,u.Password).Scan(
+		&user.ID,&user.CreatedAt,&user.UpdatedAt,&user.DeletedAt,&user.UUID,&user.Username,&user.Password,&user.NickName,&user.HeaderImg,&user.AuthorityId,
+		&authmodel.CreatedAt,&authmodel.UpdatedAt,&authmodel.DeletedAt,&authmodel.AuthorityId,&authmodel.AuthorityName,&authmodel.ParentId,&authmodel.DefaultRouter)
+	//user.Children=append(user.Children,authmodel)
+	user.Authority=authmodel
 	return err, &user
 }
 

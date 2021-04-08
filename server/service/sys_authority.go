@@ -19,7 +19,7 @@ import (
 func CreateAuthority(auth model.SysAuthority)(err error, authority model.SysAuthority){
 	var authorityBox model.SysAuthority
 	if err :=global.GVA_DB.QueryRow("select * from sys_authorities where authority_id = $1 limit 1;",auth.AuthorityId).Scan(&authorityBox.CreatedAt, &authorityBox.UpdatedAt, &authorityBox.DeletedAt, &authorityBox.AuthorityId, &authorityBox.AuthorityName, &authorityBox.ParentId); errors.Is(err, sql.ErrNoRows){
-		_, err := global.GVA_DB.Exec("insert into sys_authorities (Created_at,Updated_At,Deleted_At,Authority_Id,Authority_Name,Parent_Id) values($1,$2,$3,$4,$5,$6)",time.Now(),time.Now(),auth.DeletedAt,auth.AuthorityId,auth.AuthorityName,auth.ParentId)
+		_, err := global.GVA_DB.Exec("insert into sys_authorities (Created_at,Updated_At,Deleted_At,Authority_Id,Authority_Name,Parent_Id,) values($1,$2,$3,$4,$5,$6)",time.Now(),time.Now(),auth.DeletedAt,auth.AuthorityId,auth.AuthorityName,auth.ParentId)
 		return err, auth
 	} else {
 		return errors.New("存在相同角色id"), auth
@@ -57,7 +57,7 @@ func GetAuthorityInfoList(info request.PageInfo) (err error, list interface{}, t
 		return errors.New("获取失败，请稍后重试"), list, total
 	}
 	for rows.Next(){
-		err = rows.Scan(&authtmp.CreatedAt,&authtmp.UpdatedAt,&authtmp.DeletedAt,&authtmp.AuthorityId,&authtmp.AuthorityName,&authtmp.ParentId)
+		err = rows.Scan(&authtmp.CreatedAt,&authtmp.UpdatedAt,&authtmp.DeletedAt,&authtmp.AuthorityId,&authtmp.AuthorityName,&authtmp.ParentId,&authtmp.DefaultRouter)
 		if err != nil {
 			return err, authority, total
 		}
