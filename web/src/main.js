@@ -14,6 +14,8 @@ import { store } from '@/store/index'
 import Bus from '@/utils/bus.js'
 Vue.use(Bus)
 
+import '@/permission'
+
 new Vue({
   render: h => h(App),
   router,

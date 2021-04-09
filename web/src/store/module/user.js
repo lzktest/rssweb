@@ -41,7 +41,7 @@ export const user = {
         }
     },
     actions: {
-        async LoginIn({ commit, dispatch, rootGetters, getters}, loginInfo){
+        async LoginIn({ commit, dispatch, rootGetters}, loginInfo){
             const res = await login(loginInfo)
             //console.log(res)
             if (res.Code == 0){
@@ -62,7 +62,7 @@ export const user = {
                     //console.log(path)
                     router.push({ path:redirect })
                 } else {
-                    //console.log(getters["userInfo"].authority.defaultRouter)
+                    //console.log(getters["userInfo"])
                     //router.push({ path:getters["userInfo"].authority.defaultRouter })
                     router.push({ path: '/layout/dashboard' })
                     //router.push({ path: "/layout" })

@@ -54,7 +54,7 @@
                   </keep-alive>
                 </transition>
                 <transition>
-                  <router-view v-loading="loadingFlag" element-loading-text="正在加载中" class="admin-box" v-if="$route.meta.keepAlive && reloadFlag"></router-view>
+                  <router-view v-loading="loadingFlag" element-loading-text="正在加载中" class="admin-box" v-if="!$route.meta.keepAlive && reloadFlag"></router-view>
                 </transition>
                 Main
               </el-row>
@@ -75,6 +75,8 @@ export default {
       isCollapse: false,
       isMobile: false,
       isShadowBg: false,
+      loadingFlag: false,
+      reloadFlag: true,
       value: ''
     }
   },
@@ -84,6 +86,12 @@ export default {
   },
   methods: {
     ...mapActions('user', ['LoginOut']),
+    reload(){
+      this.reloadFlag =false
+      this.$nextTick(()=>{
+        this.reloadFlag = true
+      })
+    },
     totalCollapse() {
       this.isCollapse = !this.isCollapse
       this.isSider = !this.isCollapse
@@ -102,7 +110,7 @@ export default {
     matched(){
       return this.$route.matched
     }
-  }
+  },
 }
 </script>
 

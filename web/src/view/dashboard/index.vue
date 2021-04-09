@@ -5,8 +5,12 @@
 </template>
 
 <script>
+//import { mapGetters } from 'vuex'
 
 export default {
-    name: "Dashboard"
+    name: "Dashboard",
+    // computed: {
+    //     ...mapGetters("router", ["asyncRouters"])
+    // }
 }
 </script>
