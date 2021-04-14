@@ -4,6 +4,7 @@
             v-model="activeValue"
             type="card"
             @tab-click="changeTab"
+            @tab-remove="removeTab"
             :closable="!(this.$route.name==defaultRouter)"
             >
             <el-tab-pane
@@ -29,6 +30,7 @@ export default{
           activeValue: "",
           isMobile: false,
           isCollapse: false,
+          contextMenuVisible: false,
       }
   },
   computed: {
@@ -91,7 +93,7 @@ export default{
                obj.query = route.query;
                obj.params = route.params;
                this.historys.push(obj);
-               console.log(route)
+               
            }
            window.sessionStorage.setItem(
                "activeValue",
@@ -99,15 +101,67 @@ export default{
            );
        },
        changeTab(component){
+           console.log("test")
            const tab = component.$attrs.tab;
-           //console.log(tab.name,tab.query,tab.params);
-           this.$router.push({
+           console.log(tab.name,tab.query,tab.params);
+           this.$router.replace({
                name: tab.name,
-               query: tab.query,
-               params: tab.params
+            //    query: tab.query,
+            //    params: tab.params
            });
+           console.log("testend")
            //console.log(this.$router)
        },
-   }
+       removeTab(tab){
+           const index = this.historys.findIndex(
+               item => getFmtString(item) == tab
+           );
+           if (
+               getFmtString(this.$route) == tab
+           ) {
+               if (this.historys.length == 1){
+                   this.$router.push({ name: this.defaultRouter });
+               } else {
+                   if (index < this.historys.length - 1 ){
+                       this.$router.push({
+                           name: this.historys[index + 1].name,
+                           query: this.historys[index + 1].query,
+                           params: this.historys[index + 1].params
+                       });
+                   } else {
+                       this.$router.push({
+                           name: this.historys[index - 1].name,
+                           query: this.historys[index - 1].query,
+                           params: this.historys[index - 1].params
+                       });
+                   }
+               }
+           }
+           this.historys.splice(index, 1);
+       }
+   },
+    watch: {
+           contextMenuVisible(){
+               if (this.contextMenuVisible){
+                   document.body.addEventListener("click",() => {
+                       console.log(this.contextMenuVisible);
+                       this.contextMenuVisible = false;
+                   });
+               } else {
+                   document.body.removeEventListener("click", ()=>{
+                       this.contextMenuVisible = false;
+                   });
+               }
+           },
+           $route(to, now){
+               this.historys = this.historys.filter(item => !item.meta.closeTab);
+               this.setTab(to);
+               sessionStorage.setItem("historys",JSON.stringify(this.historys));
+               this.activeValue = window.sessionStorage.getItem("activeValue")
+               if (now && to && now.name == to.name){
+                   this.$bus.$emit("reload");
+               }
+           }
+       }
 }
 </script>
