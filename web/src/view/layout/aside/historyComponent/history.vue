@@ -101,16 +101,12 @@ export default{
            );
        },
        changeTab(component){
-           console.log("test")
            const tab = component.$attrs.tab;
-           console.log(tab.name,tab.query,tab.params);
-           this.$router.replace({
+           this.$router.push({
                name: tab.name,
-            //    query: tab.query,
-            //    params: tab.params
+               query: tab.query,
+               params: tab.params
            });
-           console.log("testend")
-           //console.log(this.$router)
        },
        removeTab(tab){
            const index = this.historys.findIndex(
