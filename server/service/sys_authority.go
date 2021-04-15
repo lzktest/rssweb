@@ -8,6 +8,7 @@ import (
 	"server/model/request"
 	"server/model/response"
 	"time"
+	"go.uber.org/zap"
 
 	//"server/utils"
 )
@@ -96,8 +97,9 @@ func findChildrenAuthority(authority *model.SysAuthority)(err error){
 		return err
 	}
 	for rows.Next(){
-		err = rows.Scan(&authtmp.CreatedAt,&authtmp.UpdatedAt,&authtmp.DeletedAt,&authtmp.AuthorityId,&authtmp.AuthorityName,&authtmp.ParentId)
+		err = rows.Scan(&authtmp.CreatedAt,&authtmp.UpdatedAt,&authtmp.DeletedAt,&authtmp.AuthorityId,&authtmp.AuthorityName,&authtmp.ParentId,&authtmp.DefaultRouter)
 		if err != nil {
+			global.GVA_LOG.Error("testssss",zap.Any("error",err))
 			return err
 		}
 		authority.Children = append(authority.Children, authtmp)
