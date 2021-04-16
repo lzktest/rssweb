@@ -7,6 +7,8 @@
     <list default="true" id="700ee6d7-c35a-4b32-8952-7a2d546ba319" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/service/sys_authority.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service/sys_authority.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/api/authority.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/api/authority.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/mixins/infoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/mixins/infoList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/view/superAdmin/authority/authority.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/view/superAdmin/authority/authority.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
