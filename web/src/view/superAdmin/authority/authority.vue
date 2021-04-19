@@ -93,6 +93,7 @@ export default {
                 }
             ],
             listApi: getAuthorityList,
+            drawer: false,
             dialogTitle: "新增角色",
             dialogType: "add",
             dialogFormVisible: false,
@@ -104,6 +105,10 @@ export default {
         }
     },
     methods: {
+        opdendrawer(row){
+            this.drawer = true;
+            this.activeRow = row;
+        },
         addAuthority(parentId){
             this.initForm();
             this.dialogTitle = "新增角色";
