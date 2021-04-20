@@ -13,7 +13,7 @@
         <el-table-column label="角色名称" min-width="180" prop="authorityName"></el-table-column>
         <el-table-column  label="操作" width="500">
             <template slot-scope="scope">
-                <el-button size="small" type="primary">设置权限</el-button>
+                <el-button @click="opdendrawer(scope.row)" size="small" type="primary">设置权限</el-button>
                 <el-button
                     @click="addAuthority(scope.row.authorityId)"
                     icon="el-icon-plus"
@@ -64,6 +64,19 @@
               <el-button @click="enterDialog" type="primary">确 定</el-button>
           </div>
       </el-dialog>
+        <el-drawer :visible.sync="drawer" :with-header="false" size="40%" title="角色配置" v-if="drawer">
+            <el-tabs :before-leave="autoEnter" class="role-box" type="border-card">
+                <el-tab-pane label="角色菜单">
+                    <Menus :row="activeRow" ref="apis" />
+                </el-tab-pane>
+                <!-- <el-tab-pane label="角色api">
+                    <apis :row="activeRow" ref="apis" />
+                </el-tab-pane>
+                <el-tab-pane label="资源权限">
+                    <Datas :authority="tableData" :row="activeRow" ref="datas" />
+                </el-tab-pane> -->
+            </el-tabs>
+        </el-drawer>
     </div>
 </template>
 <script>
@@ -74,17 +87,19 @@ import {
     updateAuthority,
 } from "@/api/authority"
 
+import Menus from "@/view/superAdmin/authority/components/menus"
+
 import infoList from "@/mixins/infoList"
 export default {
     name: "Authority",
     mixins: [infoList],
     data(){
-        var mustUint = (rule, value, callback) => {
-            if (!/^[0-9]*[1-9][0-9]*$/.test(value)){
-                return callback(new Error("请输入正整数"));
-            }
-            return callback();
-        };
+        // var mustUint = (rule, value, callback) => {
+        //     if (!/^[0-9]*[1-9][0-9]*$/.test(value)){
+        //         return callback(new Error("请输入正整数"));
+        //     }
+        //     return callback();
+        // };
         return {
             AuthorityOption:[
                 {
@@ -94,6 +109,8 @@ export default {
             ],
             listApi: getAuthorityList,
             drawer: false,
+            activeRow: {},
+            activeUserId: 0,
             dialogTitle: "新增角色",
             dialogType: "add",
             dialogFormVisible: false,
@@ -104,7 +121,19 @@ export default {
             },
         }
     },
+    components: {
+        Menus,
+    },
     methods: {
+        autoEnter(activeName, oldActiveName){
+            const paneArr = ["menus","apis","datas"];
+            if (oldActiveName){
+                if (this.$refs[paneArr[oldActiveName]].needConfirm){
+                    this.$refs[paneArr[oldActiveName]].enterAndNext();
+                    this.$refs[paneArr[oldActiveName]].needConfirm = false;
+                }
+            }
+        },
         opdendrawer(row){
             this.drawer = true;
             this.activeRow = row;
