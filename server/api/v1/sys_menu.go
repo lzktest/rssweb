@@ -12,7 +12,17 @@ import (
 	services "server/service"
 	"server/utils"
 )
+// @Tags AuthorityMenu
+// @Summary 增加menu和角色关联关系
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.AddMenuAuthorityInfo true
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"添加成功"}"
+// @Router /menu/addMenuAuthority [post]
+func AddMenuAuthority(c *gin.Context) {
 
+}
 // @Tags Menu
 // @Summary 新增菜单
 // @Security ApiKeyAuth
