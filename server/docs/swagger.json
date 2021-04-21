@@ -289,7 +289,7 @@
                 }
             }
         },
-        "/jwt/jsonInBlocklist": {
+        "/jwt/jsonInBlacklist": {
             "post": {
                 "security": [
                     {

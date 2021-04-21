@@ -39,7 +39,7 @@ func JWTAuth() gin.HandlerFunc{
 			}
 		}
 		if err, _ = services.FindUserByUuid(claims.UUID.String()); err != nil {
-			_ = services.JsonInBlocklist(model.JwtBlocklist{Jwt: token})
+			_ = services.JsonInBlacklist(model.JwtBlocklist{Jwt: token})
 			response.FailWithDetailed(gin.H{"reload":true}, err.Error(), c)
 			c.Abort()
 		}
@@ -54,7 +54,7 @@ func JWTAuth() gin.HandlerFunc{
 				if err != nil {
 					global.GVA_LOG.Error("get redis jwt failed", zap.Any("err", err))
 				} else {
-					_ = services.JsonInBlocklist(model.JwtBlocklist{Jwt: RedisJwtToken})
+					_ = services.JsonInBlacklist(model.JwtBlocklist{Jwt: RedisJwtToken})
 				}
 				_ = services.SetRedisJWT(newToken,newClaims.Username)
 			}

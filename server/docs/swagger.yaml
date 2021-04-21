@@ -355,7 +355,7 @@ paths:
       summary: 更新角色api权限
       tags:
       - Casbin
-  /jwt/jsonInBlocklist:
+  /jwt/jsonInBlacklist:
     post:
       consumes:
       - application/json

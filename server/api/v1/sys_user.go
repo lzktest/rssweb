@@ -86,7 +86,7 @@ func tokenNext(c *gin.Context, user model.SysUser){
 	} else {
 		var blockJWT model.JwtBlocklist
 		blockJWT.Jwt = jwtStr
-		if err := services.JsonInBlocklist(blockJWT); err != nil {
+		if err := services.JsonInBlacklist(blockJWT); err != nil {
 			response.FailWithMessage("jwt作废失败", c)
 			return
 		}

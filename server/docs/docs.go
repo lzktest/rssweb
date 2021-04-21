@@ -305,7 +305,7 @@ var doc = `{
                 }
             }
         },
-        "/jwt/jsonInBlocklist": {
+        "/jwt/jsonInBlacklist": {
             "post": {
                 "security": [
                     {

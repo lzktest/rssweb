@@ -8,6 +8,6 @@ import (
 func InitJwtRouter(Router *gin.RouterGroup){
 	ApiRouter := Router.Group("jwt")
 	{
-		ApiRouter.POST("jsonInBlocklist", v1.JsonInBlocklist) // jwt 加入黑名单
+		ApiRouter.POST("jsonInBlacklist", v1.JsonInBlacklist) // jwt 加入黑名单
 	}
 }

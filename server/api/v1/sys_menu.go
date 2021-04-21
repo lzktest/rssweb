@@ -123,6 +123,7 @@ func GetMenuAuthority(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
+	//global.GVA_LOG.Debug("输出authorityid:",zap.Any("debug",&param))
 	if err, menus := services.GetMenuAuthority(&param); err != nil {
 		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
 		response.FailWithDetailed(response.SysMenusResponse{Menus: menus}, "获取失败", c)

@@ -13,7 +13,7 @@ import (
 //@description: 拉黑jwt
 //@param: jwtList model.JwtBlacklist
 //@return: err error
-func JsonInBlocklist(jwtList model.JwtBlocklist)(err error){
+func JsonInBlacklist(jwtList model.JwtBlocklist)(err error){
 	jwtList.CreatedAt = time.Now()
 	jwtList.UpdatedAt = jwtList.CreatedAt
 	_, err = global.GVA_DB.Exec("insert into sys_jwt_blacklist(created_at,updated_at,jwt) values($1,$2,$3)",jwtList.CreatedAt,jwtList.UpdatedAt,jwtList.Jwt)

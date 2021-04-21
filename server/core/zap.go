@@ -20,7 +20,7 @@ func Zap() (logger *zap.Logger) {
 		_ = os.Mkdir(global.GVA_CONFIG.Zap.Director, os.ModePerm)
 	}
 	switch global.GVA_CONFIG.Zap.Level {
-	case "degug":
+	case "debug":
 		level = zap.DebugLevel
 	case "info":
 		level = zap.InfoLevel

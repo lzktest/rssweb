@@ -170,9 +170,9 @@ func GetMenuAuthority(info *request.GetAuthorityId) (err error, menus []model.Sy
 	var qstr string
 	i := 0
 	//err, treeMap := getBaseMenuTreeMap("select sbm.sys_base_menu_id, sbm.createed_at, sbm.updateed_at, sbm.deleteed_at, \nsbm.menu_level, sbm.parent_id, sbm.routerpath, sbm.routername, sbm.hidden, sbm.component, sbm.sort, sbm.keep_alive, sbm.default_menu, sbm.title, sbm.icon \nfrom sys_authority_menus sam \ninner join sys_base_menus sbm \non sam.sys_base_menu_id = sbm.sys_base_menu_id where sam.sys_authority_authority_id='"+info.AuthorityId+"';")
-
+	global.GVA_LOG.Debug("输出authorityid:",zap.Any("debug",info.AuthorityId))
 	rows, err := global.GVA_DB.Query("select * from sys_authority_menus sam \ninner join sys_base_menus sbm \non sam.sys_base_menu_id = sbm.sys_base_menu_id where sam.sys_authority_authority_id='"+info.AuthorityId+"' order by sbm.sort;")
-	if err != nil {
+	if err != nil || err == errors.New("sql: no rows in result set") {
 		return err ,menus
 	}
 	for rows.Next(){
@@ -188,7 +188,10 @@ func GetMenuAuthority(info *request.GetAuthorityId) (err error, menus []model.Sy
 		qstr += strconv.Itoa(int(menuline.ID))
 		menus = append(menus,menuline)
 	}
-
+	if len(qstr)<1 {
+		return nil ,menus
+	}
+	global.GVA_LOG.Debug("输出GetMenuAuthority sql:",zap.Any("info",qstr))
 	rows, err = global.GVA_DB.Query("select * from sys_base_menu_parameters where sys_base_menu_id in ("+qstr+");")
 	if err != nil {
 		global.GVA_LOG.Error("获取路由参数失败:",zap.Any("err",err))
