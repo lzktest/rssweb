@@ -21,7 +21,18 @@ import (
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"添加成功"}"
 // @Router /menu/addMenuAuthority [post]
 func AddMenuAuthority(c *gin.Context) {
-
+	var authorityMenu request.AddMenuAuthorityInfo
+	_ = c.ShouldBindJSON(&authorityMenu)
+	if err := utils.Verify(authorityMenu, utils.AuthorityIdVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err := services.AddMenuAuthority(authorityMenu.Menus, authorityMenu.AuthorityId); err != nil {
+		global.GVA_LOG.Error("添加失败!", zap.Any("err",err))
+		response.FailWithMessage("添加失败", c)
+	} else {
+		response.OkWithMessage("添加成功", c)
+	}
 }
 // @Tags Menu
 // @Summary 新增菜单

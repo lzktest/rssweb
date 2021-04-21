@@ -48,6 +48,20 @@ func AddBaseMenu(menu model.SysBaseMenu)(err error){
 	return errors.New("存在相同name")
 }
 
+//@author: [piexlmax]
+//@function: AddMenuAuthority
+//@description: 为角色增加menu树
+//@param:menus []model.SysBaseMenu, authorityId string
+//@return: err error
+func AddMenuAuthority(menus []model.SysBaseMenu, authorityId string)(err error){
+	var auth model.SysAuthority
+	auth.AuthorityId = authorityId
+	auth.SysBaseMenus = menus
+	//global.GVA_LOG.Info("info",zap.Any(authorityId,menus))
+	err = SetMenuAuthority(&auth)
+    return err
+}
+
 // @author: [piexlmax]
 // @function: getBaseMenuTreeMap
 // @description: 获取路由总树map

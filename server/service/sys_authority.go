@@ -27,6 +27,26 @@ func CreateAuthority(auth model.SysAuthority)(err error, authority model.SysAuth
 	}
 }
 
+//@author: [piexlmax]
+//@function: SetDataAuthority
+//@description: 设置角色资源权限
+//@param: auth model.SysAuthority
+//@return: error
+func SetDataAuthority(auth model.SysAuthority) error {
+	var s model.SysAuthority
+	if err :=global.GVA_DB.QueryRow("select * from sys_authority_menus where sys_authority_authority_id = $1 and sys_base_menu_id = $2 ;",auth.AuthorityId,auth.SysBaseMenus.ID).Scan(&s.AuthorityId, &s.SysBaseMenus.ID); errors.Is(err, sql.ErrNoRows){
+		tx :=global.GVA_DB.Begin()
+		for value := range(auth.SysAuthority){
+
+		}
+		_, err := global.GVA_DB.Exec("insert into sys_authority_menus (sys_authority_authority_id,sys_base_menu_id) values($1,$2);",auth.AuthorityId,auth.SysBaseMenus.ID)
+		return err
+	} else {
+		_, err := global.GVA_DB.Exec("update sys_authority_menus set sys_authority_authority_id = $1 sys_base_menu_id= $2);",auth.AuthorityId,auth.SysBaseMenus.ID)
+		return err
+	}
+}
+
 // @author: [piexlmax]
 // @function: CopyAuthority
 // @description: 复制一个角色

@@ -10,5 +10,6 @@ type SysAuthority struct {
 	AuthorityName   string         `json:"authorityName" gorm:"comment:角色名"`
 	ParentId        string         `json:"parentId" gorm:"comment:父角色ID"`
 	Children		[]SysAuthority `json:"children" `
+	SysBaseMenus     []SysBaseMenu  `json:"menus"`
 	DefaultRouter   string         `json:"defaultRouter"`
 }
