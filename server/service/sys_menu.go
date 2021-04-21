@@ -57,8 +57,8 @@ func AddMenuAuthority(menus []model.SysBaseMenu, authorityId string)(err error){
 	var auth model.SysAuthority
 	auth.AuthorityId = authorityId
 	auth.SysBaseMenus = menus
-	//global.GVA_LOG.Info("info",zap.Any(authorityId,menus))
-	err = SetMenuAuthority(&auth)
+	//global.GVA_LOG.Info("info",zap.Any("aaaaa",auth))
+	err =SetMenuAuthority(&auth)
     return err
 }
 
