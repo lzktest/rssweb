@@ -109,3 +109,30 @@ func UpdateAuthority(c *gin.Context) {
 		response.OkWithDetailed(response.SysAuthorityResponse{Authority: authority}, "更新成功", c)
 	}
 }
+
+// @Tags Authority
+// @Summary 删除角色
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body model.SysAuthority true "页码, 每页大小"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Router /authority/deleteAuthority [post]
+func DeleteAuthority(c *gin.Context){
+	var authority model.SysAuthority
+	_ = c.ShouldBindJSON(&authority)
+	if err := utils.Verify(authority, utils.AuthorityIdVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	//global.GVA_LOG.Info("aaa!",zap.Any("info", authority))
+	if err := services.DeleteAuthority(&authority); err != nil {
+		global.GVA_LOG.Error("删除失败!",zap.Any("err", err))
+		response.FailWithMessage("删除失败"+err.Error(),c)
+	} else {
+		response.OkWithMessage("删除成功", c)
+	}
+}
+
+
+

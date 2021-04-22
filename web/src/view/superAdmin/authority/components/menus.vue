@@ -6,7 +6,7 @@
         </div>
         <el-tree
             :data="menuTreeData"
-            :default-check-keys="menuTreeIds"
+            :default-checked-keys="menuTreeIds"
             :props="menuDefaultProps"
             @check="nodeChange"
             show-checkbox
@@ -66,7 +66,7 @@ export default {
     },
     async created() {
         const res = await getBaseMenuTree()
-        console.log(res)
+        //console.log(res)
         this.menuTreeData = res.Data.menus
         const res1 = await getMenuAuthority({ authorityId: this.row.authorityId })
         const menus = res1.Data.menus
@@ -79,7 +79,6 @@ export default {
             }
         })
         }
-        
         this.menuTreeIds = arr
     }
 }

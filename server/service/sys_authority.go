@@ -146,7 +146,13 @@ func findChildrenAuthority(authority *model.SysAuthority) (err error) {
 // @param: auth *model.SysAuthority
 // @return: err error
 func DeleteAuthority(auth *model.SysAuthority) (err error) {
-	return nil
+	var authtmp model.SysAuthority
+	if err := global.GVA_DB.QueryRow("select sys_authority_authority_id from sys_authority_menus where sys_authority_authority_id=$1;", auth.AuthorityId).Scan(&authtmp.AuthorityId); errors.Is(err, sql.ErrNoRows) {
+		_, err := global.GVA_DB.Exec("delete from sys_authorities where authority_id=$1;", auth.AuthorityId)
+		return err
+	} else {
+		return errors.New("删除前请清空角色权限")
+	}
 }
 
 // @author: [piexlmax]

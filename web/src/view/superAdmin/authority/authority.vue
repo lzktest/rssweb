@@ -32,6 +32,7 @@
                     type="primary"
                     >编辑</el-button>
                 <el-button
+                    @click="deleteAuth(scope.row)"
                     icon="el-icon-delete"
                     size="small"
                     type="danger"
@@ -69,12 +70,12 @@
                 <el-tab-pane label="角色菜单">
                     <Menus :row="activeRow" ref="apis" />
                 </el-tab-pane>
-                <!-- <el-tab-pane label="角色api">
+                <el-tab-pane label="角色api">
                     <apis :row="activeRow" ref="apis" />
-                </el-tab-pane>
-                <el-tab-pane label="资源权限">
+                </el-tab-pane> 
+                <!-- <el-tab-pane label="资源权限">
                     <Datas :authority="tableData" :row="activeRow" ref="datas" />
-                </el-tab-pane> -->
+                </el-tab-pane>  -->
             </el-tabs>
         </el-drawer>
     </div>
@@ -85,10 +86,11 @@ import {
     getAuthorityList,
     createAuthority,
     updateAuthority,
+    deleteAuthority,
 } from "@/api/authority"
 
 import Menus from "@/view/superAdmin/authority/components/menus"
-
+import Apis from "@/view/superAdmin/authority/components/apis"
 import infoList from "@/mixins/infoList"
 export default {
     name: "Authority",
@@ -123,6 +125,7 @@ export default {
     },
     components: {
         Menus,
+        Apis,
     },
     methods: {
         autoEnter(activeName, oldActiveName){
@@ -137,6 +140,32 @@ export default {
         opdendrawer(row){
             this.drawer = true;
             this.activeRow = row;
+        },
+        deleteAuth(row){
+            this.$confirm("此操作将永久删除该角色，是否继续？","提示",{
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+              .then(async ()=> {
+                  const res =await deleteAuthority({ authorityId: row.authorityId })
+                  if (res.code == 0){
+                      this.$message({
+                          type: "success",
+                          message: "删除成功!"
+                      });
+                      if (this.tableData.length == 1){
+                          this.page--;
+                      }
+                      this.getTableData();
+                  }
+              })
+              .catch(() => {
+                  this.$message({
+                      type: "info",
+                      message: "已取消删除"
+                  })
+              })
         },
         addAuthority(parentId){
             this.initForm();
