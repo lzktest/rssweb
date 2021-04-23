@@ -12,12 +12,14 @@ import (
 	services "server/service"
 	"server/utils"
 )
-// @Tags AuthorityMenu
+
+
+// @Tags Menu
 // @Summary 增加menu和角色关联关系
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body request.AddMenuAuthorityInfo true
+// @Param data body request.AddMenuAuthorityInfo true "角色ID"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"添加成功"}"
 // @Router /menu/addMenuAuthority [post]
 func AddMenuAuthority(c *gin.Context) {

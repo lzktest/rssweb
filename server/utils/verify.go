@@ -12,5 +12,5 @@ var (
 	RegisterVerify         = Rules{"Username": {NotEmpty()}, "NickName": {NotEmpty()}, "Password": {NotEmpty()}, "AuthorityId": {NotEmpty()}}
 	ChangePasswordVerify   = Rules{"Username": {NotEmpty()}, "Password": {NotEmpty()}, "NewPassword": {NotEmpty()}}
 	SetUserAuthorityVerify = Rules{"UUID": {NotEmpty()}, "AuthorityId": {NotEmpty()}}
-
+	ApiVerify		= Rules{"Path":{NotEmpty()},"Description":{NotEmpty()},"ApiGroup":{NotEmpty()},"Method":{NotEmpty()}}
 )

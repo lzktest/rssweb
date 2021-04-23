@@ -1,5 +1,24 @@
 basePath: /
 definitions:
+  model.SysApi:
+    properties:
+      apiGroup:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      method:
+        type: string
+      path:
+        type: string
+      updatedAt:
+        type: string
+    type: object
   model.SysAuthority:
     properties:
       authorityId:
@@ -12,8 +31,14 @@ definitions:
         type: array
       createdAt:
         type: string
+      defaultRouter:
+        type: string
       deletedAt:
         type: string
+      menus:
+        items:
+          $ref: '#/definitions/model.SysBaseMenu'
+        type: array
       parentId:
         type: string
       updatedAt:
@@ -107,6 +132,15 @@ definitions:
       uuid:
         type: string
     type: object
+  request.AddMenuAuthorityInfo:
+    properties:
+      authorityId:
+        type: string
+      menus:
+        items:
+          $ref: '#/definitions/model.SysBaseMenu'
+        type: array
+    type: object
   request.CasbinInReceive:
     properties:
       authorityId:
@@ -184,6 +218,29 @@ info:
   title: Swagger Example API
   version: 0.0.1
 paths:
+  /api/createApi:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysApi'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"创建成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 创建基础api
+      tags:
+      - SysApi
   /authority/copyAuthority:
     post:
       consumes:
@@ -226,6 +283,29 @@ paths:
           schema:
             type: string
       summary: 创建角色
+      tags:
+      - Authority
+  /authority/deleteAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 页码, 每页大小
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysAuthority'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"删除成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除角色
       tags:
       - Authority
   /authority/getAuthorityList:
@@ -392,6 +472,29 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 新增菜单
+      tags:
+      - Menu
+  /menu/addMenuAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 角色ID
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.AddMenuAuthorityInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"添加成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 增加menu和角色关联关系
       tags:
       - Menu
   /menu/getBaseMenuById:

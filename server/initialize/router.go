@@ -30,16 +30,18 @@ func Routers() *gin.Engine {
 	PublicGroup := Router.Group("")
 	{
 		router.InitBaseRouter(PublicGroup) // 注册基础功能路由 不做鉴权
+		router.InitApiRouter(PublicGroup)    //  api操作
 	}
 	PrivateGroup := Router.Group("")
-	PrivateGroup.Use(middleware.JWTAuth())//.Use(middleware.CasbinHandler())
+	PrivateGroup.Use(middleware.JWTAuth()).Use(middleware.CasbinHandler())
 	{
-		router.InitCccRouter(PrivateGroup)   // 测试
+		//router.InitCccRouter(PrivateGroup)   // 测试
+
 		router.InitMenuRouter(PrivateGroup)  // 菜单操作
 		router.InitCasbinRouter(PrivateGroup)  // 添加及修改api权限，获取api权限列表
 		router.InitAuthorityRouter(PrivateGroup) // 角色操作
 
-		router.InitJwtRouter(PrivateGroup)                   // jwt相关路由
+		router.InitJwtRouter(PrivateGroup)             // jwt相关路由
 		router.InitUserRouter(PrivateGroup)                  // 注册用户路由
 	}
 	global.GVA_LOG.Info("router register success")
