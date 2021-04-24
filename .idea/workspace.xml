@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="700ee6d7-c35a-4b32-8952-7a2d546ba319" name="默认的" comment="">
-      <change afterPath="$PROJECT_DIR$/server/api/v1/sys_apis.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/model/response/sys_api.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/router/sys_api.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/v1/sys_menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/v1/sys_menu.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/docs/docs.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/docs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/docs/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/docs/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/initialize/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/initialize/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/service/sys_api.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service/sys_api.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/utils/verify.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/utils/verify.go" afterDir="false" />
-    </list>
+    <list default="true" id="700ee6d7-c35a-4b32-8952-7a2d546ba319" name="默认的" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
