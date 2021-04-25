@@ -63,6 +63,71 @@ var doc = `{
                 }
             }
         },
+        "/api/deleteApi": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysApi"
+                ],
+                "summary": "分页获取api",
+                "parameters": [
+                    {
+                        "description": "分页获取api列表",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.SearchApiParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getAllApis": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysApi"
+                ],
+                "summary": "获取所有的Api 不分页",
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/authority/copyAuthority": {
             "post": {
                 "security": [
@@ -1184,6 +1249,47 @@ var doc = `{
                 },
                 "pageSize": {
                     "type": "integer"
+                }
+            }
+        },
+        "request.SearchApiParams": {
+            "type": "object",
+            "properties": {
+                "apiGroup": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "orderKey": {
+                    "type": "string"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "type": "integer"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
                 }
             }
         },
