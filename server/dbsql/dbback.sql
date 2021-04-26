@@ -715,8 +715,8 @@ COPY public.casbin_rule (id, p_type, v0, v1, v2, v3, v4, v5) FROM stdin;
 --
 
 COPY public.sys_apis (id, created_at, updated_at, deleted_at, paths, descriptions, apigroup, methods) FROM stdin;
-1	2021-01-22 02:30:41+00	2021-01-22 02:30:41+00	\N	/base/login	login	base	POST
-1	2021-04-23 10:13:39+00	2021-04-23 10:13:39+00	\N	/api/createApi	test	api	POST
+2	2021-04-23 10:13:39+00	2021-04-23 10:13:39+00	\N	/api/createApi	api test	api	POST
+3	2021-04-26 09:02:59+00	2021-04-26 09:02:59+00	\N	aaa	aaa	aaa	POST
 \.
 
 
@@ -874,7 +874,7 @@ SELECT pg_catalog.setval('public.casbin_rule_id_seq', 70, true);
 -- Name: sys_apis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
-SELECT pg_catalog.setval('public.sys_apis_id_seq', 2, true);
+SELECT pg_catalog.setval('public.sys_apis_id_seq', 6, true);
 
 
 --
@@ -918,6 +918,14 @@ SELECT pg_catalog.setval('public.sys_users_id_seq', 3, true);
 
 ALTER TABLE ONLY public.casbin_rule
     ADD CONSTRAINT casbin_rule_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sys_apis sys_apis_pk; Type: CONSTRAINT; Schema: public; Owner: db
+--
+
+ALTER TABLE ONLY public.sys_apis
+    ADD CONSTRAINT sys_apis_pk PRIMARY KEY (id);
 
 
 --

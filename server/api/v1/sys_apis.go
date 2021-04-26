@@ -56,6 +56,25 @@ func DeleteApi(c *gin.Context){
 		response.OkWithMessage("删除成功", c)
 	}
 }
+// @Tags SysApi
+// @Summary 删除api
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.IdsReq true "ID"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Router /api/deleteApisByIds [post]
+func DeleteApisByIds(c *gin.Context){
+	var ids request.IdsReq
+	_ = c.ShouldBindJSON(&ids)
+	if err := services.DeleteApisByIds(ids); err != nil {
+		global.GVA_LOG.Error("删除失败!",zap.Any("err", err))
+		response.FailWithMessage("删除失败", c)
+	} else {
+		response.OkWithMessage("删除成功", c)
+	}
+}
+
 
 // @Tags SysApi
 // @Summary  分页获取api
@@ -63,8 +82,8 @@ func DeleteApi(c *gin.Context){
 // @accept application/json
 // @Produce application/json
 // @Param data body request.SearchApiParams true "分页获取api列表"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
-// @Router /api/GetApiList [post]
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /api/getApiList [post]
 func GetApiList(c *gin.Context){
 	var pageInfo request.SearchApiParams
 	_ = c.ShouldBindJSON(&pageInfo)
@@ -73,8 +92,8 @@ func GetApiList(c *gin.Context){
 		return
 	}
 	if err, list, total := services.GetAPIInfoList(pageInfo.SysApi, pageInfo.PageInfo, pageInfo.OrderKey, pageInfo.Desc); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
+		response.FailWithMessage("获取失败", c)
 	} else {
 		response.OkWithDetailed(response.PageResult{
 				List: list,

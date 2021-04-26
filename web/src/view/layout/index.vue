@@ -56,7 +56,6 @@
                 <transition>
                   <router-view v-loading="loadingFlag" element-loading-text="正在加载中" class="admin-box" v-if="!$route.meta.keepAlive && reloadFlag"></router-view>
                 </transition>
-                Main
               </el-row>
             </el-main>
           </el-container>

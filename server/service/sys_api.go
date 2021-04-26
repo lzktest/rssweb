@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	//"go.uber.org/zap"
+	"go.uber.org/zap"
 )
 
 //@author: [piexlmax]
@@ -48,28 +48,28 @@ func GetAPIInfoList( api model.SysApi, info request.PageInfo, order string, desc
 	var sqlpre []interface{}
 	i := 1
 	if api.Path != ""{
-		sqlstr = "path = $"+strconv.Itoa(i)
+		sqlstr = " where paths ~ $"+strconv.Itoa(i)
 		i++
 		sqlpre = append(sqlpre,api.Path)
 	}
 	if api.Description != ""{
 		if sqlstr != ""{
-			sqlstr = sqlstr + " and description =$"+strconv.Itoa(i)
+			sqlstr = sqlstr + " and descriptions ~ $"+strconv.Itoa(i)
 			i++
 			sqlpre = append(sqlpre,api.Description)
 		} else {
-			sqlstr = " description=$"+strconv.Itoa(i)
+			sqlstr = " where descriptions ~ $"+strconv.Itoa(i)
 			i++
 			sqlpre = append(sqlpre,api.Description)
 		}
 	}
 	if api.Method != ""{
 		if sqlstr != ""{
-			sqlstr = sqlstr + " and method =$"+strconv.Itoa(i)
+			sqlstr = sqlstr + " and methods =$"+strconv.Itoa(i)
 			i++
 			sqlpre = append(sqlpre,api.Method)
 		} else {
-			sqlstr = " method=$"+strconv.Itoa(i)
+			sqlstr = " where methods=$"+strconv.Itoa(i)
 			i++
 			sqlpre = append(sqlpre,api.Method)
 		}
@@ -80,16 +80,23 @@ func GetAPIInfoList( api model.SysApi, info request.PageInfo, order string, desc
 			i++
 			sqlpre = append(sqlpre,api.ApiGroup)
 		} else {
-			sqlstr = " apigroup=$"+strconv.Itoa(i)
+			sqlstr = " where apigroup=$"+strconv.Itoa(i)
 			i++
 			sqlpre = append(sqlpre,api.ApiGroup)
 		}
 	}
+	sqlstr = sqlstr + " limit $"+strconv.Itoa(i)
+	sqlstr = sqlstr + " offset $"+strconv.Itoa(i+1)
 	sqlpre = append(sqlpre,limit)
 	sqlpre = append(sqlpre,offset)
+	global.GVA_LOG.Info("info",zap.Any("ageapisql",sqlstr))
+	global.GVA_LOG.Info("info",zap.Any("ageapisqlpre",sqlpre))
 	rows,err := global.GVA_DB.Query("select * from sys_apis "+sqlstr+";",sqlpre...)
 	if errors.Is(err, sql.ErrNoRows){
 		return nil,list,total
+	}
+	if err != nil {
+		return err,list,total
 	}
 	for rows.Next() {
 		var apitmp model.SysApi
@@ -120,4 +127,24 @@ func GetAllApis() (err error, apis []model.SysApi) {
 		apis = append(apis, apitmp)
 	}
 	return err,apis
+}
+
+//@author: [piexlmax]
+//@function: DeleteApis
+//@description: 删除选中API
+//@param: apis []model.SysApi
+//@return: err error
+func DeleteApisByIds(ids request.IdsReq) (err error){
+	var sqlstr string
+	if len(ids.Ids) <1{
+		return errors.New("请求id为空")
+	}
+	for key,value := range ids.Ids{
+		sqlstr = sqlstr + strconv.Itoa(value)
+		if key < len(ids.Ids)-1{
+			sqlstr = sqlstr + ","
+		}
+	}
+	_,err = global.GVA_DB.Exec("delete from sys_apis where id in ("+sqlstr+");")
+	return  err
 }
