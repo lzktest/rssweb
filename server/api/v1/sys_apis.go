@@ -75,6 +75,29 @@ func DeleteApisByIds(c *gin.Context){
 	}
 }
 
+// @Tags SysApi
+// @Summary 根据id获取api
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.GetById true "根据id获取api"
+// @Success 200 {string} string "{"success":data":{},"msg":"获取成功"}"
+// @Router /api/getApiById [post]
+func GetApiById(c *gin.Context){
+	var idInfo request.GetById
+	_ = c.ShouldBindJSON(&idInfo)
+	if err := utils.Verify(idInfo,utils.IdVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	err, api := services.GetApiById(idInfo.Id)
+	if err != nil {
+		global.GVA_LOG.Error("获取失败!",zap.Any("err", err))
+		response.FailWithMessage("获取失败", c)
+	} else {
+		response.OkWithData(response.SysAPIResponse{Api: api}, c)
+	}
+}
 
 // @Tags SysApi
 // @Summary  分页获取api
@@ -116,5 +139,27 @@ func GetAllApis(c *gin.Context){
 		response.FailWithMessage("获取失败", c)
 	} else {
 		response.OkWithDetailed(response.SysAPIListResponse{Apis: apis}, "获取成功", c)
+	}
+}
+
+// @Tags SysApi
+// @Summary 更新api
+// @security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
+// @Router /api/updateApi [post]
+func UpdateApi(c *gin.Context){
+	var api model.SysApi
+	_ = c.ShouldBindJSON(&api)
+	if err := utils.Verify(api, utils.ApiVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err := services.UpdateApi(api); err != nil {
+		global.GVA_LOG.Error("修改失败！", zap.Any("err", err))
+		response.FailWithMessage("修改失败",c)
+	} else {
+		response.OkWithMessage("修改成功", c)
 	}
 }

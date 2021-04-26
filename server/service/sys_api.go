@@ -36,6 +36,16 @@ func DeleteApi(api model.SysApi)(err error){
 }
 
 //@author: [piexlmax]
+//@function: GetApiById
+//@description: 根据id获取api
+//@param: id float64
+//@return: err error, api model.SysApi
+func GetApiById(id float64)(err error, api model.SysApi){
+	err = global.GVA_DB.QueryRow("select * from sys_apis where id=$1;",id).Scan(&api.ID,&api.CreatedAt,&api.UpdatedAt,&api.DeletedAt,&api.Path,&api.Description,&api.ApiGroup,&api.Method)
+	return err,api
+}
+
+//@author: [piexlmax]
 //@function: GetApiPageList
 //@description: 分页获取基础api列表
 //@param: api request.SearchApiParams
@@ -127,6 +137,16 @@ func GetAllApis() (err error, apis []model.SysApi) {
 		apis = append(apis, apitmp)
 	}
 	return err,apis
+}
+
+//@author: [piexlmax]
+//@function: UpdateApi
+//@description: 根据id更新api
+//@param: api model.SysApi
+//@return: err error
+func UpdateApi(api model.SysApi)(err error) {
+	_,err = global.GVA_DB.Exec("update sys_apis set updated_at=$1,paths=$2,descriptions=$3,apigroup=$4,methods=$5  where id=$6;",api.UpdatedAt,api.Path,api.Description,api.ApiGroup,api.Method,api.ID)
+	return  err
 }
 
 //@author: [piexlmax]

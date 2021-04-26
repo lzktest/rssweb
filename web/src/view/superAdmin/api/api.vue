@@ -60,7 +60,7 @@
             <el-table-column fixed="right" label="操作" width="200">
                 <template slot-scope="scope">
                     <el-button @click="editApi(scope.row)" size="small" type="primary" icon="el-icon-edit">编辑</el-button>
-                    <el-button size="small" type="danger" icon="el-icon-delete">删除</el-button>
+                    <el-button @click="deleteApi(scope.row)" size="small" type="danger" icon="el-icon-delete">删除</el-button>
                 </template>
             </el-table-column>
         </el-table> 
@@ -99,7 +99,9 @@ import {
     getApiList,
     createApi,
     deleteApisByIds,
+    deleteApi,
     getApiById,
+    updateApi,
 } from "@/api/api";
 import infoList from "@/mixins/infoList";
 const methodOptions = [
@@ -189,10 +191,10 @@ export default {
         openDialog(type){
             switch (type) {
                 case "addApi":
-                    this.dialogTitlethis = "新增Api";
+                    this.dialogTitle = "新增Api";
                     break;
                 case "edit":
-                    this.dialogTitlethis = "编辑Api";
+                    this.dialogTitle = "编辑Api";
                     break;
                 default:
                     break;
@@ -202,8 +204,34 @@ export default {
         },
         async editApi(row){
             const res = await getApiById({ id: row.ID });
-            this.form = res.data.api;
+            this.form = res.Data.api;
             this.openDialog("edit");
+        },
+        async deleteApi(row){
+            this.$confirm("此操作将永久删除所有角色下该api, 是否继续？","提示",{
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warnging"
+            })
+                .then(async () => {
+                    const res = await deleteApi(row);
+                    if (res.Code == 0){
+                        this.$message({
+                            type: "success",
+                            message: "删除成功!"
+                        });
+                        if (this.tableData.length == 1){
+                            this.page--;
+                        }
+                        this.getTableData();
+                    }
+                })
+                .catch(() =>{
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
         },
         async enterDialog(){
             this.$refs.apiForm.validate(async valid => {
@@ -212,13 +240,13 @@ export default {
                         case "addApi":
                             {
                                 const res = await createApi(this.form);
-                                if (res.code == 0){
+                                if (res.Code == 0){
                                     this.$message({
                                         type: "success",
                                         message:"添加成功",
                                         showClose: true
                                     });
-                                }
+                                } 
                                 this.getTableData();
                                 this.closeDialog();
                             }
@@ -226,7 +254,7 @@ export default {
                         case "edit":
                             {
                                 const res = await updateApi(this.form);
-                                if (res.code == 0){
+                                if (res.Code == 0){
                                     this.$message({
                                         type: "success",
                                         message: "编辑成功",

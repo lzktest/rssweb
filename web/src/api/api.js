@@ -66,6 +66,23 @@ export const getApiList = (data) => {
         data
     })
 }
+
+// @Tags Api
+// @Summary 更新api
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body api.CreateApiParams true "更新api"
+// @Success 200 {string} json "{"success":true,"data":{},"msg":"更新成功"}"
+// @Router /api/updateApi [post]
+export const updateApi = (data) => {
+    return service({
+        url: "/api/updateApi",
+        method: 'post',
+        data
+    })
+}
+
 // @Tags SysApi
 // @Summary 删除选中Api
 // @Security ApiKeyAuth
@@ -77,6 +94,22 @@ export const getApiList = (data) => {
 export const deleteApisByIds = (data) => {
     return service({
         url: "/api/deleteApisByIds",
+        method: 'post',
+        data
+    })
+}
+
+// @Tags Api
+// @Summary 删除指定api
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body dbModel.Api true "删除api"
+// @Success 200 {string} json "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /api/deleteApi [post]
+export const deleteApi = (data) => {
+    return service({
+        url: "/api/deleteApi",
         method: 'post',
         data
     })
