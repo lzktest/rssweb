@@ -842,6 +842,8 @@ COPY public.sys_jwt_blacklist (id, created_at, updated_at, deleted_at, jwt) FROM
 260	2021-04-23 04:00:45.172557+00	2021-04-23 04:00:45.172557+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiMTAyNjUyMzMtYTNlZS00NWQyLWJiOTAtN2EwMTI1NmM1YjdkIiwiSUQiOjMsIlVzZXJuYW1lIjoibGsxIiwiTmlja05hbWUiOiJ0ZXN0YSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYxOTc1MDk4MywiaXNzIjoidG9tZSIsIm5iZiI6MTYxOTE0NTE4M30.8Qozergf8MZ93-5jJQC2oFpI5L-wq_UYRKYJtPusj2c
 261	2021-04-23 04:01:10.199315+00	2021-04-23 04:01:10.199315+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYxOTc1MzQxMiwiaXNzIjoidG9tZSIsIm5iZiI6MTYxOTE0NzYxMn0.wsYshmYJWKpaLpC1gQkutJsJkwxiK9XfOoUwxgUiaT4
 258	2021-04-20 09:02:00.589595+00	2021-04-20 09:02:00.589595+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYxOTUxMjAzMCwiaXNzIjoidG9tZSIsIm5iZiI6MTYxODkwNjIzMH0.Y2zpIR2f0BvoviUaWXx9Uj3Yq7dtpu37VteMxt2NWh0
+262	2021-04-30 02:44:13.232176+00	2021-04-30 02:44:13.232176+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYxOTc1NTI3MCwiaXNzIjoidG9tZSIsIm5iZiI6MTYxOTE0OTQ3MH0.3emsQmvVXbNLyIHMTYediHVZKHSq5juTOim9V76F2uc
+263	2021-04-30 02:46:41.994672+00	2021-04-30 02:46:41.994672+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYyMDM1NTQ1MywiaXNzIjoidG9tZSIsIm5iZiI6MTYxOTE0OTQ3MH0.AZrSFsr_p6bVmkZ3wZWjCqK85IXMstcUcihIgDduEmA
 \.
 
 
@@ -888,14 +890,14 @@ SELECT pg_catalog.setval('public.sys_base_menu_parameters_id_seq', 5, true);
 -- Name: sys_base_menus_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
-SELECT pg_catalog.setval('public.sys_base_menus_id_seq', 8, true);
+SELECT pg_catalog.setval('public.sys_base_menus_id_seq', 13, true);
 
 
 --
 -- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
-SELECT pg_catalog.setval('public.sys_jwt_blacklist_id_seq', 261, true);
+SELECT pg_catalog.setval('public.sys_jwt_blacklist_id_seq', 263, true);
 
 
 --
