@@ -241,7 +241,6 @@ ALTER SEQUENCE public.sys_base_menu_parameters_id_seq OWNED BY public.sys_base_m
 --
 
 CREATE TABLE public.sys_base_menus (
-    sys_base_menu_id bigint NOT NULL,
     createed_at timestamp(0) with time zone,
     updateed_at timestamp(0) with time zone,
     deleteed_at timestamp(0) with time zone,
@@ -255,7 +254,8 @@ CREATE TABLE public.sys_base_menus (
     keep_alive boolean,
     default_menu boolean,
     title character varying(191),
-    icon character varying(191)
+    icon character varying(191),
+    sys_base_menu_id bigint NOT NULL
 );
 
 
@@ -332,10 +332,10 @@ COMMENT ON COLUMN public.sys_base_menus.icon IS '附加属性';
 
 
 --
--- Name: sys_base_menus_id_seq; Type: SEQUENCE; Schema: public; Owner: db
+-- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: db
 --
 
-CREATE SEQUENCE public.sys_base_menus_id_seq
+CREATE SEQUENCE public.sys_base_menus_sys_base_menu_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -343,13 +343,13 @@ CREATE SEQUENCE public.sys_base_menus_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_base_menus_id_seq OWNER TO db;
+ALTER TABLE public.sys_base_menus_sys_base_menu_id_seq OWNER TO db;
 
 --
--- Name: sys_base_menus_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
+-- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
 --
 
-ALTER SEQUENCE public.sys_base_menus_id_seq OWNED BY public.sys_base_menus.sys_base_menu_id;
+ALTER SEQUENCE public.sys_base_menus_sys_base_menu_id_seq OWNED BY public.sys_base_menus.sys_base_menu_id;
 
 
 --
@@ -611,7 +611,7 @@ ALTER TABLE ONLY public.sys_base_menu_parameters ALTER COLUMN id SET DEFAULT nex
 -- Name: sys_base_menus sys_base_menu_id; Type: DEFAULT; Schema: public; Owner: db
 --
 
-ALTER TABLE ONLY public.sys_base_menus ALTER COLUMN sys_base_menu_id SET DEFAULT nextval('public.sys_base_menus_id_seq'::regclass);
+ALTER TABLE ONLY public.sys_base_menus ALTER COLUMN sys_base_menu_id SET DEFAULT nextval('public.sys_base_menus_sys_base_menu_id_seq'::regclass);
 
 
 --
@@ -796,6 +796,7 @@ COPY public.sys_authority_menus (sys_authority_authority_id, sys_base_menu_id) F
 
 COPY public.sys_base_menu_parameters (id, createed_at, updateed_at, deleteed_at, sys_base_menu_id, addtype, addkey, addvalue) FROM stdin;
 5	2021-01-21 05:33:02+00	2021-01-21 05:33:02+00	\N	8	test12	test11	test13
+6	2021-05-06 09:39:01+00	2021-05-06 09:39:01+00	\N	0	query	a	a
 \.
 
 
@@ -803,32 +804,36 @@ COPY public.sys_base_menu_parameters (id, createed_at, updateed_at, deleteed_at,
 -- Data for Name: sys_base_menus; Type: TABLE DATA; Schema: public; Owner: db
 --
 
-COPY public.sys_base_menus (sys_base_menu_id, createed_at, updateed_at, deleteed_at, menu_level, parent_id, routerpath, routername, hidden, component, sort, keep_alive, default_menu, title, icon) FROM stdin;
-3	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	admin	superAdmin	f	view/superAdmin/index.vue	3	f	f	超级管理员	user-solid
-4	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	authority	authority	f	view/superAdmin/authority/authority.vue	1	f	f	角色管理	s-custom
-5	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	menu	menu	f	view/superAdmin/menu/menu.vue	2	t	f	菜单管理	s-order
-6	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	api	api	f	view/superAdmin/api/api.vue	3	t	f	api管理	s-platform
-7	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	user	user	f	view/superAdmin/user/user.vue	4	f	f	用户管理	coordinate
-8	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	person	person	t	view/person/person.vue	4	f	f	个人信息	message-solid
-9	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	example	example	f	view/example/index.vue	6	f	f	示例文件	s-management
-10	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	excel	excel	f	view/example/excel/excel.vue	4	f	f	excel导入导出	s-marketing
-11	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	upload	upload	f	view/example/upload/upload.vue	5	f	f	上传下载	upload
-12	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	breakpoint	breakpoint	f	view/example/breakpoint/breakpoint.vue	6	f	f	断点续传	upload
-13	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	customer	customer	f	view/example/customer/customer.vue	7	f	f	客户列表（资源示例）	s-custom
-14	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	systemTools	systemTools	f	view/systemTools/index.vue	5	f	f	系统工具	s-cooperation
-20	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	operation	operation	f	view/superAdmin/operation/sysOperationRecord.vue	6	f	f	操作历史	time
-21	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	simpleUploader	simpleUploader	f	view/example/simpleUploader/simpleUploader	6	f	f	断点续传（插件版）	upload
-23	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	state	state	f	view/system/state.vue	6	f	f	服务器状态	cloudy
-24	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	workflow	workflow	f	view/workflow/index.vue	5	f	f	工作流功能	phone
-25	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	workflowCreate	workflowCreate	f	view/workflow/workflowCreate/workflowCreate.vue	0	f	f	工作流绘制	circle-plus
-26	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	workflowProcess	workflowProcess	f	view/workflow/workflowProcess/workflowProcess.vue	0	f	f	工作流列表	s-cooperation
-27	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	workflowUse	workflowUse	t	view/workflow/workflowUse/workflowUse.vue	0	f	f	使用工作流	video-play
-28	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	started	started	f	view/workflow/userList/started.vue	0	f	f	我发起的	s-order
-29	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	need	need	f	view/workflow/userList/need.vue	0	f	f	我的待办	s-platform
-2	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	about	about	f	view/about/index.vue	7	f	f	关于我们	info
-22	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	master	master	f	/	0	f	f	官方网站	s-home
-15	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	14	autoCode	autoCode	f	view/systemTools/autoCode/index.vue	1	t	f	代码生成器	cpu
-1	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	dashboard	dashboard	f	view/dashboard/index.vue	1	t	f	仪表盘	setting
+COPY public.sys_base_menus (createed_at, updateed_at, deleteed_at, menu_level, parent_id, routerpath, routername, hidden, component, sort, keep_alive, default_menu, title, icon, sys_base_menu_id) FROM stdin;
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	admin	superAdmin	f	view/superAdmin/index.vue	3	f	f	超级管理员	user-solid	3
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	authority	authority	f	view/superAdmin/authority/authority.vue	1	f	f	角色管理	s-custom	4
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	menu	menu	f	view/superAdmin/menu/menu.vue	2	t	f	菜单管理	s-order	5
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	api	api	f	view/superAdmin/api/api.vue	3	t	f	api管理	s-platform	6
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	user	user	f	view/superAdmin/user/user.vue	4	f	f	用户管理	coordinate	7
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	person	person	t	view/person/person.vue	4	f	f	个人信息	message-solid	8
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	example	example	f	view/example/index.vue	6	f	f	示例文件	s-management	9
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	excel	excel	f	view/example/excel/excel.vue	4	f	f	excel导入导出	s-marketing	10
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	upload	upload	f	view/example/upload/upload.vue	5	f	f	上传下载	upload	11
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	breakpoint	breakpoint	f	view/example/breakpoint/breakpoint.vue	6	f	f	断点续传	upload	12
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	customer	customer	f	view/example/customer/customer.vue	7	f	f	客户列表（资源示例）	s-custom	13
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	systemTools	systemTools	f	view/systemTools/index.vue	5	f	f	系统工具	s-cooperation	14
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	operation	operation	f	view/superAdmin/operation/sysOperationRecord.vue	6	f	f	操作历史	time	20
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	9	simpleUploader	simpleUploader	f	view/example/simpleUploader/simpleUploader	6	f	f	断点续传（插件版）	upload	21
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	state	state	f	view/system/state.vue	6	f	f	服务器状态	cloudy	23
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	workflow	workflow	f	view/workflow/index.vue	5	f	f	工作流功能	phone	24
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	workflowCreate	workflowCreate	f	view/workflow/workflowCreate/workflowCreate.vue	0	f	f	工作流绘制	circle-plus	25
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	workflowProcess	workflowProcess	f	view/workflow/workflowProcess/workflowProcess.vue	0	f	f	工作流列表	s-cooperation	26
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	workflowUse	workflowUse	t	view/workflow/workflowUse/workflowUse.vue	0	f	f	使用工作流	video-play	27
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	started	started	f	view/workflow/userList/started.vue	0	f	f	我发起的	s-order	28
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	24	need	need	f	view/workflow/userList/need.vue	0	f	f	我的待办	s-platform	29
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	about	about	f	view/about/index.vue	7	f	f	关于我们	info	2
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	master	master	f	/	0	f	f	官方网站	s-home	22
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	14	autoCode	autoCode	f	view/systemTools/autoCode/index.vue	1	t	f	代码生成器	cpu	15
+2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	dashboard	dashboard	f	view/dashboard/index.vue	1	t	f	仪表盘	setting	1
+2021-05-06 08:14:53+00	2021-05-06 08:14:53+00	\N	0	0	aaaa	aaaa	t	/	1	f	f	aaaa	user-solid	16
+2021-05-06 08:18:08+00	2021-05-06 08:18:08+00	\N	0	0	cccc	cccc	f	/	2	f	f	cccc	delete-solid	17
+2021-05-06 09:30:35+00	2021-05-06 09:30:35+00	\N	0	0	bbbb	bbbb	f	/	3	f	f	bbbb	eleme	18
+2021-05-06 09:39:01+00	2021-05-06 09:39:01+00	\N	0	0	1111	111	f	/	1	f	f	111	user-solid	19
 \.
 
 
@@ -841,6 +846,7 @@ COPY public.sys_jwt_blacklist (id, created_at, updated_at, deleted_at, jwt) FROM
 259	2021-04-23 03:30:12.83161+00	2021-04-23 03:30:12.83161+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYxOTUxNDEyMCwiaXNzIjoidG9tZSIsIm5iZiI6MTYxODkwODMyMH0._mcTx4KspAgYnPnD-vmQkdf7p7_7DP6v6wZSeE5WXQk
 260	2021-04-23 04:00:45.172557+00	2021-04-23 04:00:45.172557+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiMTAyNjUyMzMtYTNlZS00NWQyLWJiOTAtN2EwMTI1NmM1YjdkIiwiSUQiOjMsIlVzZXJuYW1lIjoibGsxIiwiTmlja05hbWUiOiJ0ZXN0YSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYxOTc1MDk4MywiaXNzIjoidG9tZSIsIm5iZiI6MTYxOTE0NTE4M30.8Qozergf8MZ93-5jJQC2oFpI5L-wq_UYRKYJtPusj2c
 261	2021-04-23 04:01:10.199315+00	2021-04-23 04:01:10.199315+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYxOTc1MzQxMiwiaXNzIjoidG9tZSIsIm5iZiI6MTYxOTE0NzYxMn0.wsYshmYJWKpaLpC1gQkutJsJkwxiK9XfOoUwxgUiaT4
+264	2021-05-06 05:44:50.499808+00	2021-05-06 05:44:50.499808+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYyMDM1NTYwMSwiaXNzIjoidG9tZSIsIm5iZiI6MTYxOTc0OTgwMX0.FuRvn4To2NuHonB2sasgitAghuB_6Nj0V3LU83slIYs
 258	2021-04-20 09:02:00.589595+00	2021-04-20 09:02:00.589595+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYxOTUxMjAzMCwiaXNzIjoidG9tZSIsIm5iZiI6MTYxODkwNjIzMH0.Y2zpIR2f0BvoviUaWXx9Uj3Yq7dtpu37VteMxt2NWh0
 262	2021-04-30 02:44:13.232176+00	2021-04-30 02:44:13.232176+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYxOTc1NTI3MCwiaXNzIjoidG9tZSIsIm5iZiI6MTYxOTE0OTQ3MH0.3emsQmvVXbNLyIHMTYediHVZKHSq5juTOim9V76F2uc
 263	2021-04-30 02:46:41.994672+00	2021-04-30 02:46:41.994672+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYyMDM1NTQ1MywiaXNzIjoidG9tZSIsIm5iZiI6MTYxOTE0OTQ3MH0.AZrSFsr_p6bVmkZ3wZWjCqK85IXMstcUcihIgDduEmA
@@ -883,21 +889,21 @@ SELECT pg_catalog.setval('public.sys_apis_id_seq', 6, true);
 -- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
-SELECT pg_catalog.setval('public.sys_base_menu_parameters_id_seq', 5, true);
+SELECT pg_catalog.setval('public.sys_base_menu_parameters_id_seq', 6, true);
 
 
 --
--- Name: sys_base_menus_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
+-- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
-SELECT pg_catalog.setval('public.sys_base_menus_id_seq', 13, true);
+SELECT pg_catalog.setval('public.sys_base_menus_sys_base_menu_id_seq', 1, true);
 
 
 --
 -- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
-SELECT pg_catalog.setval('public.sys_jwt_blacklist_id_seq', 263, true);
+SELECT pg_catalog.setval('public.sys_jwt_blacklist_id_seq', 264, true);
 
 
 --
