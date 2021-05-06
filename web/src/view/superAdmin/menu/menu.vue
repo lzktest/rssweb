@@ -47,10 +47,10 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-dialog :title="dialogTitle">
+        <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
             <el-form
               :inline="true"
-              :moel="form"
+              :model="form"
               label-position="top"
               label-width="85px"
               ref="menuForm">
@@ -114,14 +114,65 @@
                   </el-select>
               </el-form-item>
             </el-form>
+            <div class="warning">新增菜单需要在角色管理内配置权限才可以使用</div>
+            <div>
+                <el-button
+                  size="small"
+                  type="primary"
+                  icon="el-icon-edit"
+                  @click="addParameter(form)"
+                  >新增菜单参数</el-button>
+                  <el-table :data="form.parameters" stripe style="width: 100%">
+                      <el-table-column prop="type" label="参数类型" width="180">
+                          <template slot-scope="scope">
+                              <el-select v-model="scope.row.type" placeholder="请选择">
+                                  <el-option key="query" value="query" label="query"></el-option>
+                                  <el-option key="params" value="params" label="params"></el-option>
+                              </el-select>
+                          </template>
+                      </el-table-column>
+                      <el-table-column prop="key" label="参数key" width="180">
+                          <template slot-scope="scope">
+                              <div>
+                                  <el-input v-model="scope.row.key"></el-input>
+                              </div>
+                          </template>
+                      </el-table-column>
+                      <el-table-column prop="value" label="参数值">
+                          <template slot-scope="scope">
+                                <div>
+                                    <el-input v-model="scope.row.value"></el-input>
+                                </div>
+                          </template>
+                      </el-table-column>
+                      <el-table-column>
+                          <template slot-scope="scope">
+                              <div>
+                                  <el-button
+                                    type="danger"
+                                    size="small"
+                                    icon="el-icon-delete"
+                                    >删除</el-button>
+                              </div>
+                          </template>
+                      </el-table-column>
+                  </el-table>
+            </div>
+            <div class="dialog-footer" slot="footer">
+                <el-button >取消</el-button>
+                <el-button @click="enterDialog" type="primary">确定</el-button>
+            </div>
         </el-dialog>
     </div>
 </template>
 <script>
 import { 
     getMenuList,
+    addBaseMenu,
+    updateBaseMenu,
 } from "@/api/menu";
 import infoList from "@/mixins/infoList";
+import icon from "@/view/superAdmin/menu/icon";
 export default {
     name: "Menus",
     mixins: [infoList],
@@ -156,7 +207,20 @@ export default {
             isEdit: false
         }
     },
+    components:{
+        icon
+    },
     methods: {
+        addParameter(form) {
+            if (!form.parameters){
+                this.$set(form,"parameters",[]);
+            }
+            form.parameters.push({
+                type: "query",
+                key: "",
+                value: ""
+            })
+        },
         setOptions(){
             this.menuOption = [
                 {
@@ -164,7 +228,74 @@ export default {
                     title: "根目录"
                 }
             ];
+            this.setMenuOptions(this.tableData, this.menuOption, false);
         },
+        setMenuOptions(menuData, optionsData, disabled){
+            menuData && menuData.map(item => {
+                if (item.children && item.children.length){
+                    const option = {
+                        title: item.meta.title,
+                        ID: String(item.ID),
+                        disabled: disabled || item.ID == this.form.ID,
+                        children: []
+                    };
+                    this.setMenuOptions(
+                        this.children,
+                        option.children,
+                        disabled || item.ID == this.form.ID
+                    );
+                    optionsData.push(option);
+                } else {
+                    const option = {
+                        title: item.meta.title,
+                        ID: String(item.ID),
+                        disabled: disabled ||item.ID == this.form.ID
+                    };
+                    optionsData.push(option);
+                }
+            });
+        },
+        initForm(){
+            this.checkFlag = false;
+            this.$refs.menuForm.resetFields();
+            this.form = {
+                ID: 0,
+                path: "",
+                name: "",
+                hidden: "",
+                parentId: "",
+                component: "",
+                meta: {
+                    title: "",
+                    icon: "",
+                    defaultMenu: false,
+                    keepAlive: ""
+                }
+            }
+        },
+        async enterDialog(){
+            this.$refs.menuForm.validate(async valid => {
+                if (valid){
+                    let res;
+                    if (this.isEdit){
+                        res = await updateBaseMenu(this.form);
+                    } else {
+                        res = await addBaseMenu(this.form);
+                    }
+                    console.log(res)
+                    if (res.Code == 0){
+                        this.$message({
+                            type: "success",
+                            message: this.isEdit ? "编辑成功" : "添加成功!"
+                        });
+                        this.getTableData();
+                    }
+                    this.initForm();
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        // 添加菜单方法, id为  0 则为添加根菜单
         addMenu(id){
             this.dialogTitle = "新增菜单";
             this.form.parentId = String(id);

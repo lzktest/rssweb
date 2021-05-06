@@ -83,3 +83,15 @@ export const deleteBaseMenu = (data) => {
         data
     })
 }
+
+// @Summary 修改menu列表
+// @Produce  application/json
+// @Param menu Object
+// @Router /menu/updateBaseMenu [post]
+export const updateBaseMenu = (data) => {
+    return service({
+        url: "/menu/updateBaseMenu",
+        method: 'post',
+        data
+    })
+}

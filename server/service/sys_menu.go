@@ -20,19 +20,23 @@ import (
 // @return: err error
 func AddBaseMenu(menu model.SysBaseMenu)(err error){
 	var menutmp model.SysBaseMenu
+	//global.GVA_LOG.Error("添加数据", zap.Any("err", menu))
 	err = global.GVA_DB.QueryRow("select routername from sys_base_menus where routername=$1;", menu.Name).Scan(&menutmp.Name)
 	if errors.Is(err, sql.ErrNoRows) {
 		transaction, err :=global.GVA_DB.Begin()
 		if err != nil {
 			return err
 		}
+		global.GVA_LOG.Error("添加数据", zap.Any("err", menu))
 		_, err = transaction.Exec("insert into sys_base_menus (createed_at,updateed_at,menu_level,parent_id,routerpath,routername,hidden,component,sort,keep_alive,default_menu,title,icon) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13);", time.Now(), time.Now(), menu.MenuLevel, menu.ParentId, menu.Path, menu.Name, menu.Hidden, menu.Component, menu.Sort, menu.KeepAlive, menu.DefaultMenu, menu.Title, menu.Icon)
 		if err != nil {
 			transaction.Rollback()
 			return err
 		}
+
 		if len(menu.Parameters) > 0 {
 			for _ , value := range menu.Parameters{
+				global.GVA_LOG.Error("添加数据", zap.Any("err", value))
 				_, err = transaction.Exec("insert into sys_base_menu_parameters (createed_at,updateed_at,sys_base_menu_id,addtype,addkey,addvalue) values($1,$2,$3,$4,$5,$6);",time.Now(),time.Now(),value.SysBaseMenuID,value.Type,value.Key,value.Value)
 				if err != nil {
 					transaction.Rollback()
