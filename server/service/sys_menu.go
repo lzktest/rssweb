@@ -36,7 +36,7 @@ func AddBaseMenu(menu model.SysBaseMenu)(err error){
 
 		if len(menu.Parameters) > 0 {
 			for _ , value := range menu.Parameters{
-				global.GVA_LOG.Error("添加数据", zap.Any("err", value))
+				global.GVA_LOG.Error("添加参数数据", zap.Any("err", value))
 				_, err = transaction.Exec("insert into sys_base_menu_parameters (createed_at,updateed_at,sys_base_menu_id,addtype,addkey,addvalue) values($1,$2,$3,$4,$5,$6);",time.Now(),time.Now(),value.SysBaseMenuID,value.Type,value.Key,value.Value)
 				if err != nil {
 					transaction.Rollback()
