@@ -33,16 +33,19 @@
                       size="small" 
                       type="primary" 
                       icon="el-icon-edit"
+                      @click="addMenu(scope.row.ID)"
                     >添加子菜单</el-button>
                     <el-button
                         size="small"
                         type="primary"
                         icon="el-icon-edit"
+                        @click="editMenu(scope.row.ID)"
                         >编辑</el-button>
                     <el-button
                         size="small"
                         type="danger"
                         icon="el-icon-delete"
+                        @click="deleteMenu(scope.row.ID)"
                         >删除</el-button>
                 </template>
             </el-table-column>
@@ -152,6 +155,7 @@
                                     type="danger"
                                     size="small"
                                     icon="el-icon-delete"
+                                    @click="deleteParameter(form.parameters,scope.$index)"
                                     >删除</el-button>
                               </div>
                           </template>
@@ -170,6 +174,8 @@ import {
     getMenuList,
     addBaseMenu,
     updateBaseMenu,
+    getBaseMenuById,
+    deleteBaseMenu,
 } from "@/api/menu";
 import infoList from "@/mixins/infoList";
 import icon from "@/view/superAdmin/menu/icon";
@@ -221,6 +227,9 @@ export default {
                 value: ""
             })
         },
+        deleteParameter(parameters, index){
+            parameters.splice(index, 1);
+        },
         setOptions(){
             this.menuOption = [
                 {
@@ -254,6 +263,19 @@ export default {
                     optionsData.push(option);
                 }
             });
+        },
+        //删除菜单
+        deleteMenu(ID) {
+            this.$confirm("此操作将永久删除所有该角色下菜单，是否继续？","提示",{
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warnging"
+            }).then(async () => {
+                const res = await deleteBaseMenu({ ID });
+                if (res.code == 0 ){
+                    
+                }
+            })
         },
         initForm(){
             this.checkFlag = false;
@@ -300,6 +322,15 @@ export default {
             this.dialogTitle = "新增菜单";
             this.form.parentId = String(id);
             this.isEdit = false;
+            this.setOptions();
+            this.dialogFormVisible = true;
+        },
+        // 修改菜单方法
+        async editMenu(id){
+            this.dialogTitle = "编辑菜单";
+            const res = await getBaseMenuById({ id });
+            this.form = res.Data.menus["0"];
+            this.isEdit = true;
             this.setOptions();
             this.dialogFormVisible = true;
         }

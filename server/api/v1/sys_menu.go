@@ -170,3 +170,30 @@ func GetMenu(c *gin.Context) {
 		response.OkWithDetailed(response.SysMenusResponse{Menus: menus}, "获取成功", c)
 	}
 }
+
+//@Tags Menu
+//@Summary 更新菜单
+//@Security ApiKeyAuth
+//@accept  application/json
+//@Produce application/json
+//@Param data body model.SysBaseMenu true "路由path, 父菜单ID, 路由name, 对应前端文件路径, 排序标记"
+//@Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
+//@Router /menu/updateBaseMenu [post]
+func UpdateBaseMenu(c *gin.Context){
+	var menu model.SysBaseMenu
+	_ = c.ShouldBindJSON(&menu)
+	if err :=utils.Verify(menu,utils.MenuVerify); err != nil {
+		response.FailWithMessage(err.Error(),c)
+		return
+	}
+	if err := utils.Verify(menu.Meta,utils.MenuMetaVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err := services.UpdateBaseMenu(menu); err != nil {
+		global.GVA_LOG.Error("更新失败!",zap.Any("err", err))
+		response.FailWithMessage("更新失败", c)
+	} else {
+		response.OkWithMessage("更新成功", c)
+	}
+}

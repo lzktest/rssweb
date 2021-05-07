@@ -27,8 +27,10 @@ func AddBaseMenu(menu model.SysBaseMenu)(err error){
 		if err != nil {
 			return err
 		}
-		global.GVA_LOG.Error("添加数据", zap.Any("err", menu))
-		_, err = transaction.Exec("insert into sys_base_menus (createed_at,updateed_at,menu_level,parent_id,routerpath,routername,hidden,component,sort,keep_alive,default_menu,title,icon) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13);", time.Now(), time.Now(), menu.MenuLevel, menu.ParentId, menu.Path, menu.Name, menu.Hidden, menu.Component, menu.Sort, menu.KeepAlive, menu.DefaultMenu, menu.Title, menu.Icon)
+		//global.GVA_LOG.Error("添加数据", zap.Any("err", menu))
+		var id int64
+		err = global.GVA_DB.QueryRow("insert into sys_base_menus (createed_at,updateed_at,menu_level,parent_id,routerpath,routername,hidden,component,sort,keep_alive,default_menu,title,icon) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) returning sys_base_menu_id;", time.Now(), time.Now(), menu.MenuLevel, menu.ParentId, menu.Path, menu.Name, menu.Hidden, menu.Component, menu.Sort, menu.KeepAlive, menu.DefaultMenu, menu.Title, menu.Icon).Scan(&id)
+		//global.GVA_LOG.Error("添加数据", zap.Any("err", id))
 		if err != nil {
 			transaction.Rollback()
 			return err
@@ -36,8 +38,8 @@ func AddBaseMenu(menu model.SysBaseMenu)(err error){
 
 		if len(menu.Parameters) > 0 {
 			for _ , value := range menu.Parameters{
-				global.GVA_LOG.Error("添加参数数据", zap.Any("err", value))
-				_, err = transaction.Exec("insert into sys_base_menu_parameters (createed_at,updateed_at,sys_base_menu_id,addtype,addkey,addvalue) values($1,$2,$3,$4,$5,$6);",time.Now(),time.Now(),value.SysBaseMenuID,value.Type,value.Key,value.Value)
+				//global.GVA_LOG.Error("添加参数数据", zap.Any("err", id))
+				_, err = transaction.Exec("insert into sys_base_menu_parameters (createed_at,updateed_at,sys_base_menu_id,addtype,addkey,addvalue) values($1,$2,$3,$4,$5,$6);",time.Now(),time.Now(),id,value.Type,value.Key,value.Value)
 				if err != nil {
 					transaction.Rollback()
 					return err
@@ -98,6 +100,7 @@ func getBaseMenuTreeMap(qsstr string)(err error, treeMap map[string][]model.SysB
 			return err,treeMap
 		}
 	}
+
 	rows, err = global.GVA_DB.Query("select * from sys_base_menu_parameters where sys_base_menu_id in ("+qstr+");")
 	if err != nil {
 		global.GVA_LOG.Error("获取路由子树失败:",zap.Any("err",err))
@@ -170,8 +173,12 @@ func GetInfoList(pageInfo request.PageInfo) (err error, list interface{}, total 
 
 func GetBaseMenuById(id float64)(err error,menus []model.SysBaseMenu){
 	var menuList []model.SysBaseMenu
-	err, treeMap := getBaseMenuTreeMap("select * from sys_base_menus where sys_base_menu_id = "+strconv.FormatFloat(id,'E',-1,64)+" limit 1;")
-	menuList = treeMap["0"]
+	err, treeMap := getBaseMenuTreeMap("select * from sys_base_menus where sys_base_menu_id = "+strconv.FormatFloat(id,'f',-1,64)+" limit 1;")
+	global.GVA_LOG.Error("根据id返回menu",zap.Any("info",strconv.FormatFloat(id,'f',-1,64)))
+	global.GVA_LOG.Error("根据id返回menu",zap.Any("info",treeMap))
+	for _, v := range treeMap{
+		menuList = v
+	}
 	for i := 0; i< len(menuList); i++ {
 		err = getBaseChildrenList(&menuList[i], treeMap)
 	}
@@ -314,5 +321,50 @@ func getChildrenList(menu *model.SysMenu, treeMap map[string][]model.SysMenu) (e
 	for i := 0; i < len(menu.Children); i++ {
 		err = getChildrenList(&menu.Children[i], treeMap)
 	}
+	return err
+}
+
+//@author: [piexlmax]
+//@function: UpdateBaseMenu
+//@description: 更新路由
+//@param: menu model.SysBaseMenu
+//@return: err error
+func UpdateBaseMenu(menu model.SysBaseMenu) (err error) {
+	//var oldMenu model.SysBaseMenu
+	tx,_:= global.GVA_DB.Begin()
+	_, err =tx.Exec("update sys_base_menus set updateed_at=$1,menu_level=$2,parent_id=$3,routerpath=$4,routername=$5,hidden=$6,component=$7,sort=$8,keep_alive=$9,default_menu=$10,title=$11,icon=$12 where sys_base_menu_id=$13 ;",
+		menu.UpdatedAt,menu.MenuLevel,menu.ParentId,menu.Path,menu.Name,menu.Hidden,menu.Component,menu.Sort,menu.Meta.KeepAlive,menu.Meta.DefaultMenu,menu.Meta.Title,menu.Meta.Icon,menu.ID)
+	if err != nil {
+		txerr :=tx.Rollback()
+		if txerr != nil {
+			global.GVA_LOG.Error("更新sys_base_menus失败,且回滚出现问题:",zap.Any("err",txerr))
+		}
+		global.GVA_LOG.Error("更新sys_base_menus失败:",zap.Any("err",err))
+		return err
+	}
+	if len(menu.Parameters) >0 {
+		_,err = tx.Exec("delete from sys_base_menu_parameters where sys_base_menu_id=$1;",menu.ID)
+		if err != nil {
+			txerr :=tx.Rollback()
+			if txerr != nil {
+				global.GVA_LOG.Error("更新sys_base_menu_parameters失败delete失败,且回滚出现问题:",zap.Any("err",txerr))
+			}
+			global.GVA_LOG.Error("更新sys_base_menu_parameters失败:",zap.Any("err",err))
+			return err
+		} else {
+			for _,value := range menu.Parameters {
+				_,err =tx.Exec("insert into sys_base_menu_parameters(createed_at,updateed_at,sys_base_menu_id,addtype,addkey,addvalue) values($1,$2,$3,$4,$5,$6);",menu.CreatedAt,time.Now(),menu.ID,value.Type,value.Key,value.Value)
+				if err != nil {
+					txerr :=tx.Rollback()
+					if txerr != nil {
+						global.GVA_LOG.Error("更新sys_base_menu_parameters失败insert失败,且回滚出现问题:",zap.Any("err",txerr))
+					}
+					global.GVA_LOG.Error("更新sys_base_menus失败:",zap.Any("err",err))
+					return err
+				}
+			}
+		}
+	}
+	err =tx.Commit()
 	return err
 }
