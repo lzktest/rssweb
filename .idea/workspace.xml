@@ -9,7 +9,9 @@
       <change beforePath="$PROJECT_DIR$/server/api/v1/sys_menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/v1/sys_menu.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/router/sys_menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/sys_menu.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/service/sys_menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service/sys_menu.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/api/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/api/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/api/authority.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/api/authority.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/view/superAdmin/authority/authority.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/view/superAdmin/authority/authority.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/view/superAdmin/authority/components/apis.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/view/superAdmin/authority/components/apis.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/view/superAdmin/menu/menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/view/superAdmin/menu/menu.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -197,3 +197,26 @@ func UpdateBaseMenu(c *gin.Context){
 		response.OkWithMessage("更新成功", c)
 	}
 }
+
+//@Tags Menu
+//@Summary 删除菜单
+//@Security ApiKeyAuth
+//@accept  application/json
+//@Produce application/json
+//@Param  data body request.GetById true "菜单id"
+//@Success 200 {string} string "{"success":true,"data":{},":"删除成功"}"
+//@Router /menu/deleteBaseMenu [post]
+func DeleteBaseMenu(c *gin.Context){
+	var menu request.GetById
+	_ = c.ShouldBindJSON(&menu)
+	if err := utils.Verify(menu, utils.IdVerify); err != nil{
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err := services.DeleteBaseMenu(menu.Id); err != nil{
+		global.GVA_LOG.Error("删除失败!",zap.Any("err",err))
+		response.FailWithMessage("删除失败", c)
+	} else {
+		response.OkWithMessage("删除成功", c)
+	}
+}

@@ -272,11 +272,26 @@ export default {
                 type: "warnging"
             }).then(async () => {
                 const res = await deleteBaseMenu({ ID });
-                if (res.code == 0 ){
-                    
+                if (res.Code == 0 ){
+                    this.$message({
+                        type: "success",
+                        message: "删除成功!"
+                    });
+                    if (this.tableData.length == 1){
+                        this.page--;
+                    }
+                    this.getTableData();
                 }
             })
+            .catch(() =>{
+                this.$message({
+                    type: "info",
+                    message: "已取消删除"
+                })
+            } 
+            )
         },
+        // 初始化弹窗内表格方法
         initForm(){
             this.checkFlag = false;
             this.$refs.menuForm.resetFields();

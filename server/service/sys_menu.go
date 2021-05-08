@@ -368,3 +368,13 @@ func UpdateBaseMenu(menu model.SysBaseMenu) (err error) {
 	err =tx.Commit()
 	return err
 }
+
+//@author: [piexlmax]
+//@function: DeleteBaseMenu
+//@description: 删除基础路由
+//@param: id float64
+//@return: err error
+func DeleteBaseMenu(id float64) (err error){
+	_,err = global.GVA_DB.Exec("delete from sys_base_menus where sys_base_menu_id=$1",id)
+	return err
+}
