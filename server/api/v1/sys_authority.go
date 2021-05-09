@@ -134,5 +134,26 @@ func DeleteAuthority(c *gin.Context){
 	}
 }
 
-
+// @Tags Authority
+// @Summary 设置角色资源权限
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body model.SysAuthority true "设置角色资源权限"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"设置成功"}"
+// @Router /authority/setDataAuthority [post]
+func SetDataAuthority(c *gin.Context){
+	var auth model.SysAuthority
+	_ = c.ShouldBindJSON(&auth)
+	if err := utils.Verify(auth, utils.AuthorityIdVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err := services.SetDataAuthority(auth); err!=nil {
+		global.GVA_LOG.Error("设置失败!",zap.Any("err", err))
+		response.FailWithMessage("设置失败" +err.Error(), c)
+	} else {
+		response.OkWithMessage("设置成功", c)
+	}
+}
 

@@ -13,5 +13,6 @@ func InitAuthorityRouter(Router *gin.RouterGroup){
 		//AuthorityRouter.POST("copyAuthority", v1.CopyAuthority)       // 复制角色
 		AuthorityRouter.POST("updateAuthority", v1.UpdateAuthority)    // 更新角色
 		AuthorityRouter.POST("deleteAuthority", v1.DeleteAuthority)    // 删除角色
+		AuthorityRouter.POST("setDataAuthority", v1.SetDataAuthority)    // 删除角色
 	}
 }

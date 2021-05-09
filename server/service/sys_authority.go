@@ -28,7 +28,7 @@ func CreateAuthority(auth model.SysAuthority) (err error, authority model.SysAut
 }
 
 //@author: [piexlmax]
-//@function: SetDataAuthority
+//@function: SetMenuAuthority
 //@description: 设置角色资源权限
 //@param: auth model.SysAuthority
 //@return: error
@@ -156,11 +156,29 @@ func DeleteAuthority(auth *model.SysAuthority) (err error) {
 }
 
 // @author: [piexlmax]
-// @function: SetMenuAuthority
+// @function: SetDataAuthority
 // @description: 菜单与角色绑定
 // @param: auth *model.SysAuthority
 // @return: error
-//func SetMenuAuthority(auth *model.SysAuthority) error {
-//	var s model.SysAuthority
-//	global.GVA_DB.Query("select * from Sys_BaseMenus")
-//}
+func SetDataAuthority(auth model.SysAuthority) (err error) {
+	//var s model.SysAuthority
+	//global.GVA_DB.Query("select * from Sys_BaseMenus")
+	//global.GVA_LOG.Info("角色绑定：",zap.Any("err",auth.DataAuthorityId))
+	tx,_ := global.GVA_DB.Begin()
+	_,err = tx.Exec("delete from sys_data_authority_id where sys_authority_authority=$1",auth.AuthorityId)
+	if err != nil {
+		tx.Rollback()
+		global.GVA_LOG.Error("角色绑定：",zap.Any("err",err))
+		return err
+	}
+	for _,value := range auth.DataAuthorityId {
+		_,err = tx.Exec("insert into sys_data_authority_id (sys_authority_authority,data_authority_id_authority_id) values($1,$2)",auth.AuthorityId,value.AuthorityId)
+		if err != nil {
+			tx.Rollback()
+			global.GVA_LOG.Info("角色绑定：",zap.Any("err",value))
+			return err
+		}
+	}
+	err = tx.Commit()
+	return err
+}
