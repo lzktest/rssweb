@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"fmt"
 	"server/global"
 	"server/model/request"
 	"server/model/response"
@@ -46,9 +45,7 @@ func UpdateCasbin(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
-	fmt.Println("test: %v,%v",cmr.AuthorityId,",", cmr.CasbinInfos)
 	if err := service.UpdateCasbin(cmr.AuthorityId, cmr.CasbinInfos); err != nil {
-		fmt.Print(err)
 		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))
 		response.FailWithMessage("更新失败", c)
 	} else {
