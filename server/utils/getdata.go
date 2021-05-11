@@ -1,9 +1,11 @@
 package utils
 
 import (
+	"encoding/xml"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"server/model/response"
 	"time"
 )
 
@@ -14,8 +16,11 @@ func GetData(){
 		DisableCompression: true,
 	}
 	client := &http.Client{Transport: tr}
-	resp, err := client.Get("https://example.com")
+	resp, _ := client.Get("http://vdaily.iu.vc/old-weekly.xml")
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	fmt.Print(string(body))
+	body, _ := ioutil.ReadAll(resp.Body)
+	//fmt.Print(string(body))
+	testxml := response.Channel{}
+	xml.Unmarshal(body,&testxml)
+	fmt.Print(testxml)
 }
