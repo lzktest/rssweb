@@ -4,10 +4,10 @@ import (
 	//"database/sql"
 
 	_ "github.com/lib/pq"
-	//"server/core"
-	//"server/global"
+	"server/core"
+	"server/global"
 	//"server/initialize"
-	"server/utils"
+	//"server/utils"
 )
 
 // @title Swagger Example API
@@ -19,11 +19,11 @@ import (
 // @BasePath /
 
 func main() {
-	utils.GetData()
-	//global.GVA_VP = core.Viper()
-	//global.GVA_LOG = core.Zap()
-	//global.GVA_DB = core.Pgcon()
-	//
-	//defer global.GVA_DB.Close()
-	//core.RunWindowsServer()
+	//utils.GetData()
+	global.GVA_VP = core.Viper()
+	global.GVA_LOG = core.Zap()
+	global.GVA_DB = core.Pgcon()
+
+	defer global.GVA_DB.Close()
+	core.RunWindowsServer()
 }

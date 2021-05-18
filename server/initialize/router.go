@@ -31,6 +31,7 @@ func Routers() *gin.Engine {
 	{
 		router.InitBaseRouter(PublicGroup) // 注册基础功能路由 不做鉴权
 		router.InitApiRouter(PublicGroup)    //  api操作
+		router.InitRssRouter(PublicGroup)    //  api操作
 	}
 	PrivateGroup := Router.Group("")
 	PrivateGroup.Use(middleware.JWTAuth()).Use(middleware.CasbinHandler())

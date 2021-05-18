@@ -2,14 +2,14 @@ package utils
 
 import (
 	"encoding/xml"
-	"fmt"
+	//"fmt"
 	"io/ioutil"
 	"net/http"
-	"server/model/response"
+	"server/model/request"
 	"time"
 )
 
-func GetData(){
+func GetData()(atomtmp request.Xml, err error){
 	tr := &http.Transport{
 		MaxIdleConns:       10,
 		IdleConnTimeout:    30 * time.Second,
@@ -20,7 +20,10 @@ func GetData(){
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	//fmt.Print(string(body))
-	testxml := response.Channel{}
+	testxml := request.Xml{}
 	xml.Unmarshal(body,&testxml)
-	fmt.Print(testxml)
+	//fmt.Print(testxml)
+	return testxml,nil
+	//output, _:=xml.MarshalIndent(testxml," ", "  ")
+	//fmt.Print(string(output))
 }

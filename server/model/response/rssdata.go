@@ -6,7 +6,7 @@ import (
 )
 
 // rss channel
-type Channel struct {
+type Rss struct {
 	Title  string  `xml:"title" json:"title"`
 	Link   string	`xml:"link" json:"link"`
 	Description string `xml:"description" json:"description"`
