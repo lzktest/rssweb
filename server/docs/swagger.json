@@ -4,7 +4,6 @@
         "description": "This is a sample Server pets",
         "title": "Swagger Example API",
         "contact": {},
-        "license": {},
         "version": "0.0.1"
     },
     "basePath": "/",
@@ -972,7 +971,34 @@
                 }
             }
         },
-        "/rss/getRssList": {
+        "/rss/getRssListJson": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Rss"
+                ],
+                "summary": "获取rss",
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/rss/getRssListXml": {
             "get": {
                 "security": [
                     {
@@ -1228,7 +1254,7 @@
                     "type": "string"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "description": {
                     "type": "string"
@@ -1316,7 +1342,7 @@
                     "type": "boolean"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "hidden": {
                     "type": "boolean"
@@ -1366,7 +1392,7 @@
                     "type": "string"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "id": {
                     "type": "integer"
@@ -1392,7 +1418,6 @@
             "type": "object",
             "properties": {
                 "authority": {
-                    "type": "object",
                     "$ref": "#/definitions/model.SysAuthority"
                 },
                 "authorityId": {
@@ -1402,7 +1427,7 @@
                     "type": "string"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "headerImg": {
                     "type": "string"
@@ -1545,7 +1570,7 @@
                     "type": "string"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "desc": {
                     "type": "boolean"
@@ -1591,11 +1616,22 @@
             "type": "object",
             "properties": {
                 "authority": {
-                    "type": "object",
                     "$ref": "#/definitions/model.SysAuthority"
                 },
                 "oldAuthorityId": {
                     "type": "string"
+                }
+            }
+        },
+        "sql.NullTime": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
                 }
             }
         }

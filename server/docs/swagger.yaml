@@ -7,7 +7,7 @@ definitions:
       createdAt:
         type: string
       deletedAt:
-        type: string
+        $ref: '#/definitions/sql.NullTime'
       description:
         type: string
       id:
@@ -65,7 +65,7 @@ definitions:
       defaultMenu:
         type: boolean
       deletedAt:
-        type: string
+        $ref: '#/definitions/sql.NullTime'
       hidden:
         type: boolean
       icon:
@@ -98,7 +98,7 @@ definitions:
       createdAt:
         type: string
       deletedAt:
-        type: string
+        $ref: '#/definitions/sql.NullTime'
       id:
         type: integer
       key:
@@ -116,13 +116,12 @@ definitions:
     properties:
       authority:
         $ref: '#/definitions/model.SysAuthority'
-        type: object
       authorityId:
         type: string
       createdAt:
         type: string
       deletedAt:
-        type: string
+        $ref: '#/definitions/sql.NullTime'
       headerImg:
         type: string
       id:
@@ -214,7 +213,7 @@ definitions:
       createdAt:
         type: string
       deletedAt:
-        type: string
+        $ref: '#/definitions/sql.NullTime'
       desc:
         type: boolean
       description:
@@ -245,14 +244,20 @@ definitions:
     properties:
       authority:
         $ref: '#/definitions/model.SysAuthority'
-        type: object
       oldAuthorityId:
         type: string
+    type: object
+  sql.NullTime:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
     type: object
 info:
   contact: {}
   description: This is a sample Server pets
-  license: {}
   title: Swagger Example API
   version: 0.0.1
 paths:
@@ -839,7 +844,23 @@ paths:
       summary: 更新菜单
       tags:
       - Menu
-  /rss/getRssList:
+  /rss/getRssListJson:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"创建成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取rss
+      tags:
+      - Rss
+  /rss/getRssListXml:
     get:
       consumes:
       - application/json

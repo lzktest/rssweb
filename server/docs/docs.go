@@ -19,7 +19,6 @@ var doc = `{
         "description": "{{.Description}}",
         "title": "{{.Title}}",
         "contact": {},
-        "license": {},
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -988,7 +987,34 @@ var doc = `{
                 }
             }
         },
-        "/rss/getRssList": {
+        "/rss/getRssListJson": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Rss"
+                ],
+                "summary": "获取rss",
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/rss/getRssListXml": {
             "get": {
                 "security": [
                     {
@@ -1244,7 +1270,7 @@ var doc = `{
                     "type": "string"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "description": {
                     "type": "string"
@@ -1332,7 +1358,7 @@ var doc = `{
                     "type": "boolean"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "hidden": {
                     "type": "boolean"
@@ -1382,7 +1408,7 @@ var doc = `{
                     "type": "string"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "id": {
                     "type": "integer"
@@ -1408,7 +1434,6 @@ var doc = `{
             "type": "object",
             "properties": {
                 "authority": {
-                    "type": "object",
                     "$ref": "#/definitions/model.SysAuthority"
                 },
                 "authorityId": {
@@ -1418,7 +1443,7 @@ var doc = `{
                     "type": "string"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "headerImg": {
                     "type": "string"
@@ -1561,7 +1586,7 @@ var doc = `{
                     "type": "string"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "$ref": "#/definitions/sql.NullTime"
                 },
                 "desc": {
                     "type": "boolean"
@@ -1607,11 +1632,22 @@ var doc = `{
             "type": "object",
             "properties": {
                 "authority": {
-                    "type": "object",
                     "$ref": "#/definitions/model.SysAuthority"
                 },
                 "oldAuthorityId": {
                     "type": "string"
+                }
+            }
+        },
+        "sql.NullTime": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
                 }
             }
         }
