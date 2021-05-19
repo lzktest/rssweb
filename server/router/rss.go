@@ -8,6 +8,7 @@ import (
 func InitRssRouter(Router *gin.RouterGroup){
 	ApiRouter := Router.Group("rss")
 	{
-		ApiRouter.GET("getRssList", v1.GetRssList)   //获取数据
+		ApiRouter.GET("getRssListJson", v1.GetRssListJson)   //获取数据
+		ApiRouter.GET("getRssListXml", v1.GetRssListXml)   //获取数据
 	}
 }

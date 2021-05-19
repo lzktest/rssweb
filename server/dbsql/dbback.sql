@@ -16,12 +16,26 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: casbin_rule; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: casbin_rule; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.casbin_rule (
@@ -36,10 +50,10 @@ CREATE TABLE public.casbin_rule (
 );
 
 
-ALTER TABLE public.casbin_rule OWNER TO miniflux;
+ALTER TABLE public.casbin_rule OWNER TO db;
 
 --
--- Name: casbin_rule_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
+-- Name: casbin_rule_id_seq; Type: SEQUENCE; Schema: public; Owner: db
 --
 
 CREATE SEQUENCE public.casbin_rule_id_seq
@@ -50,17 +64,51 @@ CREATE SEQUENCE public.casbin_rule_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.casbin_rule_id_seq OWNER TO miniflux;
+ALTER TABLE public.casbin_rule_id_seq OWNER TO db;
 
 --
--- Name: casbin_rule_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
+-- Name: casbin_rule_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
 --
 
 ALTER SEQUENCE public.casbin_rule_id_seq OWNED BY public.casbin_rule.id;
 
 
 --
--- Name: sys_apis; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: rssdata; Type: TABLE; Schema: public; Owner: db
+--
+
+CREATE TABLE public.rssdata (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    xmltype character varying,
+    xmltitle character varying,
+    xmldescription character varying,
+    xmllink character varying,
+    lastbuilddate character varying,
+    generator character varying
+);
+
+
+ALTER TABLE public.rssdata OWNER TO db;
+
+--
+-- Name: rssdatasub; Type: TABLE; Schema: public; Owner: db
+--
+
+CREATE TABLE public.rssdatasub (
+    itemid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    title character varying,
+    link character varying,
+    pubdate character varying,
+    description character varying,
+    createtime timestamp(0) with time zone,
+    rssdataid uuid
+);
+
+
+ALTER TABLE public.rssdatasub OWNER TO db;
+
+--
+-- Name: sys_apis; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.sys_apis (
@@ -75,31 +123,31 @@ CREATE TABLE public.sys_apis (
 );
 
 
-ALTER TABLE public.sys_apis OWNER TO miniflux;
+ALTER TABLE public.sys_apis OWNER TO db;
 
 --
--- Name: COLUMN sys_apis.paths; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_apis.paths; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_apis.paths IS 'api路径';
 
 
 --
--- Name: COLUMN sys_apis.descriptions; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_apis.descriptions; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_apis.descriptions IS 'api描述';
 
 
 --
--- Name: COLUMN sys_apis.apigroup; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_apis.apigroup; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_apis.apigroup IS 'api组';
 
 
 --
--- Name: sys_apis_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
+-- Name: sys_apis_id_seq; Type: SEQUENCE; Schema: public; Owner: db
 --
 
 CREATE SEQUENCE public.sys_apis_id_seq
@@ -110,17 +158,17 @@ CREATE SEQUENCE public.sys_apis_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_apis_id_seq OWNER TO miniflux;
+ALTER TABLE public.sys_apis_id_seq OWNER TO db;
 
 --
--- Name: sys_apis_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
+-- Name: sys_apis_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
 --
 
 ALTER SEQUENCE public.sys_apis_id_seq OWNED BY public.sys_apis.id;
 
 
 --
--- Name: sys_authorities; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: sys_authorities; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.sys_authorities (
@@ -134,31 +182,31 @@ CREATE TABLE public.sys_authorities (
 );
 
 
-ALTER TABLE public.sys_authorities OWNER TO miniflux;
+ALTER TABLE public.sys_authorities OWNER TO db;
 
 --
--- Name: COLUMN sys_authorities.authority_id; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_authorities.authority_id; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_authorities.authority_id IS '角色ID';
 
 
 --
--- Name: COLUMN sys_authorities.authority_name; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_authorities.authority_name; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_authorities.authority_name IS '角色名';
 
 
 --
--- Name: COLUMN sys_authorities.parent_id; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_authorities.parent_id; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_authorities.parent_id IS '父角色ID';
 
 
 --
--- Name: sys_authority_menus; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: sys_authority_menus; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.sys_authority_menus (
@@ -167,17 +215,17 @@ CREATE TABLE public.sys_authority_menus (
 );
 
 
-ALTER TABLE public.sys_authority_menus OWNER TO miniflux;
+ALTER TABLE public.sys_authority_menus OWNER TO db;
 
 --
--- Name: COLUMN sys_authority_menus.sys_authority_authority_id; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_authority_menus.sys_authority_authority_id; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_authority_menus.sys_authority_authority_id IS '角色id';
 
 
 --
--- Name: sys_base_menu_parameters; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: sys_base_menu_parameters; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.sys_base_menu_parameters (
@@ -192,31 +240,31 @@ CREATE TABLE public.sys_base_menu_parameters (
 );
 
 
-ALTER TABLE public.sys_base_menu_parameters OWNER TO miniflux;
+ALTER TABLE public.sys_base_menu_parameters OWNER TO db;
 
 --
--- Name: COLUMN sys_base_menu_parameters.addtype; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menu_parameters.addtype; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menu_parameters.addtype IS '地址栏携带参数为params还是query';
 
 
 --
--- Name: COLUMN sys_base_menu_parameters.addkey; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menu_parameters.addkey; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menu_parameters.addkey IS '地址栏携带参数的key';
 
 
 --
--- Name: COLUMN sys_base_menu_parameters.addvalue; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menu_parameters.addvalue; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menu_parameters.addvalue IS '地址栏携带参数的值';
 
 
 --
--- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
+-- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE; Schema: public; Owner: db
 --
 
 CREATE SEQUENCE public.sys_base_menu_parameters_id_seq
@@ -227,17 +275,17 @@ CREATE SEQUENCE public.sys_base_menu_parameters_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_base_menu_parameters_id_seq OWNER TO miniflux;
+ALTER TABLE public.sys_base_menu_parameters_id_seq OWNER TO db;
 
 --
--- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
+-- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
 --
 
 ALTER SEQUENCE public.sys_base_menu_parameters_id_seq OWNED BY public.sys_base_menu_parameters.id;
 
 
 --
--- Name: sys_base_menus; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: sys_base_menus; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.sys_base_menus (
@@ -259,80 +307,80 @@ CREATE TABLE public.sys_base_menus (
 );
 
 
-ALTER TABLE public.sys_base_menus OWNER TO miniflux;
+ALTER TABLE public.sys_base_menus OWNER TO db;
 
 --
--- Name: COLUMN sys_base_menus.parent_id; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.parent_id; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.parent_id IS '父菜单id';
 
 
 --
--- Name: COLUMN sys_base_menus.routerpath; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.routerpath; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.routerpath IS '路由path';
 
 
 --
--- Name: COLUMN sys_base_menus.routername; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.routername; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.routername IS '路由name';
 
 
 --
--- Name: COLUMN sys_base_menus.hidden; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.hidden; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.hidden IS '是否在列表隐藏';
 
 
 --
--- Name: COLUMN sys_base_menus.component; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.component; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.component IS '对应前端文件路径';
 
 
 --
--- Name: COLUMN sys_base_menus.sort; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.sort; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.sort IS '排序标记';
 
 
 --
--- Name: COLUMN sys_base_menus.keep_alive; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.keep_alive; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.keep_alive IS '附加属性';
 
 
 --
--- Name: COLUMN sys_base_menus.default_menu; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.default_menu; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.default_menu IS '附加属性';
 
 
 --
--- Name: COLUMN sys_base_menus.title; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.title; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.title IS '附加属性';
 
 
 --
--- Name: COLUMN sys_base_menus.icon; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_base_menus.icon; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_base_menus.icon IS '附加属性';
 
 
 --
--- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
+-- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: db
 --
 
 CREATE SEQUENCE public.sys_base_menus_sys_base_menu_id_seq
@@ -343,17 +391,17 @@ CREATE SEQUENCE public.sys_base_menus_sys_base_menu_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_base_menus_sys_base_menu_id_seq OWNER TO miniflux;
+ALTER TABLE public.sys_base_menus_sys_base_menu_id_seq OWNER TO db;
 
 --
--- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
+-- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
 --
 
 ALTER SEQUENCE public.sys_base_menus_sys_base_menu_id_seq OWNED BY public.sys_base_menus.sys_base_menu_id;
 
 
 --
--- Name: sys_data_authority_id; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: sys_data_authority_id; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.sys_data_authority_id (
@@ -362,10 +410,10 @@ CREATE TABLE public.sys_data_authority_id (
 );
 
 
-ALTER TABLE public.sys_data_authority_id OWNER TO miniflux;
+ALTER TABLE public.sys_data_authority_id OWNER TO db;
 
 --
--- Name: sys_jwt_blacklist; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: sys_jwt_blacklist; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.sys_jwt_blacklist (
@@ -377,10 +425,10 @@ CREATE TABLE public.sys_jwt_blacklist (
 );
 
 
-ALTER TABLE public.sys_jwt_blacklist OWNER TO miniflux;
+ALTER TABLE public.sys_jwt_blacklist OWNER TO db;
 
 --
--- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
+-- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: db
 --
 
 CREATE SEQUENCE public.sys_jwt_blacklist_id_seq
@@ -391,17 +439,17 @@ CREATE SEQUENCE public.sys_jwt_blacklist_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_jwt_blacklist_id_seq OWNER TO miniflux;
+ALTER TABLE public.sys_jwt_blacklist_id_seq OWNER TO db;
 
 --
--- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
+-- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
 --
 
 ALTER SEQUENCE public.sys_jwt_blacklist_id_seq OWNED BY public.sys_jwt_blacklist.id;
 
 
 --
--- Name: sys_operation_records; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: sys_operation_records; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.sys_operation_records (
@@ -422,80 +470,80 @@ CREATE TABLE public.sys_operation_records (
 );
 
 
-ALTER TABLE public.sys_operation_records OWNER TO miniflux;
+ALTER TABLE public.sys_operation_records OWNER TO db;
 
 --
--- Name: COLUMN sys_operation_records.ip; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.ip; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.ip IS '请求ip';
 
 
 --
--- Name: COLUMN sys_operation_records.method; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.method; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.method IS '请求方法';
 
 
 --
--- Name: COLUMN sys_operation_records.path; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.path; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.path IS '请求路径';
 
 
 --
--- Name: COLUMN sys_operation_records.status; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.status; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.status IS '请求状态';
 
 
 --
--- Name: COLUMN sys_operation_records.latency; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.latency; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.latency IS '延迟';
 
 
 --
--- Name: COLUMN sys_operation_records.agent; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.agent; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.agent IS '代理';
 
 
 --
--- Name: COLUMN sys_operation_records.error_message; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.error_message; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.error_message IS '错误信息';
 
 
 --
--- Name: COLUMN sys_operation_records.body; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.body; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.body IS '请求Body';
 
 
 --
--- Name: COLUMN sys_operation_records.resp; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.resp; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.resp IS '响应Body';
 
 
 --
--- Name: COLUMN sys_operation_records.userid; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_operation_records.userid; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_operation_records.userid IS '用户id';
 
 
 --
--- Name: sys_operation_records_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
+-- Name: sys_operation_records_id_seq; Type: SEQUENCE; Schema: public; Owner: db
 --
 
 CREATE SEQUENCE public.sys_operation_records_id_seq
@@ -506,17 +554,17 @@ CREATE SEQUENCE public.sys_operation_records_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_operation_records_id_seq OWNER TO miniflux;
+ALTER TABLE public.sys_operation_records_id_seq OWNER TO db;
 
 --
--- Name: sys_operation_records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
+-- Name: sys_operation_records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
 --
 
 ALTER SEQUENCE public.sys_operation_records_id_seq OWNED BY public.sys_operation_records.id;
 
 
 --
--- Name: sys_users; Type: TABLE; Schema: public; Owner: miniflux
+-- Name: sys_users; Type: TABLE; Schema: public; Owner: db
 --
 
 CREATE TABLE public.sys_users (
@@ -533,52 +581,52 @@ CREATE TABLE public.sys_users (
 );
 
 
-ALTER TABLE public.sys_users OWNER TO miniflux;
+ALTER TABLE public.sys_users OWNER TO db;
 
 --
--- Name: COLUMN sys_users.uuid; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_users.uuid; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_users.uuid IS '用户UUID';
 
 
 --
--- Name: COLUMN sys_users.username; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_users.username; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_users.username IS '用户登录名';
 
 
 --
--- Name: COLUMN sys_users.password; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_users.password; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_users.password IS '用户登录密码';
 
 
 --
--- Name: COLUMN sys_users.nick_name; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_users.nick_name; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_users.nick_name IS '用户昵称';
 
 
 --
--- Name: COLUMN sys_users.header_img; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_users.header_img; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_users.header_img IS '用户头像';
 
 
 --
--- Name: COLUMN sys_users.authority_id; Type: COMMENT; Schema: public; Owner: miniflux
+-- Name: COLUMN sys_users.authority_id; Type: COMMENT; Schema: public; Owner: db
 --
 
 COMMENT ON COLUMN public.sys_users.authority_id IS '用户角色ID';
 
 
 --
--- Name: sys_users_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
+-- Name: sys_users_id_seq; Type: SEQUENCE; Schema: public; Owner: db
 --
 
 CREATE SEQUENCE public.sys_users_id_seq
@@ -589,66 +637,66 @@ CREATE SEQUENCE public.sys_users_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_users_id_seq OWNER TO miniflux;
+ALTER TABLE public.sys_users_id_seq OWNER TO db;
 
 --
--- Name: sys_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
+-- Name: sys_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
 --
 
 ALTER SEQUENCE public.sys_users_id_seq OWNED BY public.sys_users.id;
 
 
 --
--- Name: casbin_rule id; Type: DEFAULT; Schema: public; Owner: miniflux
+-- Name: casbin_rule id; Type: DEFAULT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.casbin_rule ALTER COLUMN id SET DEFAULT nextval('public.casbin_rule_id_seq'::regclass);
 
 
 --
--- Name: sys_apis id; Type: DEFAULT; Schema: public; Owner: miniflux
+-- Name: sys_apis id; Type: DEFAULT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_apis ALTER COLUMN id SET DEFAULT nextval('public.sys_apis_id_seq'::regclass);
 
 
 --
--- Name: sys_base_menu_parameters id; Type: DEFAULT; Schema: public; Owner: miniflux
+-- Name: sys_base_menu_parameters id; Type: DEFAULT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_base_menu_parameters ALTER COLUMN id SET DEFAULT nextval('public.sys_base_menu_parameters_id_seq'::regclass);
 
 
 --
--- Name: sys_base_menus sys_base_menu_id; Type: DEFAULT; Schema: public; Owner: miniflux
+-- Name: sys_base_menus sys_base_menu_id; Type: DEFAULT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_base_menus ALTER COLUMN sys_base_menu_id SET DEFAULT nextval('public.sys_base_menus_sys_base_menu_id_seq'::regclass);
 
 
 --
--- Name: sys_jwt_blacklist id; Type: DEFAULT; Schema: public; Owner: miniflux
+-- Name: sys_jwt_blacklist id; Type: DEFAULT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_jwt_blacklist ALTER COLUMN id SET DEFAULT nextval('public.sys_jwt_blacklist_id_seq'::regclass);
 
 
 --
--- Name: sys_operation_records id; Type: DEFAULT; Schema: public; Owner: miniflux
+-- Name: sys_operation_records id; Type: DEFAULT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_operation_records ALTER COLUMN id SET DEFAULT nextval('public.sys_operation_records_id_seq'::regclass);
 
 
 --
--- Name: sys_users id; Type: DEFAULT; Schema: public; Owner: miniflux
+-- Name: sys_users id; Type: DEFAULT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_users ALTER COLUMN id SET DEFAULT nextval('public.sys_users_id_seq'::regclass);
 
 
 --
--- Data for Name: casbin_rule; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: casbin_rule; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.casbin_rule (id, p_type, v0, v1, v2, v3, v4, v5) FROM stdin;
@@ -724,7 +772,23 @@ COPY public.casbin_rule (id, p_type, v0, v1, v2, v3, v4, v5) FROM stdin;
 
 
 --
--- Data for Name: sys_apis; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: rssdata; Type: TABLE DATA; Schema: public; Owner: db
+--
+
+COPY public.rssdata (id, xmltype, xmltitle, xmldescription, xmllink, lastbuilddate, generator) FROM stdin;
+\.
+
+
+--
+-- Data for Name: rssdatasub; Type: TABLE DATA; Schema: public; Owner: db
+--
+
+COPY public.rssdatasub (itemid, title, link, pubdate, description, createtime, rssdataid) FROM stdin;
+\.
+
+
+--
+-- Data for Name: sys_apis; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.sys_apis (id, created_at, updated_at, deleted_at, paths, descriptions, apigroup, methods) FROM stdin;
@@ -734,7 +798,7 @@ COPY public.sys_apis (id, created_at, updated_at, deleted_at, paths, description
 
 
 --
--- Data for Name: sys_authorities; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: sys_authorities; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.sys_authorities (created_at, updated_at, deleted_at, authority_id, authority_name, parent_id, default_router) FROM stdin;
@@ -747,7 +811,7 @@ COPY public.sys_authorities (created_at, updated_at, deleted_at, authority_id, a
 
 
 --
--- Data for Name: sys_authority_menus; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: sys_authority_menus; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.sys_authority_menus (sys_authority_authority_id, sys_base_menu_id) FROM stdin;
@@ -804,7 +868,7 @@ COPY public.sys_authority_menus (sys_authority_authority_id, sys_base_menu_id) F
 
 
 --
--- Data for Name: sys_base_menu_parameters; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: sys_base_menu_parameters; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.sys_base_menu_parameters (id, createed_at, updateed_at, deleteed_at, sys_base_menu_id, addtype, addkey, addvalue) FROM stdin;
@@ -812,7 +876,7 @@ COPY public.sys_base_menu_parameters (id, createed_at, updateed_at, deleteed_at,
 
 
 --
--- Data for Name: sys_base_menus; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: sys_base_menus; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.sys_base_menus (sys_base_menu_id, createed_at, updateed_at, deleteed_at, menu_level, parent_id, routerpath, routername, hidden, component, sort, keep_alive, default_menu, title, icon) FROM stdin;
@@ -829,7 +893,7 @@ COPY public.sys_base_menus (sys_base_menu_id, createed_at, updateed_at, deleteed
 
 
 --
--- Data for Name: sys_data_authority_id; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: sys_data_authority_id; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.sys_data_authority_id (sys_authority_authority, data_authority_id_authority_id) FROM stdin;
@@ -839,7 +903,7 @@ COPY public.sys_data_authority_id (sys_authority_authority, data_authority_id_au
 
 
 --
--- Data for Name: sys_jwt_blacklist; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: sys_jwt_blacklist; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.sys_jwt_blacklist (id, created_at, updated_at, deleted_at, jwt) FROM stdin;
@@ -857,7 +921,7 @@ COPY public.sys_jwt_blacklist (id, created_at, updated_at, deleted_at, jwt) FROM
 
 
 --
--- Data for Name: sys_operation_records; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: sys_operation_records; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.sys_operation_records (id, createed_at, updateed_at, deleteed_at, ip, method, path, status, latency, agent, error_message, body, resp, userid) FROM stdin;
@@ -865,7 +929,7 @@ COPY public.sys_operation_records (id, createed_at, updateed_at, deleteed_at, ip
 
 
 --
--- Data for Name: sys_users; Type: TABLE DATA; Schema: public; Owner: miniflux
+-- Data for Name: sys_users; Type: TABLE DATA; Schema: public; Owner: db
 --
 
 COPY public.sys_users (id, createed_at, updateed_at, deleteed_at, uuid, username, password, nick_name, header_img, authority_id) FROM stdin;
@@ -875,56 +939,56 @@ COPY public.sys_users (id, createed_at, updateed_at, deleteed_at, uuid, username
 
 
 --
--- Name: casbin_rule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
+-- Name: casbin_rule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
 SELECT pg_catalog.setval('public.casbin_rule_id_seq', 72, true);
 
 
 --
--- Name: sys_apis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
+-- Name: sys_apis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
 SELECT pg_catalog.setval('public.sys_apis_id_seq', 6, true);
 
 
 --
--- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
+-- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
 SELECT pg_catalog.setval('public.sys_base_menu_parameters_id_seq', 18, true);
 
 
 --
--- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
+-- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
 SELECT pg_catalog.setval('public.sys_base_menus_sys_base_menu_id_seq', 33, true);
 
 
 --
--- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
+-- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
 SELECT pg_catalog.setval('public.sys_jwt_blacklist_id_seq', 266, true);
 
 
 --
--- Name: sys_operation_records_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
+-- Name: sys_operation_records_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
 SELECT pg_catalog.setval('public.sys_operation_records_id_seq', 1, false);
 
 
 --
--- Name: sys_users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
+-- Name: sys_users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
 --
 
 SELECT pg_catalog.setval('public.sys_users_id_seq', 4, true);
 
 
 --
--- Name: casbin_rule casbin_rule_pkey; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: casbin_rule casbin_rule_pkey; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.casbin_rule
@@ -932,7 +996,15 @@ ALTER TABLE ONLY public.casbin_rule
 
 
 --
--- Name: sys_apis sys_apis_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: rssdata newtable_pk; Type: CONSTRAINT; Schema: public; Owner: db
+--
+
+ALTER TABLE ONLY public.rssdata
+    ADD CONSTRAINT newtable_pk PRIMARY KEY (id);
+
+
+--
+-- Name: sys_apis sys_apis_pk; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_apis
@@ -940,7 +1012,7 @@ ALTER TABLE ONLY public.sys_apis
 
 
 --
--- Name: sys_apis sys_apis_un; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: sys_apis sys_apis_un; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_apis
@@ -948,7 +1020,7 @@ ALTER TABLE ONLY public.sys_apis
 
 
 --
--- Name: sys_authorities sys_authorities_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: sys_authorities sys_authorities_pk; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_authorities
@@ -956,7 +1028,7 @@ ALTER TABLE ONLY public.sys_authorities
 
 
 --
--- Name: sys_base_menu_parameters sys_base_menu_parameters_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: sys_base_menu_parameters sys_base_menu_parameters_pk; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_base_menu_parameters
@@ -964,7 +1036,7 @@ ALTER TABLE ONLY public.sys_base_menu_parameters
 
 
 --
--- Name: sys_base_menus sys_base_menus_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: sys_base_menus sys_base_menus_pk; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_base_menus
@@ -972,7 +1044,7 @@ ALTER TABLE ONLY public.sys_base_menus
 
 
 --
--- Name: sys_jwt_blacklist sys_jwt_blacklist_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: sys_jwt_blacklist sys_jwt_blacklist_pk; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_jwt_blacklist
@@ -980,7 +1052,7 @@ ALTER TABLE ONLY public.sys_jwt_blacklist
 
 
 --
--- Name: sys_jwt_blacklist sys_jwt_blacklist_un; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: sys_jwt_blacklist sys_jwt_blacklist_un; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_jwt_blacklist
@@ -988,7 +1060,7 @@ ALTER TABLE ONLY public.sys_jwt_blacklist
 
 
 --
--- Name: sys_users sys_users_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: sys_users sys_users_pk; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_users
@@ -996,7 +1068,7 @@ ALTER TABLE ONLY public.sys_users
 
 
 --
--- Name: sys_users sys_users_un; Type: CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: sys_users sys_users_un; Type: CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_users
@@ -1004,14 +1076,14 @@ ALTER TABLE ONLY public.sys_users
 
 
 --
--- Name: unique_index; Type: INDEX; Schema: public; Owner: miniflux
+-- Name: unique_index; Type: INDEX; Schema: public; Owner: db
 --
 
 CREATE UNIQUE INDEX unique_index ON public.casbin_rule USING btree (p_type, v0, v1, v2, v3, v4, v5);
 
 
 --
--- Name: sys_base_menu_parameters sys_base_menu_parameters_fk; Type: FK CONSTRAINT; Schema: public; Owner: miniflux
+-- Name: sys_base_menu_parameters sys_base_menu_parameters_fk; Type: FK CONSTRAINT; Schema: public; Owner: db
 --
 
 ALTER TABLE ONLY public.sys_base_menu_parameters

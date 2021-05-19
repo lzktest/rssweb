@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"go.uber.org/zap"
 	"github.com/gin-gonic/gin"
-	"server/utils"
+	"go.uber.org/zap"
+	"server/service"
 	//"server/model"
 	"server/model/response"
 	//"server/model/request"
@@ -17,12 +17,35 @@ import (
 // @accept application/json
 // @Produce application/json
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"创建成功"}"
-// @Router /rss/getRssList [GET]
-func GetRssList(c *gin.Context){
-	if xml, err := utils.GetData(); err != nil{
+// @Router /rss/getRssListJson [GET]
+func GetRssListJson(c *gin.Context){
+	if xml, err := sevice.GetData(); err != nil{
 		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
 		response.OkWithMessage("创建成功",c)
 	} else {
+		c.Header("content-type","application/atom-xml; charset=UTF-8")
+		c.Header("connection","keep-alive")
+		c.Header("content-disposition","inline")
+		c.XML(200,xml)
+
+	}
+}
+
+// @Tags Rss
+// @Summary 获取rss
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"创建成功"}"
+// @Router /rss/getRssListXml [GET]
+func GetRssListXml(c *gin.Context){
+	if xml, err := sevice.GetData(); err != nil{
+		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
+		response.OkWithMessage("创建成功",c)
+	} else {
+		c.Header("content-type","application/atom-json; charset=UTF-8")
+		c.Header("connection","keep-alive")
+		c.Header("content-disposition","inline")
 		c.XML(200,xml)
 	}
 }
