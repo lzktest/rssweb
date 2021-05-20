@@ -23,7 +23,7 @@ type ChannelRss struct {
 	Copyright   string  `xml:"copyright" json:"copyright"`
 	WebMaster   string  `xml:"webmaster" json:"web_master"`
 	PubDate	    string  `xml:"pubdate" json:"pub_date"`
-	LastBuildDate  string `xml:"lastbuilddate" json:"lastBuildDate"`
+	LastBuildDate  string `xml:"lastBuildDate" json:"lastBuildDate"`
 	CateGory	string  `xml:"category" json:"cate_gory"`
 	Generator   string  `xml:"generator" json:"generator"`
 	Docs 		string  `xml:"docs" json:"docs"`

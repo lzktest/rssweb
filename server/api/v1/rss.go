@@ -41,7 +41,8 @@ func GetRssListJson(c *gin.Context){
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"创建成功"}"
 // @Router /rss/getRssListXml [GET]
 func GetRssListXml(c *gin.Context){
-	if xml, err := services.GetData(); err != nil{
+	rssdataid := c.Query("uuid")
+	if xml, err := services.GetRssDataJson(rssdataid); err != nil{
 		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
 		response.OkWithMessage("创建成功",c)
 	} else {

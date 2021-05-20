@@ -19,6 +19,8 @@ require (
 	github.com/lib/pq v1.9.0
 	github.com/lzktest/casbinpgandadapter v1.0.1
 	github.com/mojocn/base64Captcha v1.3.1
+	github.com/robfig/cron v1.2.0
+	github.com/robfig/cron/v3 v3.0.1
 	github.com/satori/go.uuid v1.2.0
 	github.com/spf13/viper v1.7.1
 	github.com/swaggo/gin-swagger v1.3.0

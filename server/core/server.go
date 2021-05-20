@@ -26,5 +26,6 @@ func RunWindowsServer() {
 	默认自动化文档地址:http://127.0.0.1%s/swagger/index.html
 	默认前端文件运行地址:http://127.0.0.1:8080
 `, address)
+	go 	initialize.Cronjobs()
 	global.GVA_LOG.Error(s.ListenAndServe().Error())
 }
