@@ -12,7 +12,7 @@ import (
 )
 
 // @Tags Rss
-// @Summary 获取rss
+// @Summary 获取rssjson
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
@@ -20,7 +20,6 @@ import (
 // @Router /rss/getRssListJson [GET]
 func GetRssListJson(c *gin.Context){
 	rssdataid := c.Query("uuid")
-	global.GVA_LOG.Error("创建失败!", zap.Any("err", rssdataid))
 	if xml, err := services.GetRssDataJson(rssdataid); err != nil{
 		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
 		response.OkWithMessage("创建成功",c)
@@ -28,13 +27,13 @@ func GetRssListJson(c *gin.Context){
 		//c.Header("content-type","application/atom-xml; charset=UTF-8")
 		c.Header("connection","keep-alive")
 		c.Header("content-disposition","inline")
-		c.XML(200,xml)
+		c.JSON(200,xml)
 
 	}
 }
 
 // @Tags Rss
-// @Summary 获取rss
+// @Summary 获取rssxml
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json

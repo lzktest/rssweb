@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8e2b7e97-091a-4d8a-9cc5-64e404cfef36" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/core/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/v1/rss.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/v1/rss.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/service/getdata.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service/getdata.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
