@@ -35,7 +35,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: casbin_rule; Type: TABLE; Schema: public; Owner: db
+-- Name: casbin_rule; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.casbin_rule (
@@ -50,10 +50,10 @@ CREATE TABLE public.casbin_rule (
 );
 
 
-ALTER TABLE public.casbin_rule OWNER TO db;
+ALTER TABLE public.casbin_rule OWNER TO miniflux;
 
 --
--- Name: casbin_rule_id_seq; Type: SEQUENCE; Schema: public; Owner: db
+-- Name: casbin_rule_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
 --
 
 CREATE SEQUENCE public.casbin_rule_id_seq
@@ -64,17 +64,17 @@ CREATE SEQUENCE public.casbin_rule_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.casbin_rule_id_seq OWNER TO db;
+ALTER TABLE public.casbin_rule_id_seq OWNER TO miniflux;
 
 --
--- Name: casbin_rule_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
+-- Name: casbin_rule_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
 --
 
 ALTER SEQUENCE public.casbin_rule_id_seq OWNED BY public.casbin_rule.id;
 
 
 --
--- Name: rssdata; Type: TABLE; Schema: public; Owner: db
+-- Name: rssdata; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.rssdata (
@@ -86,15 +86,15 @@ CREATE TABLE public.rssdata (
     lastbuilddate character varying,
     generator character varying,
     updatetime timestamp(0) with time zone DEFAULT now(),
-    status boolean DEFAULT true,
+    status boolean DEFAULT true NOT NULL,
     cycletime character varying
 );
 
 
-ALTER TABLE public.rssdata OWNER TO db;
+ALTER TABLE public.rssdata OWNER TO miniflux;
 
 --
--- Name: rssdatasub; Type: TABLE; Schema: public; Owner: db
+-- Name: rssdatasub; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.rssdatasub (
@@ -109,10 +109,10 @@ CREATE TABLE public.rssdatasub (
 );
 
 
-ALTER TABLE public.rssdatasub OWNER TO db;
+ALTER TABLE public.rssdatasub OWNER TO miniflux;
 
 --
--- Name: sys_apis; Type: TABLE; Schema: public; Owner: db
+-- Name: sys_apis; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.sys_apis (
@@ -127,31 +127,31 @@ CREATE TABLE public.sys_apis (
 );
 
 
-ALTER TABLE public.sys_apis OWNER TO db;
+ALTER TABLE public.sys_apis OWNER TO miniflux;
 
 --
--- Name: COLUMN sys_apis.paths; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_apis.paths; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_apis.paths IS 'api路径';
 
 
 --
--- Name: COLUMN sys_apis.descriptions; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_apis.descriptions; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_apis.descriptions IS 'api描述';
 
 
 --
--- Name: COLUMN sys_apis.apigroup; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_apis.apigroup; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_apis.apigroup IS 'api组';
 
 
 --
--- Name: sys_apis_id_seq; Type: SEQUENCE; Schema: public; Owner: db
+-- Name: sys_apis_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
 --
 
 CREATE SEQUENCE public.sys_apis_id_seq
@@ -162,17 +162,17 @@ CREATE SEQUENCE public.sys_apis_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_apis_id_seq OWNER TO db;
+ALTER TABLE public.sys_apis_id_seq OWNER TO miniflux;
 
 --
--- Name: sys_apis_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
+-- Name: sys_apis_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
 --
 
 ALTER SEQUENCE public.sys_apis_id_seq OWNED BY public.sys_apis.id;
 
 
 --
--- Name: sys_authorities; Type: TABLE; Schema: public; Owner: db
+-- Name: sys_authorities; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.sys_authorities (
@@ -186,31 +186,31 @@ CREATE TABLE public.sys_authorities (
 );
 
 
-ALTER TABLE public.sys_authorities OWNER TO db;
+ALTER TABLE public.sys_authorities OWNER TO miniflux;
 
 --
--- Name: COLUMN sys_authorities.authority_id; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_authorities.authority_id; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_authorities.authority_id IS '角色ID';
 
 
 --
--- Name: COLUMN sys_authorities.authority_name; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_authorities.authority_name; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_authorities.authority_name IS '角色名';
 
 
 --
--- Name: COLUMN sys_authorities.parent_id; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_authorities.parent_id; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_authorities.parent_id IS '父角色ID';
 
 
 --
--- Name: sys_authority_menus; Type: TABLE; Schema: public; Owner: db
+-- Name: sys_authority_menus; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.sys_authority_menus (
@@ -219,17 +219,17 @@ CREATE TABLE public.sys_authority_menus (
 );
 
 
-ALTER TABLE public.sys_authority_menus OWNER TO db;
+ALTER TABLE public.sys_authority_menus OWNER TO miniflux;
 
 --
--- Name: COLUMN sys_authority_menus.sys_authority_authority_id; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_authority_menus.sys_authority_authority_id; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_authority_menus.sys_authority_authority_id IS '角色id';
 
 
 --
--- Name: sys_base_menu_parameters; Type: TABLE; Schema: public; Owner: db
+-- Name: sys_base_menu_parameters; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.sys_base_menu_parameters (
@@ -244,31 +244,31 @@ CREATE TABLE public.sys_base_menu_parameters (
 );
 
 
-ALTER TABLE public.sys_base_menu_parameters OWNER TO db;
+ALTER TABLE public.sys_base_menu_parameters OWNER TO miniflux;
 
 --
--- Name: COLUMN sys_base_menu_parameters.addtype; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menu_parameters.addtype; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menu_parameters.addtype IS '地址栏携带参数为params还是query';
 
 
 --
--- Name: COLUMN sys_base_menu_parameters.addkey; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menu_parameters.addkey; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menu_parameters.addkey IS '地址栏携带参数的key';
 
 
 --
--- Name: COLUMN sys_base_menu_parameters.addvalue; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menu_parameters.addvalue; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menu_parameters.addvalue IS '地址栏携带参数的值';
 
 
 --
--- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE; Schema: public; Owner: db
+-- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
 --
 
 CREATE SEQUENCE public.sys_base_menu_parameters_id_seq
@@ -279,17 +279,17 @@ CREATE SEQUENCE public.sys_base_menu_parameters_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_base_menu_parameters_id_seq OWNER TO db;
+ALTER TABLE public.sys_base_menu_parameters_id_seq OWNER TO miniflux;
 
 --
--- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
+-- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
 --
 
 ALTER SEQUENCE public.sys_base_menu_parameters_id_seq OWNED BY public.sys_base_menu_parameters.id;
 
 
 --
--- Name: sys_base_menus; Type: TABLE; Schema: public; Owner: db
+-- Name: sys_base_menus; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.sys_base_menus (
@@ -311,80 +311,80 @@ CREATE TABLE public.sys_base_menus (
 );
 
 
-ALTER TABLE public.sys_base_menus OWNER TO db;
+ALTER TABLE public.sys_base_menus OWNER TO miniflux;
 
 --
--- Name: COLUMN sys_base_menus.parent_id; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.parent_id; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.parent_id IS '父菜单id';
 
 
 --
--- Name: COLUMN sys_base_menus.routerpath; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.routerpath; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.routerpath IS '路由path';
 
 
 --
--- Name: COLUMN sys_base_menus.routername; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.routername; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.routername IS '路由name';
 
 
 --
--- Name: COLUMN sys_base_menus.hidden; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.hidden; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.hidden IS '是否在列表隐藏';
 
 
 --
--- Name: COLUMN sys_base_menus.component; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.component; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.component IS '对应前端文件路径';
 
 
 --
--- Name: COLUMN sys_base_menus.sort; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.sort; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.sort IS '排序标记';
 
 
 --
--- Name: COLUMN sys_base_menus.keep_alive; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.keep_alive; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.keep_alive IS '附加属性';
 
 
 --
--- Name: COLUMN sys_base_menus.default_menu; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.default_menu; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.default_menu IS '附加属性';
 
 
 --
--- Name: COLUMN sys_base_menus.title; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.title; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.title IS '附加属性';
 
 
 --
--- Name: COLUMN sys_base_menus.icon; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_base_menus.icon; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_base_menus.icon IS '附加属性';
 
 
 --
--- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: db
+-- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
 --
 
 CREATE SEQUENCE public.sys_base_menus_sys_base_menu_id_seq
@@ -395,17 +395,17 @@ CREATE SEQUENCE public.sys_base_menus_sys_base_menu_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_base_menus_sys_base_menu_id_seq OWNER TO db;
+ALTER TABLE public.sys_base_menus_sys_base_menu_id_seq OWNER TO miniflux;
 
 --
--- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
+-- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
 --
 
 ALTER SEQUENCE public.sys_base_menus_sys_base_menu_id_seq OWNED BY public.sys_base_menus.sys_base_menu_id;
 
 
 --
--- Name: sys_data_authority_id; Type: TABLE; Schema: public; Owner: db
+-- Name: sys_data_authority_id; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.sys_data_authority_id (
@@ -414,10 +414,10 @@ CREATE TABLE public.sys_data_authority_id (
 );
 
 
-ALTER TABLE public.sys_data_authority_id OWNER TO db;
+ALTER TABLE public.sys_data_authority_id OWNER TO miniflux;
 
 --
--- Name: sys_jwt_blacklist; Type: TABLE; Schema: public; Owner: db
+-- Name: sys_jwt_blacklist; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.sys_jwt_blacklist (
@@ -429,10 +429,10 @@ CREATE TABLE public.sys_jwt_blacklist (
 );
 
 
-ALTER TABLE public.sys_jwt_blacklist OWNER TO db;
+ALTER TABLE public.sys_jwt_blacklist OWNER TO miniflux;
 
 --
--- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: db
+-- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
 --
 
 CREATE SEQUENCE public.sys_jwt_blacklist_id_seq
@@ -443,17 +443,17 @@ CREATE SEQUENCE public.sys_jwt_blacklist_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_jwt_blacklist_id_seq OWNER TO db;
+ALTER TABLE public.sys_jwt_blacklist_id_seq OWNER TO miniflux;
 
 --
--- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
+-- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
 --
 
 ALTER SEQUENCE public.sys_jwt_blacklist_id_seq OWNED BY public.sys_jwt_blacklist.id;
 
 
 --
--- Name: sys_operation_records; Type: TABLE; Schema: public; Owner: db
+-- Name: sys_operation_records; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.sys_operation_records (
@@ -474,80 +474,80 @@ CREATE TABLE public.sys_operation_records (
 );
 
 
-ALTER TABLE public.sys_operation_records OWNER TO db;
+ALTER TABLE public.sys_operation_records OWNER TO miniflux;
 
 --
--- Name: COLUMN sys_operation_records.ip; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.ip; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.ip IS '请求ip';
 
 
 --
--- Name: COLUMN sys_operation_records.method; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.method; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.method IS '请求方法';
 
 
 --
--- Name: COLUMN sys_operation_records.path; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.path; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.path IS '请求路径';
 
 
 --
--- Name: COLUMN sys_operation_records.status; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.status; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.status IS '请求状态';
 
 
 --
--- Name: COLUMN sys_operation_records.latency; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.latency; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.latency IS '延迟';
 
 
 --
--- Name: COLUMN sys_operation_records.agent; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.agent; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.agent IS '代理';
 
 
 --
--- Name: COLUMN sys_operation_records.error_message; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.error_message; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.error_message IS '错误信息';
 
 
 --
--- Name: COLUMN sys_operation_records.body; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.body; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.body IS '请求Body';
 
 
 --
--- Name: COLUMN sys_operation_records.resp; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.resp; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.resp IS '响应Body';
 
 
 --
--- Name: COLUMN sys_operation_records.userid; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_operation_records.userid; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_operation_records.userid IS '用户id';
 
 
 --
--- Name: sys_operation_records_id_seq; Type: SEQUENCE; Schema: public; Owner: db
+-- Name: sys_operation_records_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
 --
 
 CREATE SEQUENCE public.sys_operation_records_id_seq
@@ -558,17 +558,17 @@ CREATE SEQUENCE public.sys_operation_records_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_operation_records_id_seq OWNER TO db;
+ALTER TABLE public.sys_operation_records_id_seq OWNER TO miniflux;
 
 --
--- Name: sys_operation_records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
+-- Name: sys_operation_records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
 --
 
 ALTER SEQUENCE public.sys_operation_records_id_seq OWNED BY public.sys_operation_records.id;
 
 
 --
--- Name: sys_users; Type: TABLE; Schema: public; Owner: db
+-- Name: sys_users; Type: TABLE; Schema: public; Owner: miniflux
 --
 
 CREATE TABLE public.sys_users (
@@ -585,52 +585,52 @@ CREATE TABLE public.sys_users (
 );
 
 
-ALTER TABLE public.sys_users OWNER TO db;
+ALTER TABLE public.sys_users OWNER TO miniflux;
 
 --
--- Name: COLUMN sys_users.uuid; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_users.uuid; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_users.uuid IS '用户UUID';
 
 
 --
--- Name: COLUMN sys_users.username; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_users.username; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_users.username IS '用户登录名';
 
 
 --
--- Name: COLUMN sys_users.password; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_users.password; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_users.password IS '用户登录密码';
 
 
 --
--- Name: COLUMN sys_users.nick_name; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_users.nick_name; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_users.nick_name IS '用户昵称';
 
 
 --
--- Name: COLUMN sys_users.header_img; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_users.header_img; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_users.header_img IS '用户头像';
 
 
 --
--- Name: COLUMN sys_users.authority_id; Type: COMMENT; Schema: public; Owner: db
+-- Name: COLUMN sys_users.authority_id; Type: COMMENT; Schema: public; Owner: miniflux
 --
 
 COMMENT ON COLUMN public.sys_users.authority_id IS '用户角色ID';
 
 
 --
--- Name: sys_users_id_seq; Type: SEQUENCE; Schema: public; Owner: db
+-- Name: sys_users_id_seq; Type: SEQUENCE; Schema: public; Owner: miniflux
 --
 
 CREATE SEQUENCE public.sys_users_id_seq
@@ -641,66 +641,66 @@ CREATE SEQUENCE public.sys_users_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sys_users_id_seq OWNER TO db;
+ALTER TABLE public.sys_users_id_seq OWNER TO miniflux;
 
 --
--- Name: sys_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: db
+-- Name: sys_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: miniflux
 --
 
 ALTER SEQUENCE public.sys_users_id_seq OWNED BY public.sys_users.id;
 
 
 --
--- Name: casbin_rule id; Type: DEFAULT; Schema: public; Owner: db
+-- Name: casbin_rule id; Type: DEFAULT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.casbin_rule ALTER COLUMN id SET DEFAULT nextval('public.casbin_rule_id_seq'::regclass);
 
 
 --
--- Name: sys_apis id; Type: DEFAULT; Schema: public; Owner: db
+-- Name: sys_apis id; Type: DEFAULT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_apis ALTER COLUMN id SET DEFAULT nextval('public.sys_apis_id_seq'::regclass);
 
 
 --
--- Name: sys_base_menu_parameters id; Type: DEFAULT; Schema: public; Owner: db
+-- Name: sys_base_menu_parameters id; Type: DEFAULT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_base_menu_parameters ALTER COLUMN id SET DEFAULT nextval('public.sys_base_menu_parameters_id_seq'::regclass);
 
 
 --
--- Name: sys_base_menus sys_base_menu_id; Type: DEFAULT; Schema: public; Owner: db
+-- Name: sys_base_menus sys_base_menu_id; Type: DEFAULT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_base_menus ALTER COLUMN sys_base_menu_id SET DEFAULT nextval('public.sys_base_menus_sys_base_menu_id_seq'::regclass);
 
 
 --
--- Name: sys_jwt_blacklist id; Type: DEFAULT; Schema: public; Owner: db
+-- Name: sys_jwt_blacklist id; Type: DEFAULT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_jwt_blacklist ALTER COLUMN id SET DEFAULT nextval('public.sys_jwt_blacklist_id_seq'::regclass);
 
 
 --
--- Name: sys_operation_records id; Type: DEFAULT; Schema: public; Owner: db
+-- Name: sys_operation_records id; Type: DEFAULT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_operation_records ALTER COLUMN id SET DEFAULT nextval('public.sys_operation_records_id_seq'::regclass);
 
 
 --
--- Name: sys_users id; Type: DEFAULT; Schema: public; Owner: db
+-- Name: sys_users id; Type: DEFAULT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_users ALTER COLUMN id SET DEFAULT nextval('public.sys_users_id_seq'::regclass);
 
 
 --
--- Data for Name: casbin_rule; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: casbin_rule; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.casbin_rule (id, p_type, v0, v1, v2, v3, v4, v5) FROM stdin;
@@ -776,17 +776,18 @@ COPY public.casbin_rule (id, p_type, v0, v1, v2, v3, v4, v5) FROM stdin;
 
 
 --
--- Data for Name: rssdata; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: rssdata; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.rssdata (id, xmltype, xmltitle, xmldescription, xmllink, lastbuilddate, generator, updatetime, status, cycletime) FROM stdin;
-b00fb98c-271a-41cf-baa2-dfea5657c83b	rss-xml	四季评书	四季书评	http://www.4sbooks.com/feed		https://wordpress.org/?v=4.9.1	2021-05-21 09:07:51+00	t	2000
-ed8f2fa2-7240-4795-ba50-5650b444691f	rss-xml	c	c	https://blog.caixin.com/feed	\N	\N	2021-05-21 09:07:55+00	t	2000
+ed8f2fa2-7240-4795-ba50-5650b444691f	rss-xml	c	c	https://blog.caixin.com/feed	\N	\N	2021-05-23 02:37:56+00	t	2000
+b00fb98c-271a-41cf-baa2-dfea5657c83b	rss-xml	四季评书	四季书评	http://www.4sbooks.com/feed		https://wordpress.org/?v=4.9.1	2021-05-23 02:44:11+00	t	2000
+0e070b04-eb16-4895-b017-57207c36a9d0	rss-xml	111	111	111	\N	\N	2021-05-23 06:53:05+00	t	2222
 \.
 
 
 --
--- Data for Name: rssdatasub; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: rssdatasub; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.rssdatasub (itemid, title, link, pubdate, description, createtime, rssdataid, rssdoc) FROM stdin;
@@ -820,11 +821,21 @@ b203334b-15e8-4440-bc02-1013cfda4ced	“他们搞这有什么意义？”	http:/
 8bf0a809-3744-4181-b441-d10af17e74ff	这件事真真是“富贵险中求”	http://caiweiming.blog.caixin.com/archives/246104	Fri, 21 May 2021 04:10:41 +0000	这件事真真是&ldquo;富贵险中求&rdquo;。&mdash;&mdash;<p />&ldquo;富贵险中求&rdquo;的比拟笔者在前几天的一则微博中曾经用过，喻指当前全球疫情未缓，而日本疫情又趋向严重，若无好转迹象，为减少经济损失而坚持要在今年7月举办东京奥运会，此举恐过于冒险。昨日看到如下这则新闻，又想起这句民间谚语，不妨再用一下，但无揶揄之意。<p />据财新网报道，近日国际货币基金组织（IMF）前首席经济学家罗格夫发表的一篇文章引起吾国学界的关注，这篇《美元霸权显露出脆弱性》的文章分析说，若人民币不再盯住一篮子货币，转向现代的通胀目标锚定体系，让其汇率自由浮动，到那时亚洲大半国家会跟着人民币走，美元所占份额将会减半。<p />笔者也看&nbsp;&nbsp;<a href="http://caiweiming.blog.caixin.com/archives/246104" target="_blank">阅读全文</a>	2021-05-21 09:07:55+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Fri, 21 May 2021 16:50:11 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>美国疫情年招生复盘：顶尖美国本科学生激增，普通大学招不到生，两极分化撕裂</title>\n                <link>http://alighthouse.blog.caixin.com/archives/246113</link>\n                <pubDate>Fri, 21 May 2021 08:40:56 +0000</pubDate>\n                <dc:creator>灯塔学院</dc:creator>\n                \t\t<category><![CDATA[天下]]></category>\n                <guid isPermaLink="false">http://alighthouse.blog.caixin.com/archives/246113</guid>\n                <description><![CDATA[你可能已经读到了去年破纪录的美国大学申请学生数量。<p />不过，值得注意的是，其实这些看起来很令人震惊的海量申请学生，主要都是在申请那些已经有足够生源的，美国顶尖的那一部分大学。<p />而其他普通的美国大学，招生情况则不容乐观，两极分化很严重。Common App 的数据指出，来自低收入学生的学生群体在大学申请中严重下降。<p />最近，美国众多的顶尖高校都在大举庆祝他们新冠疫情期间招生的成功。<p />《华盛顿邮报》指出，哈佛大学的申请量上升了整整 42%，而弗吉尼亚大学则上升了整整 15%。他们认为，这要归功于许多美国大学今年首次实行了考试可选（test optional）的政策，这意味着学生不需要提交 SAT 或 ACT 成绩。这篇报道的标题直接就写着，&ldquo;申请量激增：知名大学不再需要 SAT 和 ACT 成绩&rdquo;。&nbsp;&nbsp;<a href="http://alighthouse.blog.caixin.com/archives/246113" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>LPR长期不变将失去利率市场化的意义</title>\n                <link>http://anbound.blog.caixin.com/archives/246112</link>\n                <pubDate>Fri, 21 May 2021 08:04:54 +0000</pubDate>\n                <dc:creator>安邦智库</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://anbound.blog.caixin.com/archives/246112</guid>\n                <description><![CDATA[一如市场预期，2021年第5次贷款市场报价利率（LPR）报价继续保持不变。中国人民银行授权全国银行间同业拆借中心公布，2021年5月20日贷款市场报价利率（LPR）为：1年期LPR为3.85%，5年期以上LPR为4.65%，两个期限品种报价均与上个月持平。至此，在MLF和逆回购利率保持不变的情况下，LPR利率连续第13个月按兵不动在市场意料之中。尽管目前来看，在货币政策意图&ldquo;稳字当头、不急转弯&rdquo;的基调之下，保持政策利率不变体现了货币政策力求稳定的基本取向，但在安邦智库（ANBOUND）的研究人员看来，代表信贷市场价格的LPR长期保持不变，不禁令人担心，LPR是否能够反映出信贷市场的供需变化？以LPR机制为核心的利率市场化改革能否继续推进？<p />图1：LPR品种历史趋势图<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621584334_UhfBmq.jpg" style="width: 620px; height: 324px;" /><p />来源：中国货币网&nbsp;&nbsp;<a href="http://anbound.blog.caixin.com/archives/246112" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>绿色发展机制建设需要有系统性考虑</title>\n                <link>http://anbound.blog.caixin.com/archives/246111</link>\n                <pubDate>Fri, 21 May 2021 08:00:44 +0000</pubDate>\n                <dc:creator>安邦智库</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://anbound.blog.caixin.com/archives/246111</guid>\n                <description><![CDATA[中国在提出&ldquo;碳达峰&rdquo;&ldquo;碳中和&rdquo;发展目标之后，在推动绿色发展方面正在加快。目前，一方面，作为绿色发展基础设施的碳交易所将很快落地；央行等金融监管部门都在推动建立绿色金融体系和推动绿色金融产品，为绿色发展提供金融资源配置的新机制。另一方面，发改委、环境部等部门也在尽快推出整体绿色发展的规划。安邦智库（ANBOUND）实际上早已提出，绿色发展将不仅仅是环境保护、减碳的问题，其实更应当从经济结构转型和可持续发展的角度来看待。建立绿色发展机制需要有系统性的思维，从整体宏观经济发展的角度来建设和完善。<p />近期，前央行行长周小川提出实现&ldquo;碳中和&rdquo;目标的机制性问题，这两方面的问题都值得&nbsp;&nbsp;<a href="http://anbound.blog.caixin.com/archives/246111" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>左晖：商业领域的人文主义思考者与践行者</title>\n                <link>http://renyi.blog.caixin.com/archives/246082</link>\n                <pubDate>Fri, 21 May 2021 07:55:26 +0000</pubDate>\n                <dc:creator>任意</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://renyi.blog.caixin.com/archives/246082</guid>\n                <description><![CDATA[今天下午惊闻左晖先生去世。十分震惊，感慨万千，极为难过！<p />天妒英才。一颗巨星的陨落。他离开了我们。这不仅仅是业界的损失，也是中国的损失，世界的损失（很多人可能需要在以后才能体会到这其中的意义）。<p />震惊之中，仍然坚持开完了几个会。把李翔《详谈左晖&mdash;&mdash;做难而正确的事》拿回家，晚上又再读了一遍。这本书刚出，我就买回来，请团队每个人都认真读一读。我相信这会是对他们宝贵的价值观熏陶与洗礼。<p />有幸见过左晖先生几次。上过几次有他参与的电话会。最后一次见他，是在贝壳的上市典礼。最后一次微信交流，是我在4月22日给他发了《2021美国战略竞争法案》的翻译。他的朋友圈则定格在4月23日，写在贝壳创立三周年之际。<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621558060_MoswGk.png" style="width: 554px; height: 362px;" />&nbsp;&nbsp;<a href="http://renyi.blog.caixin.com/archives/246082" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>“他们搞这有什么意义？”</title>\n                <link>http://lisongwei.blog.caixin.com/archives/246109</link>\n                <pubDate>Fri, 21 May 2021 06:25:07 +0000</pubDate>\n                <dc:creator>李松蔚</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://lisongwei.blog.caixin.com/archives/246109</guid>\n                <description><![CDATA[真是风水轮流转。二十年前流行周星驰电影，最时尚的年轻人在论坛里讲黑话：「神仙？妖怪？谢谢！」老一辈看得一头雾水，这种无厘头的对白有趣在哪里？他们就这样被时代抛下。<p />现在轮到我们这一代了。上个B站，全程地铁老爷爷看手机：怎么全B站都在心疼哥哥？WHY？哥哥怎么了？哥哥的女朋友为啥生气？<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621578186_NCfvbn.png" style="width: 620px; height: 429px;" /><p />我有几个写公号的朋友，人上了岁数，但是壮心不死，还想努力跟上现在的流行文化，力不从心的脚步看着有些辛酸。动不动就发出灵魂拷问：这是什么？这也能火？火起来的点是？<p />上图的「心疼哥哥」梗就是一个例子。不知道在说什么对吗？不知道就说明你已经老了。&nbsp;&nbsp;<a href="http://lisongwei.blog.caixin.com/archives/246109" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>传统金融供给与数字金融发展：补充还是替代？</title>\n                <link>http://zhang-ming.blog.caixin.com/archives/246110</link>\n                <pubDate>Fri, 21 May 2021 05:24:27 +0000</pubDate>\n                <dc:creator>张明</dc:creator>\n                \t\t<category><![CDATA[经济]]></category>\n                <guid isPermaLink="false">http://zhang-ming.blog.caixin.com/archives/246110</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621581118_SzlVGa.jpg" style="width: 465px; height: 620px;" /><p />文中配图摄于镇江北固山。<p />文 | 王喆 陈胤默 张明<p />内容提要：本文采用2011-2018年的地市级面板数据，研究传统金融供给对数字金融发展的影响。研究发现，传统金融供给对数字金融发展具有显著的正向影响，即在传统金融发展越充分的地方，数字金融发展越快；传统金融供给对数字金融覆盖广度和数字金融使用深度具有显著的正向影响，但对数字化程度影响不显著。进一步研究发现，在市场化程度较高、金融监管程度较强、法治水平较高的地区，传统金融供给对数字金融有着显著的正向影响；考虑非正式制度因素之后发&nbsp;&nbsp;<a href="http://zhang-ming.blog.caixin.com/archives/246110" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>陈燕妮：新冠暴发下谁取消了珠峰行程？-在此刻凝视我的一位朋友攀登珠峰（四）</title>\n                <link>http://chenyanni.blog.caixin.com/archives/246108</link>\n                <pubDate>Fri, 21 May 2021 05:18:56 +0000</pubDate>\n                <dc:creator>陈燕妮</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://chenyanni.blog.caixin.com/archives/246108</guid>\n                <description><![CDATA[（前文链接）\t<p />在此刻凝视一位朋友攀登珠峰（一）\t<p />当珠峰南坡暴发17个新冠&mdash;&mdash;在此刻凝视一位朋友攀登珠峰（二）\t<p />体育总局忽然叫停登顶珠峰-在此刻凝视我的一位朋友攀登珠峰（三）\t<p />2021年5月18日<p />我朋友皮元自5月16日从珠峰大本营冲顶而去一走没有消息，到此刻已过了第三天，也就是所谓72小时之后。<p />这三天，我反复端详他们团队的攀登进度表估算行程，72小时之后的今天，也就是尼泊尔时间5月19日，在他们日程表中被称为&ldquo;D4&rdquo;。<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621574035_Dupkxs.jpg" style="width: 288px; height: 620px;" /><p />（皮元团队的攀登日程。）&nbsp;&nbsp;<a href="http://chenyanni.blog.caixin.com/archives/246108" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>这件事真真是“富贵险中求”</title>\n                <link>http://caiweiming.blog.caixin.com/archives/246104</link>\n                <pubDate>Fri, 21 May 2021 04:10:41 +0000</pubDate>\n                <dc:creator>蔡未名</dc:creator>\n                \t\t<category><![CDATA[天下]]></category>\n\t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n                <guid isPermaLink="false">http://caiweiming.blog.caixin.com/archives/246104</guid>\n                <description><![CDATA[这件事真真是&ldquo;富贵险中求&rdquo;。&mdash;&mdash;<p />&ldquo;富贵险中求&rdquo;的比拟笔者在前几天的一则微博中曾经用过，喻指当前全球疫情未缓，而日本疫情又趋向严重，若无好转迹象，为减少经济损失而坚持要在今年7月举办东京奥运会，此举恐过于冒险。昨日看到如下这则新闻，又想起这句民间谚语，不妨再用一下，但无揶揄之意。<p />据财新网报道，近日国际货币基金组织（IMF）前首席经济学家罗格夫发表的一篇文章引起吾国学界的关注，这篇《美元霸权显露出脆弱性》的文章分析说，若人民币不再盯住一篮子货币，转向现代的通胀目标锚定体系，让其汇率自由浮动，到那时亚洲大半国家会跟着人民币走，美元所占份额将会减半。<p />笔者也看&nbsp;&nbsp;<a href="http://caiweiming.blog.caixin.com/archives/246104" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>若论文数据库也遭美国 “卡脖子”，中国如何应对？</title>\n                <link>http://zhishifenzi.blog.caixin.com/archives/246105</link>\n                <pubDate>Fri, 21 May 2021 04:00:05 +0000</pubDate>\n                <dc:creator>知识分子</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://zhishifenzi.blog.caixin.com/archives/246105</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621575422_EPNxpq.jpg" style="width: 620px; height: 372px;" /><p />pixabay.com<p />导 读<p />中国科协生命科学学会联合体秘书长王小宁在4月中旬的一次座谈会上表示，公共论文数据库PubMed &ldquo;卡&rdquo; 了国内两家科研机构的 &ldquo;脖子&rdquo;，具体是哪两家，他并未点明，且未说明具体原因。<p />在中美关系紧张之际，不仅国内工业界在热议哪些技术被卡了脖子，中国科学家也在密切地关注和讨论：如果科学界也像芯片技术那样被卡了脖子，那该怎么办？从实验设备、试剂耗材，到实验动物模型，再到数据库、软件工具，我们还能自主地从事科学研究吗？<p />撰文｜叶水送<p />4月19日，中国科协技术协会生命科学学会联合体秘书长、免疫学家王小宁在一个内部座谈会上对科学界的 &ldquo;卡脖子&rdquo; 问题表示担忧，&ldquo;如果美国政府不让我们使用PubMed，我们该怎么办？&rdquo;&nbsp;&nbsp;<a href="http://zhishifenzi.blog.caixin.com/archives/246105" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>胡泳：互联网作为知识媒介</title>\n                <link>http://huyong.blog.caixin.com/archives/246107</link>\n                <pubDate>Fri, 21 May 2021 03:48:06 +0000</pubDate>\n                <dc:creator>胡泳</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://huyong.blog.caixin.com/archives/246107</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621573648_gzqtpM.jpg" style="width: 620px; height: 413px;" /><p />互联网作为一种可以在广泛的知识领域中寻求信息的工具，可以促进更多的有意学习、偶然学习，同时锻炼学习者的批判性思考能力。从知识的角度看，互联网也改变了知识的性质。<p />这意味着，传统学科之间的界限正在消散，代表知识的传统方式（书籍、学术论文等）变得不那么重要，传统学者或专家的作用正在发生重大变化。<p />大众传播学者长期以来一直研究&ldquo;知识鸿沟&rdquo;（knowledge gap）现象，该现象首先由美国传播学者蒂奇纳（P. Tichenor）、多诺霍（G. Donohue）和奥里恩（C. Olien）的研究小组（197&nbsp;&nbsp;<a href="http://huyong.blog.caixin.com/archives/246107" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
 f6706aec-c2b3-40c8-8263-d6e5b2e89bc2	若论文数据库也遭美国 “卡脖子”，中国如何应对？	http://zhishifenzi.blog.caixin.com/archives/246105	Fri, 21 May 2021 04:00:05 +0000	<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621575422_EPNxpq.jpg" style="width: 620px; height: 372px;" /><p />pixabay.com<p />导 读<p />中国科协生命科学学会联合体秘书长王小宁在4月中旬的一次座谈会上表示，公共论文数据库PubMed &ldquo;卡&rdquo; 了国内两家科研机构的 &ldquo;脖子&rdquo;，具体是哪两家，他并未点明，且未说明具体原因。<p />在中美关系紧张之际，不仅国内工业界在热议哪些技术被卡了脖子，中国科学家也在密切地关注和讨论：如果科学界也像芯片技术那样被卡了脖子，那该怎么办？从实验设备、试剂耗材，到实验动物模型，再到数据库、软件工具，我们还能自主地从事科学研究吗？<p />撰文｜叶水送<p />4月19日，中国科协技术协会生命科学学会联合体秘书长、免疫学家王小宁在一个内部座谈会上对科学界的 &ldquo;卡脖子&rdquo; 问题表示担忧，&ldquo;如果美国政府不让我们使用PubMed，我们该怎么办？&rdquo;&nbsp;&nbsp;<a href="http://zhishifenzi.blog.caixin.com/archives/246105" target="_blank">阅读全文</a>	2021-05-21 09:07:55+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Fri, 21 May 2021 16:50:11 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>美国疫情年招生复盘：顶尖美国本科学生激增，普通大学招不到生，两极分化撕裂</title>\n                <link>http://alighthouse.blog.caixin.com/archives/246113</link>\n                <pubDate>Fri, 21 May 2021 08:40:56 +0000</pubDate>\n                <dc:creator>灯塔学院</dc:creator>\n                \t\t<category><![CDATA[天下]]></category>\n                <guid isPermaLink="false">http://alighthouse.blog.caixin.com/archives/246113</guid>\n                <description><![CDATA[你可能已经读到了去年破纪录的美国大学申请学生数量。<p />不过，值得注意的是，其实这些看起来很令人震惊的海量申请学生，主要都是在申请那些已经有足够生源的，美国顶尖的那一部分大学。<p />而其他普通的美国大学，招生情况则不容乐观，两极分化很严重。Common App 的数据指出，来自低收入学生的学生群体在大学申请中严重下降。<p />最近，美国众多的顶尖高校都在大举庆祝他们新冠疫情期间招生的成功。<p />《华盛顿邮报》指出，哈佛大学的申请量上升了整整 42%，而弗吉尼亚大学则上升了整整 15%。他们认为，这要归功于许多美国大学今年首次实行了考试可选（test optional）的政策，这意味着学生不需要提交 SAT 或 ACT 成绩。这篇报道的标题直接就写着，&ldquo;申请量激增：知名大学不再需要 SAT 和 ACT 成绩&rdquo;。&nbsp;&nbsp;<a href="http://alighthouse.blog.caixin.com/archives/246113" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>LPR长期不变将失去利率市场化的意义</title>\n                <link>http://anbound.blog.caixin.com/archives/246112</link>\n                <pubDate>Fri, 21 May 2021 08:04:54 +0000</pubDate>\n                <dc:creator>安邦智库</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://anbound.blog.caixin.com/archives/246112</guid>\n                <description><![CDATA[一如市场预期，2021年第5次贷款市场报价利率（LPR）报价继续保持不变。中国人民银行授权全国银行间同业拆借中心公布，2021年5月20日贷款市场报价利率（LPR）为：1年期LPR为3.85%，5年期以上LPR为4.65%，两个期限品种报价均与上个月持平。至此，在MLF和逆回购利率保持不变的情况下，LPR利率连续第13个月按兵不动在市场意料之中。尽管目前来看，在货币政策意图&ldquo;稳字当头、不急转弯&rdquo;的基调之下，保持政策利率不变体现了货币政策力求稳定的基本取向，但在安邦智库（ANBOUND）的研究人员看来，代表信贷市场价格的LPR长期保持不变，不禁令人担心，LPR是否能够反映出信贷市场的供需变化？以LPR机制为核心的利率市场化改革能否继续推进？<p />图1：LPR品种历史趋势图<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621584334_UhfBmq.jpg" style="width: 620px; height: 324px;" /><p />来源：中国货币网&nbsp;&nbsp;<a href="http://anbound.blog.caixin.com/archives/246112" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>绿色发展机制建设需要有系统性考虑</title>\n                <link>http://anbound.blog.caixin.com/archives/246111</link>\n                <pubDate>Fri, 21 May 2021 08:00:44 +0000</pubDate>\n                <dc:creator>安邦智库</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://anbound.blog.caixin.com/archives/246111</guid>\n                <description><![CDATA[中国在提出&ldquo;碳达峰&rdquo;&ldquo;碳中和&rdquo;发展目标之后，在推动绿色发展方面正在加快。目前，一方面，作为绿色发展基础设施的碳交易所将很快落地；央行等金融监管部门都在推动建立绿色金融体系和推动绿色金融产品，为绿色发展提供金融资源配置的新机制。另一方面，发改委、环境部等部门也在尽快推出整体绿色发展的规划。安邦智库（ANBOUND）实际上早已提出，绿色发展将不仅仅是环境保护、减碳的问题，其实更应当从经济结构转型和可持续发展的角度来看待。建立绿色发展机制需要有系统性的思维，从整体宏观经济发展的角度来建设和完善。<p />近期，前央行行长周小川提出实现&ldquo;碳中和&rdquo;目标的机制性问题，这两方面的问题都值得&nbsp;&nbsp;<a href="http://anbound.blog.caixin.com/archives/246111" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>左晖：商业领域的人文主义思考者与践行者</title>\n                <link>http://renyi.blog.caixin.com/archives/246082</link>\n                <pubDate>Fri, 21 May 2021 07:55:26 +0000</pubDate>\n                <dc:creator>任意</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://renyi.blog.caixin.com/archives/246082</guid>\n                <description><![CDATA[今天下午惊闻左晖先生去世。十分震惊，感慨万千，极为难过！<p />天妒英才。一颗巨星的陨落。他离开了我们。这不仅仅是业界的损失，也是中国的损失，世界的损失（很多人可能需要在以后才能体会到这其中的意义）。<p />震惊之中，仍然坚持开完了几个会。把李翔《详谈左晖&mdash;&mdash;做难而正确的事》拿回家，晚上又再读了一遍。这本书刚出，我就买回来，请团队每个人都认真读一读。我相信这会是对他们宝贵的价值观熏陶与洗礼。<p />有幸见过左晖先生几次。上过几次有他参与的电话会。最后一次见他，是在贝壳的上市典礼。最后一次微信交流，是我在4月22日给他发了《2021美国战略竞争法案》的翻译。他的朋友圈则定格在4月23日，写在贝壳创立三周年之际。<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621558060_MoswGk.png" style="width: 554px; height: 362px;" />&nbsp;&nbsp;<a href="http://renyi.blog.caixin.com/archives/246082" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>“他们搞这有什么意义？”</title>\n                <link>http://lisongwei.blog.caixin.com/archives/246109</link>\n                <pubDate>Fri, 21 May 2021 06:25:07 +0000</pubDate>\n                <dc:creator>李松蔚</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://lisongwei.blog.caixin.com/archives/246109</guid>\n                <description><![CDATA[真是风水轮流转。二十年前流行周星驰电影，最时尚的年轻人在论坛里讲黑话：「神仙？妖怪？谢谢！」老一辈看得一头雾水，这种无厘头的对白有趣在哪里？他们就这样被时代抛下。<p />现在轮到我们这一代了。上个B站，全程地铁老爷爷看手机：怎么全B站都在心疼哥哥？WHY？哥哥怎么了？哥哥的女朋友为啥生气？<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621578186_NCfvbn.png" style="width: 620px; height: 429px;" /><p />我有几个写公号的朋友，人上了岁数，但是壮心不死，还想努力跟上现在的流行文化，力不从心的脚步看着有些辛酸。动不动就发出灵魂拷问：这是什么？这也能火？火起来的点是？<p />上图的「心疼哥哥」梗就是一个例子。不知道在说什么对吗？不知道就说明你已经老了。&nbsp;&nbsp;<a href="http://lisongwei.blog.caixin.com/archives/246109" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>传统金融供给与数字金融发展：补充还是替代？</title>\n                <link>http://zhang-ming.blog.caixin.com/archives/246110</link>\n                <pubDate>Fri, 21 May 2021 05:24:27 +0000</pubDate>\n                <dc:creator>张明</dc:creator>\n                \t\t<category><![CDATA[经济]]></category>\n                <guid isPermaLink="false">http://zhang-ming.blog.caixin.com/archives/246110</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621581118_SzlVGa.jpg" style="width: 465px; height: 620px;" /><p />文中配图摄于镇江北固山。<p />文 | 王喆 陈胤默 张明<p />内容提要：本文采用2011-2018年的地市级面板数据，研究传统金融供给对数字金融发展的影响。研究发现，传统金融供给对数字金融发展具有显著的正向影响，即在传统金融发展越充分的地方，数字金融发展越快；传统金融供给对数字金融覆盖广度和数字金融使用深度具有显著的正向影响，但对数字化程度影响不显著。进一步研究发现，在市场化程度较高、金融监管程度较强、法治水平较高的地区，传统金融供给对数字金融有着显著的正向影响；考虑非正式制度因素之后发&nbsp;&nbsp;<a href="http://zhang-ming.blog.caixin.com/archives/246110" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>陈燕妮：新冠暴发下谁取消了珠峰行程？-在此刻凝视我的一位朋友攀登珠峰（四）</title>\n                <link>http://chenyanni.blog.caixin.com/archives/246108</link>\n                <pubDate>Fri, 21 May 2021 05:18:56 +0000</pubDate>\n                <dc:creator>陈燕妮</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://chenyanni.blog.caixin.com/archives/246108</guid>\n                <description><![CDATA[（前文链接）\t<p />在此刻凝视一位朋友攀登珠峰（一）\t<p />当珠峰南坡暴发17个新冠&mdash;&mdash;在此刻凝视一位朋友攀登珠峰（二）\t<p />体育总局忽然叫停登顶珠峰-在此刻凝视我的一位朋友攀登珠峰（三）\t<p />2021年5月18日<p />我朋友皮元自5月16日从珠峰大本营冲顶而去一走没有消息，到此刻已过了第三天，也就是所谓72小时之后。<p />这三天，我反复端详他们团队的攀登进度表估算行程，72小时之后的今天，也就是尼泊尔时间5月19日，在他们日程表中被称为&ldquo;D4&rdquo;。<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621574035_Dupkxs.jpg" style="width: 288px; height: 620px;" /><p />（皮元团队的攀登日程。）&nbsp;&nbsp;<a href="http://chenyanni.blog.caixin.com/archives/246108" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>这件事真真是“富贵险中求”</title>\n                <link>http://caiweiming.blog.caixin.com/archives/246104</link>\n                <pubDate>Fri, 21 May 2021 04:10:41 +0000</pubDate>\n                <dc:creator>蔡未名</dc:creator>\n                \t\t<category><![CDATA[天下]]></category>\n\t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n                <guid isPermaLink="false">http://caiweiming.blog.caixin.com/archives/246104</guid>\n                <description><![CDATA[这件事真真是&ldquo;富贵险中求&rdquo;。&mdash;&mdash;<p />&ldquo;富贵险中求&rdquo;的比拟笔者在前几天的一则微博中曾经用过，喻指当前全球疫情未缓，而日本疫情又趋向严重，若无好转迹象，为减少经济损失而坚持要在今年7月举办东京奥运会，此举恐过于冒险。昨日看到如下这则新闻，又想起这句民间谚语，不妨再用一下，但无揶揄之意。<p />据财新网报道，近日国际货币基金组织（IMF）前首席经济学家罗格夫发表的一篇文章引起吾国学界的关注，这篇《美元霸权显露出脆弱性》的文章分析说，若人民币不再盯住一篮子货币，转向现代的通胀目标锚定体系，让其汇率自由浮动，到那时亚洲大半国家会跟着人民币走，美元所占份额将会减半。<p />笔者也看&nbsp;&nbsp;<a href="http://caiweiming.blog.caixin.com/archives/246104" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>若论文数据库也遭美国 “卡脖子”，中国如何应对？</title>\n                <link>http://zhishifenzi.blog.caixin.com/archives/246105</link>\n                <pubDate>Fri, 21 May 2021 04:00:05 +0000</pubDate>\n                <dc:creator>知识分子</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://zhishifenzi.blog.caixin.com/archives/246105</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621575422_EPNxpq.jpg" style="width: 620px; height: 372px;" /><p />pixabay.com<p />导 读<p />中国科协生命科学学会联合体秘书长王小宁在4月中旬的一次座谈会上表示，公共论文数据库PubMed &ldquo;卡&rdquo; 了国内两家科研机构的 &ldquo;脖子&rdquo;，具体是哪两家，他并未点明，且未说明具体原因。<p />在中美关系紧张之际，不仅国内工业界在热议哪些技术被卡了脖子，中国科学家也在密切地关注和讨论：如果科学界也像芯片技术那样被卡了脖子，那该怎么办？从实验设备、试剂耗材，到实验动物模型，再到数据库、软件工具，我们还能自主地从事科学研究吗？<p />撰文｜叶水送<p />4月19日，中国科协技术协会生命科学学会联合体秘书长、免疫学家王小宁在一个内部座谈会上对科学界的 &ldquo;卡脖子&rdquo; 问题表示担忧，&ldquo;如果美国政府不让我们使用PubMed，我们该怎么办？&rdquo;&nbsp;&nbsp;<a href="http://zhishifenzi.blog.caixin.com/archives/246105" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>胡泳：互联网作为知识媒介</title>\n                <link>http://huyong.blog.caixin.com/archives/246107</link>\n                <pubDate>Fri, 21 May 2021 03:48:06 +0000</pubDate>\n                <dc:creator>胡泳</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://huyong.blog.caixin.com/archives/246107</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621573648_gzqtpM.jpg" style="width: 620px; height: 413px;" /><p />互联网作为一种可以在广泛的知识领域中寻求信息的工具，可以促进更多的有意学习、偶然学习，同时锻炼学习者的批判性思考能力。从知识的角度看，互联网也改变了知识的性质。<p />这意味着，传统学科之间的界限正在消散，代表知识的传统方式（书籍、学术论文等）变得不那么重要，传统学者或专家的作用正在发生重大变化。<p />大众传播学者长期以来一直研究&ldquo;知识鸿沟&rdquo;（knowledge gap）现象，该现象首先由美国传播学者蒂奇纳（P. Tichenor）、多诺霍（G. Donohue）和奥里恩（C. Olien）的研究小组（197&nbsp;&nbsp;<a href="http://huyong.blog.caixin.com/archives/246107" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
 158f6cd7-77a6-4219-aa28-1efbe231c752	胡泳：互联网作为知识媒介	http://huyong.blog.caixin.com/archives/246107	Fri, 21 May 2021 03:48:06 +0000	<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621573648_gzqtpM.jpg" style="width: 620px; height: 413px;" /><p />互联网作为一种可以在广泛的知识领域中寻求信息的工具，可以促进更多的有意学习、偶然学习，同时锻炼学习者的批判性思考能力。从知识的角度看，互联网也改变了知识的性质。<p />这意味着，传统学科之间的界限正在消散，代表知识的传统方式（书籍、学术论文等）变得不那么重要，传统学者或专家的作用正在发生重大变化。<p />大众传播学者长期以来一直研究&ldquo;知识鸿沟&rdquo;（knowledge gap）现象，该现象首先由美国传播学者蒂奇纳（P. Tichenor）、多诺霍（G. Donohue）和奥里恩（C. Olien）的研究小组（197&nbsp;&nbsp;<a href="http://huyong.blog.caixin.com/archives/246107" target="_blank">阅读全文</a>	2021-05-21 09:07:55+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Fri, 21 May 2021 16:50:11 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>美国疫情年招生复盘：顶尖美国本科学生激增，普通大学招不到生，两极分化撕裂</title>\n                <link>http://alighthouse.blog.caixin.com/archives/246113</link>\n                <pubDate>Fri, 21 May 2021 08:40:56 +0000</pubDate>\n                <dc:creator>灯塔学院</dc:creator>\n                \t\t<category><![CDATA[天下]]></category>\n                <guid isPermaLink="false">http://alighthouse.blog.caixin.com/archives/246113</guid>\n                <description><![CDATA[你可能已经读到了去年破纪录的美国大学申请学生数量。<p />不过，值得注意的是，其实这些看起来很令人震惊的海量申请学生，主要都是在申请那些已经有足够生源的，美国顶尖的那一部分大学。<p />而其他普通的美国大学，招生情况则不容乐观，两极分化很严重。Common App 的数据指出，来自低收入学生的学生群体在大学申请中严重下降。<p />最近，美国众多的顶尖高校都在大举庆祝他们新冠疫情期间招生的成功。<p />《华盛顿邮报》指出，哈佛大学的申请量上升了整整 42%，而弗吉尼亚大学则上升了整整 15%。他们认为，这要归功于许多美国大学今年首次实行了考试可选（test optional）的政策，这意味着学生不需要提交 SAT 或 ACT 成绩。这篇报道的标题直接就写着，&ldquo;申请量激增：知名大学不再需要 SAT 和 ACT 成绩&rdquo;。&nbsp;&nbsp;<a href="http://alighthouse.blog.caixin.com/archives/246113" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>LPR长期不变将失去利率市场化的意义</title>\n                <link>http://anbound.blog.caixin.com/archives/246112</link>\n                <pubDate>Fri, 21 May 2021 08:04:54 +0000</pubDate>\n                <dc:creator>安邦智库</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://anbound.blog.caixin.com/archives/246112</guid>\n                <description><![CDATA[一如市场预期，2021年第5次贷款市场报价利率（LPR）报价继续保持不变。中国人民银行授权全国银行间同业拆借中心公布，2021年5月20日贷款市场报价利率（LPR）为：1年期LPR为3.85%，5年期以上LPR为4.65%，两个期限品种报价均与上个月持平。至此，在MLF和逆回购利率保持不变的情况下，LPR利率连续第13个月按兵不动在市场意料之中。尽管目前来看，在货币政策意图&ldquo;稳字当头、不急转弯&rdquo;的基调之下，保持政策利率不变体现了货币政策力求稳定的基本取向，但在安邦智库（ANBOUND）的研究人员看来，代表信贷市场价格的LPR长期保持不变，不禁令人担心，LPR是否能够反映出信贷市场的供需变化？以LPR机制为核心的利率市场化改革能否继续推进？<p />图1：LPR品种历史趋势图<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621584334_UhfBmq.jpg" style="width: 620px; height: 324px;" /><p />来源：中国货币网&nbsp;&nbsp;<a href="http://anbound.blog.caixin.com/archives/246112" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>绿色发展机制建设需要有系统性考虑</title>\n                <link>http://anbound.blog.caixin.com/archives/246111</link>\n                <pubDate>Fri, 21 May 2021 08:00:44 +0000</pubDate>\n                <dc:creator>安邦智库</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://anbound.blog.caixin.com/archives/246111</guid>\n                <description><![CDATA[中国在提出&ldquo;碳达峰&rdquo;&ldquo;碳中和&rdquo;发展目标之后，在推动绿色发展方面正在加快。目前，一方面，作为绿色发展基础设施的碳交易所将很快落地；央行等金融监管部门都在推动建立绿色金融体系和推动绿色金融产品，为绿色发展提供金融资源配置的新机制。另一方面，发改委、环境部等部门也在尽快推出整体绿色发展的规划。安邦智库（ANBOUND）实际上早已提出，绿色发展将不仅仅是环境保护、减碳的问题，其实更应当从经济结构转型和可持续发展的角度来看待。建立绿色发展机制需要有系统性的思维，从整体宏观经济发展的角度来建设和完善。<p />近期，前央行行长周小川提出实现&ldquo;碳中和&rdquo;目标的机制性问题，这两方面的问题都值得&nbsp;&nbsp;<a href="http://anbound.blog.caixin.com/archives/246111" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>左晖：商业领域的人文主义思考者与践行者</title>\n                <link>http://renyi.blog.caixin.com/archives/246082</link>\n                <pubDate>Fri, 21 May 2021 07:55:26 +0000</pubDate>\n                <dc:creator>任意</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://renyi.blog.caixin.com/archives/246082</guid>\n                <description><![CDATA[今天下午惊闻左晖先生去世。十分震惊，感慨万千，极为难过！<p />天妒英才。一颗巨星的陨落。他离开了我们。这不仅仅是业界的损失，也是中国的损失，世界的损失（很多人可能需要在以后才能体会到这其中的意义）。<p />震惊之中，仍然坚持开完了几个会。把李翔《详谈左晖&mdash;&mdash;做难而正确的事》拿回家，晚上又再读了一遍。这本书刚出，我就买回来，请团队每个人都认真读一读。我相信这会是对他们宝贵的价值观熏陶与洗礼。<p />有幸见过左晖先生几次。上过几次有他参与的电话会。最后一次见他，是在贝壳的上市典礼。最后一次微信交流，是我在4月22日给他发了《2021美国战略竞争法案》的翻译。他的朋友圈则定格在4月23日，写在贝壳创立三周年之际。<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621558060_MoswGk.png" style="width: 554px; height: 362px;" />&nbsp;&nbsp;<a href="http://renyi.blog.caixin.com/archives/246082" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>“他们搞这有什么意义？”</title>\n                <link>http://lisongwei.blog.caixin.com/archives/246109</link>\n                <pubDate>Fri, 21 May 2021 06:25:07 +0000</pubDate>\n                <dc:creator>李松蔚</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://lisongwei.blog.caixin.com/archives/246109</guid>\n                <description><![CDATA[真是风水轮流转。二十年前流行周星驰电影，最时尚的年轻人在论坛里讲黑话：「神仙？妖怪？谢谢！」老一辈看得一头雾水，这种无厘头的对白有趣在哪里？他们就这样被时代抛下。<p />现在轮到我们这一代了。上个B站，全程地铁老爷爷看手机：怎么全B站都在心疼哥哥？WHY？哥哥怎么了？哥哥的女朋友为啥生气？<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621578186_NCfvbn.png" style="width: 620px; height: 429px;" /><p />我有几个写公号的朋友，人上了岁数，但是壮心不死，还想努力跟上现在的流行文化，力不从心的脚步看着有些辛酸。动不动就发出灵魂拷问：这是什么？这也能火？火起来的点是？<p />上图的「心疼哥哥」梗就是一个例子。不知道在说什么对吗？不知道就说明你已经老了。&nbsp;&nbsp;<a href="http://lisongwei.blog.caixin.com/archives/246109" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>传统金融供给与数字金融发展：补充还是替代？</title>\n                <link>http://zhang-ming.blog.caixin.com/archives/246110</link>\n                <pubDate>Fri, 21 May 2021 05:24:27 +0000</pubDate>\n                <dc:creator>张明</dc:creator>\n                \t\t<category><![CDATA[经济]]></category>\n                <guid isPermaLink="false">http://zhang-ming.blog.caixin.com/archives/246110</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621581118_SzlVGa.jpg" style="width: 465px; height: 620px;" /><p />文中配图摄于镇江北固山。<p />文 | 王喆 陈胤默 张明<p />内容提要：本文采用2011-2018年的地市级面板数据，研究传统金融供给对数字金融发展的影响。研究发现，传统金融供给对数字金融发展具有显著的正向影响，即在传统金融发展越充分的地方，数字金融发展越快；传统金融供给对数字金融覆盖广度和数字金融使用深度具有显著的正向影响，但对数字化程度影响不显著。进一步研究发现，在市场化程度较高、金融监管程度较强、法治水平较高的地区，传统金融供给对数字金融有着显著的正向影响；考虑非正式制度因素之后发&nbsp;&nbsp;<a href="http://zhang-ming.blog.caixin.com/archives/246110" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>陈燕妮：新冠暴发下谁取消了珠峰行程？-在此刻凝视我的一位朋友攀登珠峰（四）</title>\n                <link>http://chenyanni.blog.caixin.com/archives/246108</link>\n                <pubDate>Fri, 21 May 2021 05:18:56 +0000</pubDate>\n                <dc:creator>陈燕妮</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://chenyanni.blog.caixin.com/archives/246108</guid>\n                <description><![CDATA[（前文链接）\t<p />在此刻凝视一位朋友攀登珠峰（一）\t<p />当珠峰南坡暴发17个新冠&mdash;&mdash;在此刻凝视一位朋友攀登珠峰（二）\t<p />体育总局忽然叫停登顶珠峰-在此刻凝视我的一位朋友攀登珠峰（三）\t<p />2021年5月18日<p />我朋友皮元自5月16日从珠峰大本营冲顶而去一走没有消息，到此刻已过了第三天，也就是所谓72小时之后。<p />这三天，我反复端详他们团队的攀登进度表估算行程，72小时之后的今天，也就是尼泊尔时间5月19日，在他们日程表中被称为&ldquo;D4&rdquo;。<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621574035_Dupkxs.jpg" style="width: 288px; height: 620px;" /><p />（皮元团队的攀登日程。）&nbsp;&nbsp;<a href="http://chenyanni.blog.caixin.com/archives/246108" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>这件事真真是“富贵险中求”</title>\n                <link>http://caiweiming.blog.caixin.com/archives/246104</link>\n                <pubDate>Fri, 21 May 2021 04:10:41 +0000</pubDate>\n                <dc:creator>蔡未名</dc:creator>\n                \t\t<category><![CDATA[天下]]></category>\n\t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n                <guid isPermaLink="false">http://caiweiming.blog.caixin.com/archives/246104</guid>\n                <description><![CDATA[这件事真真是&ldquo;富贵险中求&rdquo;。&mdash;&mdash;<p />&ldquo;富贵险中求&rdquo;的比拟笔者在前几天的一则微博中曾经用过，喻指当前全球疫情未缓，而日本疫情又趋向严重，若无好转迹象，为减少经济损失而坚持要在今年7月举办东京奥运会，此举恐过于冒险。昨日看到如下这则新闻，又想起这句民间谚语，不妨再用一下，但无揶揄之意。<p />据财新网报道，近日国际货币基金组织（IMF）前首席经济学家罗格夫发表的一篇文章引起吾国学界的关注，这篇《美元霸权显露出脆弱性》的文章分析说，若人民币不再盯住一篮子货币，转向现代的通胀目标锚定体系，让其汇率自由浮动，到那时亚洲大半国家会跟着人民币走，美元所占份额将会减半。<p />笔者也看&nbsp;&nbsp;<a href="http://caiweiming.blog.caixin.com/archives/246104" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>若论文数据库也遭美国 “卡脖子”，中国如何应对？</title>\n                <link>http://zhishifenzi.blog.caixin.com/archives/246105</link>\n                <pubDate>Fri, 21 May 2021 04:00:05 +0000</pubDate>\n                <dc:creator>知识分子</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://zhishifenzi.blog.caixin.com/archives/246105</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621575422_EPNxpq.jpg" style="width: 620px; height: 372px;" /><p />pixabay.com<p />导 读<p />中国科协生命科学学会联合体秘书长王小宁在4月中旬的一次座谈会上表示，公共论文数据库PubMed &ldquo;卡&rdquo; 了国内两家科研机构的 &ldquo;脖子&rdquo;，具体是哪两家，他并未点明，且未说明具体原因。<p />在中美关系紧张之际，不仅国内工业界在热议哪些技术被卡了脖子，中国科学家也在密切地关注和讨论：如果科学界也像芯片技术那样被卡了脖子，那该怎么办？从实验设备、试剂耗材，到实验动物模型，再到数据库、软件工具，我们还能自主地从事科学研究吗？<p />撰文｜叶水送<p />4月19日，中国科协技术协会生命科学学会联合体秘书长、免疫学家王小宁在一个内部座谈会上对科学界的 &ldquo;卡脖子&rdquo; 问题表示担忧，&ldquo;如果美国政府不让我们使用PubMed，我们该怎么办？&rdquo;&nbsp;&nbsp;<a href="http://zhishifenzi.blog.caixin.com/archives/246105" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>胡泳：互联网作为知识媒介</title>\n                <link>http://huyong.blog.caixin.com/archives/246107</link>\n                <pubDate>Fri, 21 May 2021 03:48:06 +0000</pubDate>\n                <dc:creator>胡泳</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://huyong.blog.caixin.com/archives/246107</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621573648_gzqtpM.jpg" style="width: 620px; height: 413px;" /><p />互联网作为一种可以在广泛的知识领域中寻求信息的工具，可以促进更多的有意学习、偶然学习，同时锻炼学习者的批判性思考能力。从知识的角度看，互联网也改变了知识的性质。<p />这意味着，传统学科之间的界限正在消散，代表知识的传统方式（书籍、学术论文等）变得不那么重要，传统学者或专家的作用正在发生重大变化。<p />大众传播学者长期以来一直研究&ldquo;知识鸿沟&rdquo;（knowledge gap）现象，该现象首先由美国传播学者蒂奇纳（P. Tichenor）、多诺霍（G. Donohue）和奥里恩（C. Olien）的研究小组（197&nbsp;&nbsp;<a href="http://huyong.blog.caixin.com/archives/246107" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+28a7f542-31c8-4517-b989-f23938d0673e	袁隆平 释义学 科学技术哲学	http://lvnaiji.blog.caixin.com/archives/246139	Sun, 23 May 2021 01:45:49 +0000	22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+5d56282d-feaf-4c45-a9b2-d98e2b09f1ca	申赋渔 | 我一直在等待一场大醉	http://fuyu.blog.caixin.com/archives/246138	Sun, 23 May 2021 01:03:13 +0000	<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+f357f8d1-e6bf-4d76-a39e-62a2d0816238	造车传闻、股价不振！美的这次赌对了吗？	http://zhangyinyin.blog.caixin.com/archives/246131	Sun, 23 May 2021 00:47:17 +0000	摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+cb6e9abb-3788-4c91-9c52-f4a994acf098	最新70城房价出炉！楼市的微妙变化，值得注意	http://zhangyinyin.blog.caixin.com/archives/246130	Sun, 23 May 2021 00:39:45 +0000	摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+ff5a4dae-f70b-46ea-b6a4-ed003da3ac12	吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生	http://fanpusci.blog.caixin.com/archives/246140	Sun, 23 May 2021 00:30:56 +0000	点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+5a946b41-2f24-499b-937d-72ab33d6f739	袁隆平的实际三大贡献丨纪念袁隆平	http://fanpusci.blog.caixin.com/archives/246141	Sun, 23 May 2021 00:30:56 +0000	点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+98586738-a2dd-4b32-b3c1-34f9b446eba9	不许联想 | POLO衫该怎么穿？	http://wangxiaofeng.blog.caixin.com/archives/246134	Sat, 22 May 2021 14:43:16 +0000	POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+92c9a67e-882a-4d61-9a37-ccd01eb8cc3f	1400多种中国鸟，你认识多少？	http://fanpusci.blog.caixin.com/archives/246120	Sat, 22 May 2021 14:00:00 +0000	来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+92ac8cd7-82e1-4c3e-a69c-441036b6c7c3	每个人都必须面对的一个话题	http://shangshanruoshui.blog.caixin.com/archives/246133	Sat, 22 May 2021 13:10:06 +0000	周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
+d9ce833c-9691-46a9-812e-4a1117682915	由戴妃采访丑闻想到了职业主义的弊端	http://xili.blog.caixin.com/archives/246129	Sat, 22 May 2021 13:07:31 +0000	这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>	2021-05-23 02:37:56+00	ed8f2fa2-7240-4795-ba50-5650b444691f	<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n     xmlns:content="http://purl.org/rss/1.0/modules/content/"\n     xmlns:wfw="http://wellformedweb.org/CommentAPI/"\n     xmlns:dc="http://purl.org/dc/elements/1.1/"\n     xmlns:atom="http://www.w3.org/2005/Atom"\n     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"\n     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"\n          >\n\n    <channel>\n        <title>财新博客-新世纪的常识传播者-财新网&#187;首页</title>\n        <atom:link href="http://blog.caixin.com/feed" rel="self" type="application/rss+xml" />\n        <link>http://blog.caixin.com</link>\n        <description>财经 经济 社会 人文 生活 科技 财新 博客</description>\n        <lastBuildDate>Sun, 23 May 2021 10:00:29 +0000</lastBuildDate>\n        <language>en</language>\n        <sy:updatePeriod>hourly</sy:updatePeriod>\n        <sy:updateFrequency>1</sy:updateFrequency>\n        <generator>http://blog.caixin.com</generator>\n                    <item>\n                <title>袁隆平 释义学 科学技术哲学</title>\n                <link>http://lvnaiji.blog.caixin.com/archives/246139</link>\n                <pubDate>Sun, 23 May 2021 01:45:49 +0000</pubDate>\n                <dc:creator>吕乃基</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n\t\t<category><![CDATA[科学技术哲学]]></category>\n\t\t<category><![CDATA[袁隆平]]></category>\n\t\t<category><![CDATA[释义学]]></category>\n                <guid isPermaLink="false">http://lvnaiji.blog.caixin.com/archives/246139</guid>\n                <description><![CDATA[22日刚过13时，几乎在同一时间，中国大地上走了两位院士，袁隆平与吴孟超。人们为之哀悼。<p />与此同时，对两位院士及其成就的各种介绍和评论见诸于各种媒体。这种状况，可以说是释义学的某种扩展和延伸。<p />1.<p />释义学（或解释学）是关于对文本的内容和意义的解释的哲学探讨，其一是基于语义分析，其二基于人本主义。至于&ldquo;文本&rdquo;，可以是一切历史上流传下来的文献，特别是有影响者，西方如古希腊哲人的作品、中世纪、文艺复兴和启蒙运动，以及现代和后现代各个时期的哲学、文学和艺术作品。这样的解释不断进行，譬如&ldquo;回到某某某&rdquo;等等，有些新的解释影响了当时社会的走向。例如路德对圣经的重新解释推动了宗教改革。<p />在中国，对唐诗宋词的解释，对四大名著的解释，这种解释本身早已成为一门学问，如&ldquo;红学&rdquo;。&nbsp;&nbsp;<a href="http://lvnaiji.blog.caixin.com/archives/246139" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>申赋渔 &#124; 我一直在等待一场大醉</title>\n                <link>http://fuyu.blog.caixin.com/archives/246138</link>\n                <pubDate>Sun, 23 May 2021 01:03:13 +0000</pubDate>\n                <dc:creator>申赋渔</dc:creator>\n                \t\t<category><![CDATA[点滴]]></category>\n                <guid isPermaLink="false">http://fuyu.blog.caixin.com/archives/246138</guid>\n                <description><![CDATA[<img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621731755_gPsOQE.png" style="width: 465px; height: 620px;" /><p />我的书架上放着两瓶酒，放了许多年，一直没喝。<p />我把最大的一间屋子做成了书房。沿墙摆满了书架。在书架的合围处，放了一张书桌。我经常一早起来，就在书桌旁边坐着，目光从一排一排的书脊上慢慢地移过去，有时一坐就是半天。什么也不做，就是看着这一排排的书。偶尔，我的目光会扫到这两瓶酒，我会停一停，然后看着窗外的树梢发呆。那是许多年前的一个初冬，头顶梧桐树的叶子一片片在飘落。南京的大街上很热闹，身边穿梭着行人和车辆。我骑着自行车，急匆匆地去买酒。我想找一家门头漂亮的烟酒店，买两瓶好酒。&nbsp;&nbsp;<a href="http://fuyu.blog.caixin.com/archives/246138" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>造车传闻、股价不振！美的这次赌对了吗？</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246131</link>\n                <pubDate>Sun, 23 May 2021 00:47:17 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[新能源汽车，造车，美的，格力，股价]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246131</guid>\n                <description><![CDATA[摘要：不容易（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qid6tI6mSa" src="https://si1.go2yd.com/get-image/0qid6tI6mSa" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />最近的资本市场，一向比较低调的美的集团颇抢风头，股价起伏，估计让很多投资者心跳加速。<p />5 月 17 日，美的集团突然官宣：美的新能源汽车新品将于 5 月 18 日发布。有不少网友纷纷表示美的要 &quot; 造车 &quot; 了。其实并不是，因为此前美的集团也曾表示，美的集团只做汽车部件，不会直接造车。<p />5月18日，美的集团旗下威灵汽车部件公司发布三大产品线，包括驱动系统、热管理系统、辅助自动驾驶系统。与百度、小米、360等互联网科技公司不同，美的强调&ldquo;不造车&rdquo;，专注为车企提供汽车零部件。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246131" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>最新70城房价出炉！楼市的微妙变化，值得注意</title>\n                <link>http://zhangyinyin.blog.caixin.com/archives/246130</link>\n                <pubDate>Sun, 23 May 2021 00:39:45 +0000</pubDate>\n                <dc:creator>张银银</dc:creator>\n                \t\t<category><![CDATA[宏观]]></category>\n\t\t<category><![CDATA[经济]]></category>\n\t\t<category><![CDATA[楼市，买房，房价，小阳春，行情]]></category>\n                <guid isPermaLink="false">http://zhangyinyin.blog.caixin.com/archives/246130</guid>\n                <description><![CDATA[摘要：小阳春过后，下半年行情如何？（欢迎关注杠杆游戏）<p /><img _src="https://si1.go2yd.com/get-image/0qicFaICzkS" src="https://si1.go2yd.com/get-image/0qicFaICzkS" style="display: block; max-width: 500px;" /><p />撰文|张银银<p />楼市有微妙变化。<p />近日，国统局公布了全国70城房价。从4月份70城新建商品住宅房价指数来看，新建商品住宅上涨城市数量62个，较上月持平；持平城市3个，较上月增加1个；下跌城市5个，较上月减少1个。从涨幅情况来看，70城平均涨幅为0.48%，涨幅较上月扩大0.07个百分点；上涨城市平均涨幅0.56%，环比涨幅扩大0.07个百分点。<p />4月份，4个一线城市新建商品住宅销售价格环比上涨0.6%，涨幅比上月扩大0.2个百分点。<p />其中，北京、上海、广州和深圳分别上涨0.6%、0.3%、1.1%和0.5%。&nbsp;&nbsp;<a href="http://zhangyinyin.blog.caixin.com/archives/246130" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>吴孟超：用一生为理想去奋斗 丨纪念吴孟超医生</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246140</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246140</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13点02分，中科院院士、中国肝脏外科的开拓者和主要创始人、原第二军医大学副校长吴孟超在上海逝世，享年99岁。吴孟超院士从医78载，直至96岁还依然每周出门诊、做手术。他的一生，完成1万6千余台手术，创下多项我国和世界肝脏外科“第一”。吴孟超院士专业上精益求精，面对科学问题实事求是，对待病人全心全意服务，而令他踏上外科医学之路的则是深深的爱国情怀，也成为他一生的信仰。<p />2012年，吴孟超被评为年度感动中国人物，颁奖词上这样写道：“60年前，吴孟超搭建了第一张手术台，到今天也没有离开；手中一把刀，游刃肝胆，依然精准；心中一团火，守着誓言，从未熄灭。他是不知疲倦的老马，要把病人一个一个驮过河。”<p />本文为吴孟超院士于2012年11月30日在人民大会堂举行的“首都高校科学道德和学风建设宣讲教育报告会”上的报告。谨以此文悼念吴孟超先生。&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246140" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>袁隆平的实际三大贡献丨纪念袁隆平</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246141</link>\n                <pubDate>Sun, 23 May 2021 00:30:56 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246141</guid>\n                <description><![CDATA[点击上方蓝字“返朴”进入主页，可关注查阅往期文章<p />2021年5月22日13时07分，“共和国勋章”获得者、中国工程院院士袁隆平，因多器官功能衰竭在湖南长沙逝世，享年91岁。袁隆平被誉为“中国杂交水稻之父”，是我国研究和发展杂交水稻的开创者，发明了“三系法”籼型杂交水稻，成功研究出了“二系法”杂交水稻，创建了超级杂交稻技术体系。袁隆平从事杂交水稻研究50余载，一生浸在稻田里，直到今年年初，这位乐观的老人还坚持在海南三亚南繁基地开展科研。袁隆平早已成为国人心中的“神农”，成为中国农业乃至科学界的代名词，但也有另一种声音，认为夸大了袁隆平的成就，让中国人“吃得太饱”不仅仅是袁隆平一人。实际上，客观地评价袁隆平的贡献，了解袁隆平的一生，才是对他最好的悼念。“从泥土里来，到白云中去”，袁老一路走好！&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246141" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>不许联想 &#124; POLO衫该怎么穿？</title>\n                <link>http://wangxiaofeng.blog.caixin.com/archives/246134</link>\n                <pubDate>Sat, 22 May 2021 14:43:16 +0000</pubDate>\n                <dc:creator>王小峰</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://wangxiaofeng.blog.caixin.com/archives/246134</guid>\n                <description><![CDATA[POLO衫和T恤差不多，都属于男人夏季经常穿的服饰。虽然它跟T恤只是在某些地方有些差别——比如领子、扣子，但在穿着方面，两者差别很大。T恤你随便怎么穿都不为过，POLO衫的穿法却很有讲究，穿不好会被人笑话。<p />我观察过穿POLO衫的人，多数人不太知道怎么穿。这大概是因为现代服饰多是舶来品，一种服饰的出现和延续一定会形成传统，我们只是不了解这些传统而已。比如西服，穿西服就不能穿球鞋，只能穿皮鞋，这并不受法律约束，是受传统和习惯的影响。当然，你穿西服一定要穿球鞋或拖鞋，大概也没人拦着你，顶多在人眼里你是个不懂穿着打扮的人。就像现在很多人喜欢穿汉服，貌似可以继承传统文化，但现代人穿汉服都特别难看，因为你必须要蓄须（不然跟太监一样）、梳发髻、戴冠冕，这样才能堂皇，而且手里只能拿把扇子不能拿手机。否则跟神经病一样。&nbsp;&nbsp;<a href="http://wangxiaofeng.blog.caixin.com/archives/246134" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>1400多种中国鸟，你认识多少？</title>\n                <link>http://fanpusci.blog.caixin.com/archives/246120</link>\n                <pubDate>Sat, 22 May 2021 14:00:00 +0000</pubDate>\n                <dc:creator>返朴</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://fanpusci.blog.caixin.com/archives/246120</guid>\n                <description><![CDATA[来源&nbsp;| 星球研究所<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692871_MSxGdq.jpg" style="width: 371px; height: 620px;" /><p />百兽驰骋大地<p />鱼类畅游江海还有一类注定属于天空那就是<p />鸟类<p />中国有1400多种鸟类它们形态各异有的高大威猛、有的小巧玲珑有的色彩艳丽、有的朴实无华但不变的是一对令人类羡慕的翅膀（白鹇，摄影师@朱润禄）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692899_AgpeXM.jpg" style="width: 442px; height: 620px;" /><p />从远古时期开始人们便对鸟类着迷在诗歌中、在描画中、在器物中我们都能发现鸟的身影（三星堆出土的铜花果与立鸟，摄影师@柳叶氘，制图@郑伯容/星球研究所）▼<p /><img alt="" src="http://pic.caixin.com/blog/Mon_2105/m_1621692926_FqRGsm.jpg" style="width: 427px; height: 620px;" />&nbsp;&nbsp;<a href="http://fanpusci.blog.caixin.com/archives/246120" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>每个人都必须面对的一个话题</title>\n                <link>http://shangshanruoshui.blog.caixin.com/archives/246133</link>\n                <pubDate>Sat, 22 May 2021 13:10:06 +0000</pubDate>\n                <dc:creator>侯安扬</dc:creator>\n                \t\t<category><![CDATA[未分类]]></category>\n                <guid isPermaLink="false">http://shangshanruoshui.blog.caixin.com/archives/246133</guid>\n                <description><![CDATA[周六，先来看一下昨天的仓位指数吧。<p /><img class="rich_pages" data-galleryid="" data-ratio="0.5585215605749486" data-s="300,640" src="https://mmbiz.qpic.cn/mmbiz_png/5icBz7jORbY7L17k9dTbr2Rib81nhjJxLPIibV03pGT0C1QbXibhWjHtFCuhUVMSXQX7ehuVuiaWkEEPfQv1LSH9Lfw/640?wx_fmt=png" data-type="png" data-w="487"  /><p />根据投票的结果，这周仓位指数是85.1%，似乎变化不大，处在反弹中途的阶段，预计市场反弹没结束。<p />从昨晚到现在，似乎经济新闻没什么东西，但是社会新闻倒是不少。<p />先是一个21岁的腾讯员工自杀，她还在微博上留下了一段话，引发了大量的讨论和转载。<p />我读了她的文字，她似乎失去了对生命意义的感知，放弃了自己的生命。<p />然后，又传来了袁隆平院士去世的消息。他的功绩自不多说，如果一句话总结他的一生，那就是“杂交水稻之父”，足以。&nbsp;&nbsp;<a href="http://shangshanruoshui.blog.caixin.com/archives/246133" target="_blank">阅读全文</a>]]></description>\n            </item>\n                    <item>\n                <title>由戴妃采访丑闻想到了职业主义的弊端</title>\n                <link>http://xili.blog.caixin.com/archives/246129</link>\n                <pubDate>Sat, 22 May 2021 13:07:31 +0000</pubDate>\n                <dc:creator>曦力</dc:creator>\n                \t\t<category><![CDATA[人文]]></category>\n                <guid isPermaLink="false">http://xili.blog.caixin.com/archives/246129</guid>\n                <description><![CDATA[这两天英国皇室又爆出大瓜：二十五年前BBC对戴安娜王妃轰动一时的采访竟是&ldquo;PUA&rdquo;出来的。PUA在这里的意思是：记者用龌龊的办法对戴妃进行心理攻击，最终使其觉得周围的人都不可信，只有这名记者可信，进而接受采访，倾尽肺腑之言。而这次采访又进一步加剧了皇室原本就危机重重的家庭婚姻关系，加速了其最终的瓦解。换言之，这位BBC的记者为了尽可能获得威猛的爆料，不顾戴妃及其家人的基本福祉，专攻其个人弱点。以致于最后出现的结果是，新闻有了，对象没了。分歧已久的威廉哈里两弟兄，在对这件事的回应上，步调一致了。他俩分别发表声明，感谢调查结果的公布，并强烈谴责BBC在这件事上曾经的做法。这成为了BBC历史上的&ldquo;至暗时&nbsp;&nbsp;<a href="http://xili.blog.caixin.com/archives/246129" target="_blank">阅读全文</a>]]></description>\n            </item>\n            </channel>\n</rss>\n
 \.
 
 
 --
--- Data for Name: sys_apis; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: sys_apis; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.sys_apis (id, created_at, updated_at, deleted_at, paths, descriptions, apigroup, methods) FROM stdin;
@@ -834,7 +845,7 @@ COPY public.sys_apis (id, created_at, updated_at, deleted_at, paths, description
 
 
 --
--- Data for Name: sys_authorities; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: sys_authorities; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.sys_authorities (created_at, updated_at, deleted_at, authority_id, authority_name, parent_id, default_router) FROM stdin;
@@ -847,40 +858,11 @@ COPY public.sys_authorities (created_at, updated_at, deleted_at, authority_id, a
 
 
 --
--- Data for Name: sys_authority_menus; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: sys_authority_menus; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.sys_authority_menus (sys_authority_authority_id, sys_base_menu_id) FROM stdin;
 1	8
-888	1
-888	2
-888	3
-888	4
-888	5
-888	6
-888	7
-888	8
-888	9
-888	10
-888	11
-888	12
-888	13
-888	14
-888	15
-888	16
-888	17
-888	18
-888	19
-888	20
-888	21
-888	22
-888	23
-888	24
-888	25
-888	26
-888	27
-888	28
-888	29
 8881	1
 8881	2
 8881	8
@@ -900,11 +882,21 @@ COPY public.sys_authority_menus (sys_authority_authority_id, sys_base_menu_id) F
 9528	15
 9528	16
 9528	17
+888	22
+888	1
+888	3
+888	4
+888	5
+888	6
+888	7
+888	20
+888	34
+888	8
 \.
 
 
 --
--- Data for Name: sys_base_menu_parameters; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: sys_base_menu_parameters; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.sys_base_menu_parameters (id, createed_at, updateed_at, deleteed_at, sys_base_menu_id, addtype, addkey, addvalue) FROM stdin;
@@ -912,7 +904,7 @@ COPY public.sys_base_menu_parameters (id, createed_at, updateed_at, deleteed_at,
 
 
 --
--- Data for Name: sys_base_menus; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: sys_base_menus; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.sys_base_menus (sys_base_menu_id, createed_at, updateed_at, deleteed_at, menu_level, parent_id, routerpath, routername, hidden, component, sort, keep_alive, default_menu, title, icon) FROM stdin;
@@ -925,12 +917,12 @@ COPY public.sys_base_menus (sys_base_menu_id, createed_at, updateed_at, deleteed
 20	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	3	operation	operation	f	view/superAdmin/operation/sysOperationRecord.vue	6	f	f	操作历史	time
 22	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	master	master	f	/	0	f	f	官方网站	s-home
 1	2021-01-14 02:32:18+00	2021-01-14 02:32:18+00	\N	0	0	dashboard	dashboard	f	view/dashboard/index.vue	1	t	f	仪表盘	setting
-34	2021-05-21 10:08:51+00	2021-05-21 10:08:51+00	\N	0	0	rssmanager	rssmanager	f	/	4	f	f	rss源管理界面	s-cooperation
+34	2021-05-21 10:08:51+00	2021-05-21 10:08:51+00	\N	0	0	rssmanager	rssmanager	f	view/rssmanager/index.vue	4	f	f	rss源管理界面	s-cooperation
 \.
 
 
 --
--- Data for Name: sys_data_authority_id; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: sys_data_authority_id; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.sys_data_authority_id (sys_authority_authority, data_authority_id_authority_id) FROM stdin;
@@ -942,7 +934,7 @@ COPY public.sys_data_authority_id (sys_authority_authority, data_authority_id_au
 
 
 --
--- Data for Name: sys_jwt_blacklist; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: sys_jwt_blacklist; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.sys_jwt_blacklist (id, created_at, updated_at, deleted_at, jwt) FROM stdin;
@@ -957,11 +949,12 @@ COPY public.sys_jwt_blacklist (id, created_at, updated_at, deleted_at, jwt) FROM
 265	2021-05-07 02:02:56.878814+00	2021-05-07 02:02:56.878814+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYyMDg4NDY5MCwiaXNzIjoidG9tZSIsIm5iZiI6MTYyMDI3ODg5MH0.2yalmn8b9YrNMS9Q5fISAanapJxy8RRxGeHYwhn2RIA
 266	2021-05-09 02:19:18.681277+00	2021-05-09 02:19:18.681277+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZWE0ZTk1ODAtZjQyMC00MTc3LTg2MzMtYjhhMDhjYjczNTVhIiwiSUQiOjEsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYyMTEzMTMwMCwiaXNzIjoicW1QbHVzIiwibmJmIjoxNjIwNTI1NTAwfQ.u5rV5O9mw184PnQyVKyK_ihUu2sExmFaNskf5_9WISY
 267	2021-05-21 09:55:20.973912+00	2021-05-21 09:55:20.973912+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYyMjE5NTE5MiwiaXNzIjoidG9tZSIsIm5iZiI6MTYyMTU4OTM5Mn0.GzsdbUuVMVVkXWn0kFTUapkTUaV07MPF_8M4vp7zZqw
+268	2021-05-22 11:23:01.827332+00	2021-05-22 11:23:01.827332+00	\N	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZjZjMTFhZjUtMjBmMC00MGQ1LTlmZGEtZGZjMWQwNTgyYjM5IiwiSUQiOjAsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6ImFkbSIsIkF1dGhvcml0eUlkIjoiODg4IiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYyMjI4NzI5NCwiaXNzIjoidG9tZSIsIm5iZiI6MTYyMTY4MTQ5NH0.6Q5uhgF0gvt5e0q_POfKBCYfneqC9SHIeFxiMB7CHK0
 \.
 
 
 --
--- Data for Name: sys_operation_records; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: sys_operation_records; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.sys_operation_records (id, createed_at, updateed_at, deleteed_at, ip, method, path, status, latency, agent, error_message, body, resp, userid) FROM stdin;
@@ -969,7 +962,7 @@ COPY public.sys_operation_records (id, createed_at, updateed_at, deleteed_at, ip
 
 
 --
--- Data for Name: sys_users; Type: TABLE DATA; Schema: public; Owner: db
+-- Data for Name: sys_users; Type: TABLE DATA; Schema: public; Owner: miniflux
 --
 
 COPY public.sys_users (id, createed_at, updateed_at, deleteed_at, uuid, username, password, nick_name, header_img, authority_id) FROM stdin;
@@ -979,56 +972,56 @@ COPY public.sys_users (id, createed_at, updateed_at, deleteed_at, uuid, username
 
 
 --
--- Name: casbin_rule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
+-- Name: casbin_rule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
 --
 
 SELECT pg_catalog.setval('public.casbin_rule_id_seq', 72, true);
 
 
 --
--- Name: sys_apis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
+-- Name: sys_apis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
 --
 
 SELECT pg_catalog.setval('public.sys_apis_id_seq', 6, true);
 
 
 --
--- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
+-- Name: sys_base_menu_parameters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
 --
 
 SELECT pg_catalog.setval('public.sys_base_menu_parameters_id_seq', 18, true);
 
 
 --
--- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
+-- Name: sys_base_menus_sys_base_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
 --
 
 SELECT pg_catalog.setval('public.sys_base_menus_sys_base_menu_id_seq', 34, true);
 
 
 --
--- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
+-- Name: sys_jwt_blacklist_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
 --
 
-SELECT pg_catalog.setval('public.sys_jwt_blacklist_id_seq', 267, true);
+SELECT pg_catalog.setval('public.sys_jwt_blacklist_id_seq', 268, true);
 
 
 --
--- Name: sys_operation_records_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
+-- Name: sys_operation_records_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
 --
 
 SELECT pg_catalog.setval('public.sys_operation_records_id_seq', 1, false);
 
 
 --
--- Name: sys_users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: db
+-- Name: sys_users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: miniflux
 --
 
 SELECT pg_catalog.setval('public.sys_users_id_seq', 4, true);
 
 
 --
--- Name: casbin_rule casbin_rule_pkey; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: casbin_rule casbin_rule_pkey; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.casbin_rule
@@ -1036,7 +1029,7 @@ ALTER TABLE ONLY public.casbin_rule
 
 
 --
--- Name: rssdata newtable_pk; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: rssdata newtable_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.rssdata
@@ -1044,7 +1037,7 @@ ALTER TABLE ONLY public.rssdata
 
 
 --
--- Name: rssdata rssdata_un; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: rssdata rssdata_un; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.rssdata
@@ -1052,7 +1045,7 @@ ALTER TABLE ONLY public.rssdata
 
 
 --
--- Name: rssdatasub rssdatasub_pk; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: rssdatasub rssdatasub_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.rssdatasub
@@ -1060,7 +1053,7 @@ ALTER TABLE ONLY public.rssdatasub
 
 
 --
--- Name: rssdatasub rssdatasub_un; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: rssdatasub rssdatasub_un; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.rssdatasub
@@ -1068,7 +1061,7 @@ ALTER TABLE ONLY public.rssdatasub
 
 
 --
--- Name: sys_apis sys_apis_pk; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_apis sys_apis_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_apis
@@ -1076,7 +1069,7 @@ ALTER TABLE ONLY public.sys_apis
 
 
 --
--- Name: sys_apis sys_apis_un; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_apis sys_apis_un; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_apis
@@ -1084,7 +1077,7 @@ ALTER TABLE ONLY public.sys_apis
 
 
 --
--- Name: sys_authorities sys_authorities_pk; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_authorities sys_authorities_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_authorities
@@ -1092,7 +1085,7 @@ ALTER TABLE ONLY public.sys_authorities
 
 
 --
--- Name: sys_base_menu_parameters sys_base_menu_parameters_pk; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_base_menu_parameters sys_base_menu_parameters_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_base_menu_parameters
@@ -1100,7 +1093,7 @@ ALTER TABLE ONLY public.sys_base_menu_parameters
 
 
 --
--- Name: sys_base_menus sys_base_menus_pk; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_base_menus sys_base_menus_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_base_menus
@@ -1108,7 +1101,7 @@ ALTER TABLE ONLY public.sys_base_menus
 
 
 --
--- Name: sys_jwt_blacklist sys_jwt_blacklist_pk; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_jwt_blacklist sys_jwt_blacklist_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_jwt_blacklist
@@ -1116,7 +1109,7 @@ ALTER TABLE ONLY public.sys_jwt_blacklist
 
 
 --
--- Name: sys_jwt_blacklist sys_jwt_blacklist_un; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_jwt_blacklist sys_jwt_blacklist_un; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_jwt_blacklist
@@ -1124,7 +1117,7 @@ ALTER TABLE ONLY public.sys_jwt_blacklist
 
 
 --
--- Name: sys_users sys_users_pk; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_users sys_users_pk; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_users
@@ -1132,7 +1125,7 @@ ALTER TABLE ONLY public.sys_users
 
 
 --
--- Name: sys_users sys_users_un; Type: CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_users sys_users_un; Type: CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_users
@@ -1140,14 +1133,14 @@ ALTER TABLE ONLY public.sys_users
 
 
 --
--- Name: unique_index; Type: INDEX; Schema: public; Owner: db
+-- Name: unique_index; Type: INDEX; Schema: public; Owner: miniflux
 --
 
 CREATE UNIQUE INDEX unique_index ON public.casbin_rule USING btree (p_type, v0, v1, v2, v3, v4, v5);
 
 
 --
--- Name: rssdatasub rssdatasub_rssdata_key; Type: FK CONSTRAINT; Schema: public; Owner: db
+-- Name: rssdatasub rssdatasub_rssdata_key; Type: FK CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.rssdatasub
@@ -1155,7 +1148,7 @@ ALTER TABLE ONLY public.rssdatasub
 
 
 --
--- Name: sys_base_menu_parameters sys_base_menu_parameters_fk; Type: FK CONSTRAINT; Schema: public; Owner: db
+-- Name: sys_base_menu_parameters sys_base_menu_parameters_fk; Type: FK CONSTRAINT; Schema: public; Owner: miniflux
 --
 
 ALTER TABLE ONLY public.sys_base_menu_parameters
