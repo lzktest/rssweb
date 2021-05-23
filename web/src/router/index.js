@@ -16,6 +16,12 @@ const baseRouters = [
         redirect: '/login'
     },
     {
+        path: '/rssview',
+        name: 'rssview',
+        component: () =>
+            import ('@/view/rssview/index.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () =>

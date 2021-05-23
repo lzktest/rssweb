@@ -68,3 +68,17 @@ type Item struct {
 	Pubdate    string  `xml:"pubDate" json:"pubDate"`
 	Source     string  `xml:"source" json:"source"`
 }
+
+// rssdata
+type RssDatas struct {
+	Id string  `json:"id"`
+	Xmltype string `json:"xmltype"`
+	XmlTitle string `json:"xmltitle"`
+	XmlDescription string `json:"xmldescription"`
+	XmlLink string `json:"xmllink"`
+	Status bool `json:"status"`
+	CycleTime string `json:"cycletime"`
+}
+type RssDataList struct{
+	RssDataLists []RssDatas `json:"rssDataList"`
+}

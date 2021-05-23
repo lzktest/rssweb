@@ -1,5 +1,22 @@
 basePath: /
 definitions:
+  model.RssDatas:
+    properties:
+      cycletime:
+        type: string
+      id:
+        type: string
+      status:
+        type: boolean
+      xmldescription:
+        type: string
+      xmllink:
+        type: string
+      xmltitle:
+        type: string
+      xmltype:
+        type: string
+    type: object
   model.SysApi:
     properties:
       apiGroup:
@@ -205,6 +222,13 @@ definitions:
         type: integer
       pageSize:
         type: integer
+    type: object
+  request.RssIdsReq:
+    properties:
+      ids:
+        items:
+          type: string
+        type: array
     type: object
   request.SearchApiParams:
     properties:
@@ -844,6 +868,91 @@ paths:
       summary: 更新菜单
       tags:
       - Menu
+  /rss/addRssDataList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: xmltype,xmlttitle,xmldescription,xmllink,cycletime
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.RssDatas'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"添加成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 添加rssdata
+      tags:
+      - Rss
+  /rss/deleteRssDataList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.RssIdsReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"删除成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除rssdata
+      tags:
+      - Rss
+  /rss/getRssDataList:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取rssdata
+      tags:
+      - Rss
+  /rss/getRssDataListById:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.RssDatas'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 通过id获取rssdata
+      tags:
+      - Rss
   /rss/getRssListJson:
     get:
       consumes:
@@ -857,7 +966,7 @@ paths:
             type: string
       security:
       - ApiKeyAuth: []
-      summary: 获取rss
+      summary: 获取rssjson
       tags:
       - Rss
   /rss/getRssListXml:
@@ -868,12 +977,35 @@ paths:
       - application/json
       responses:
         "200":
-          description: '{"success":true,"data":{},"msg":"创建成功"}'
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
           schema:
             type: string
       security:
       - ApiKeyAuth: []
-      summary: 获取rss
+      summary: 获取rssxml
+      tags:
+      - Rss
+  /rss/updateRssDataList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: id,xmltype,xmlttitle,xmldescription,xmllink,cycletime
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.RssDatas'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"修改成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 修改rssdata
       tags:
       - Rss
   /user/changePassword:

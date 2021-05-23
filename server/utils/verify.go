@@ -13,4 +13,6 @@ var (
 	ChangePasswordVerify   = Rules{"Username": {NotEmpty()}, "Password": {NotEmpty()}, "NewPassword": {NotEmpty()}}
 	SetUserAuthorityVerify = Rules{"UUID": {NotEmpty()}, "AuthorityId": {NotEmpty()}}
 	ApiVerify		= Rules{"Path":{NotEmpty()},"Description":{NotEmpty()},"ApiGroup":{NotEmpty()},"Method":{NotEmpty()}}
+	RssDatas 	=Rules{"Xmltype":{NotEmpty()},"XmlTitle":{NotEmpty()},"XmlLink":{NotEmpty()},"CycleTime":{NotEmpty()}}
+	RssDatasUpdate 	=Rules{"Id":{NotEmpty()},"Xmltype":{NotEmpty()},"XmlTitle":{NotEmpty()},"XmlLink":{NotEmpty()},"CycleTime":{NotEmpty()}}
 )

@@ -82,13 +82,14 @@ func GetData(id string,xmllink string){
 					err =tx.Rollback()
 					return
 				}
-				_,err = tx.Exec("update rssdata set updatetime=$1 where id=$2",time.Now(),id)
-				if err != nil{
-					global.GVA_LOG.Warn("updatetime 更新失败!", zap.Any("warning", err))
-					err =tx.Rollback()
-					return
-				}
+
 			}
+		}
+		_,err = tx.Exec("update rssdata set updatetime=$1 where id=$2",time.Now(),id)
+		if err != nil{
+			global.GVA_LOG.Warn("updatetime 更新失败!", zap.Any("warning", err))
+			err =tx.Rollback()
+			return
 		}
 		err := tx.Commit()
 		if err != nil {
@@ -110,13 +111,14 @@ func GetData(id string,xmllink string){
 					err =tx.Rollback()
 					return
 				}
-				_,err = tx.Exec("update rssdata set updatetime=$1 where id=$2",time.Now(),id)
-				if err != nil{
-					global.GVA_LOG.Warn("updatetime 更新失败!", zap.Any("warning", err))
-					err =tx.Rollback()
-					return
-				}
 			}
+		}
+		global.GVA_LOG.Warn("updatetime 更新!", zap.Any("warning", id))
+		_,err = tx.Exec("update rssdata set updatetime=$1 where id=$2",time.Now(),id)
+		if err != nil{
+			global.GVA_LOG.Warn("updatetime 更新失败!", zap.Any("warning", err))
+			err =tx.Rollback()
+			return
 		}
 		err := tx.Commit()
 		if err != nil {
@@ -168,4 +170,55 @@ func CheckTag(src , tag string)(bool, error){
 			}
 		}
 	}
+}
+
+// 获取rssdatalist
+func GetRssDataList()(rss []model.RssDatas,err error){
+	rows,err := global.GVA_DB.Query("select id,xmltype,xmltitle,xmldescription,xmllink,status,cycletime from rssdata")
+	if err != nil{
+		global.GVA_LOG.Error("select 获取xmllist失败!", zap.Any("err", err))
+		return rss,err
+	}
+	for rows.Next(){
+		var rsstmp model.RssDatas
+		err = rows.Scan(&rsstmp.Id,&rsstmp.Xmltype,&rsstmp.XmlTitle,&rsstmp.XmlDescription,&rsstmp.XmlLink,&rsstmp.Status,&rsstmp.CycleTime)
+		if err != nil {
+			global.GVA_LOG.Error("select 获取xmllist失败!", zap.Any("err", err))
+			return rss,err
+		}
+		rss = append(rss, rsstmp)
+	}
+	return rss, err
+}
+
+// 添加rssdatalist
+func AddRssDataList(rss model.RssDatas)(err error){
+	_,err = global.GVA_DB.Exec("insert into rssdata(xmltype,xmltitle,xmldescription,xmllink,status,cycletime) values($1,$2,$3,$4,$5,$6);",rss.Xmltype,rss.XmlTitle,rss.XmlDescription,rss.XmlLink,rss.Status,rss.CycleTime)
+	return err
+}
+// 修改rssdatalist
+func UpdateRssDataList(rss model.RssDatas)(err error){
+	_,err = global.GVA_DB.Exec("update rssdata set xmltype=$1,xmltitle=$2,xmldescription=$3,xmllink=$4,status=$5,cycletime=$6 where id=$7;",rss.Xmltype,rss.XmlTitle,rss.XmlDescription,rss.XmlLink,rss.Status,rss.CycleTime,rss.Id)
+	return err
+}
+
+// 删除rssdatalist
+func DeleteDataList(rss request.RssIdsReq)(err error){
+	tx ,_ := global.GVA_DB.Begin()
+	for _,value := range rss.Ids{
+		_,err = tx.Exec("delete from rssdata where id = $1;",value)
+		if err !=nil{
+			global.GVA_LOG.Error("delete rssdata 失败!", zap.Any("id", value))
+			tx.Rollback()
+			return err
+		}
+	}
+	err = tx.Commit()
+	return err
+}
+
+// 根据id获取rssdata
+func GetRssDataListbyId(id string)(rsstmp model.RssDatas,err error){
+	err = global.GVA_DB.QueryRow("select id,xmltype,xmltitle,xmldescription,xmllink,status,cycletime from rssdata where id=$1",id).Scan(&rsstmp.Id,&rsstmp.Xmltype,&rsstmp.XmlTitle,&rsstmp.XmlDescription,&rsstmp.XmlLink,&rsstmp.Status,&rsstmp.CycleTime)
+	return rsstmp, err
 }

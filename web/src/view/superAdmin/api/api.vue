@@ -27,7 +27,7 @@
                     <el-button @click="openDialog('addApi')" type="primary">新增api</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-popover placement="top" width="160">
+                    <el-popover placement="top" width="160" v-model="deleteVisible">
                         <p>确定要删除吗?</p>
                         <div style="text-align: right; margin: 0">
                             <el-button size="mini" type="text">取消</el-button>
