@@ -1,16 +1,19 @@
-from golang:1.15  as build
+FROM golang:1.15  as build
 WORKDIR /go/src/app
-arg GO111MODULE=on
-arg GOPROXY='https://goproxy.cn'
-copy . .
-workdir /go/src/app/server
-run CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build  main.go 
-run ls -alh . 
-run pwd
+ARG GO111MODULE=on
+ARG GOPROXY='https://goproxy.cn'
+RUN git clone -b rssweb https://gitee.com/null_312_2255/rssweb.git rssweb
+RUN pwd
+WORKDIR /go/src/app/rssweb/server
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go 
+RUN ls -al . 
+RUN pwd
 
-from alpine:latest
-workdir /app
-copy --from=build ["/go/src/app/server/config.yaml","/go/src/app/server/main","./"]
-run chmod +x main
-expose 8888
-cmd ["./main"]
+FROM alpine:latest
+WORKDIR /app/
+COPY --from=build /go/src/app/rssweb/server/config.yaml .
+COPY --from=build /go/src/app/rssweb/server/main .
+RUN ls -al
+RUN chmod +x main
+EXPOSE 8888
+CMD ["./main"]
