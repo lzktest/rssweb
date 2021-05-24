@@ -2,7 +2,7 @@ FROM node:12.18.4  as build
 WORKDIR /usr/src/app
 RUN git clone -b rssweb https://gitee.com/null_312_2255/rssweb.git rssweb
 WORKDIR /usr/src/app/rssweb/web
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org && npm cache clean --force && cnpm install &&cnpm install @vue/cli-service -g && cnpm install --save-dev script-ext-html-webpack-plugin vue-template-compiler @vue/cli-plugin-eslint @vue/cli-plugin-babel  && npm run build
+RUN npm cache clean --force && npm install &&npm install @vue/cli-service -g && npm install --save-dev script-ext-html-webpack-plugin vue-template-compiler @vue/cli-plugin-eslint @vue/cli-plugin-babel  && npm run build
 
 FROM nginx:latest
 WORKDIR /app/

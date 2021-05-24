@@ -1,0 +1,29 @@
+version: '2'
+services:
+  rssserver:
+    #build: ./server
+    image: tianyuliufang/rsswebserver
+    #volumes:
+      #- ./server/config.yaml:/app/config.yaml
+      #- ./server/resource/:/app/resource/
+    ports:
+      - "9000:8888"
+  rssweb:
+    #build: ./web
+    image: tianyuliufang/rsswebstatic
+    #volumes:
+      #- ./server.conf:/etc/nginx/conf.d/default.conf
+      #- ./web/dist/:/app/
+    ports:
+      - "9001:80"
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: testdb1
+      POSTGRES_USER: miniflux
+      POSTGRES_PASSWORD: test
+    ports:
+      - "9002:5432"
+  redis:
+    image: redis:latest

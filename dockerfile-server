@@ -13,6 +13,8 @@ FROM alpine:latest
 WORKDIR /app/
 COPY --from=build /go/src/app/rssweb/server/config.yaml .
 COPY --from=build /go/src/app/rssweb/server/main .
+COPY --from=build /go/src/app/rssweb/server/resource ./resource
+
 RUN ls -al
 RUN chmod +x main
 EXPOSE 8888
