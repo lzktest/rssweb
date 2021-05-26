@@ -4,7 +4,7 @@
             <el-table-column prop="xmltitle" label="标题" min-width="20"></el-table-column>
             <el-table-column prop="xmllink" label="源地址" min-width="40"></el-table-column>
             <el-table-column prop="id" label="生成rss地址" min-width="80">
-                <template slot-scope="iditem">{{domain}}/v1/rss/getRssListXml?uuid={{iditem.row.id}}</template>
+                <template slot-scope="iditem">http://{{domain}}/v1/rss/getRssListXml?uuid={{iditem.row.id}}</template>
             </el-table-column>
         </el-table>
     </div>
