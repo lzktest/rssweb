@@ -75,3 +75,18 @@ export const updateRssDataList = (data) => {
         data
     })
 }
+// @Tags Rss
+// @Summary 导入rssList
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body  true "导入rssList"
+// @Success 200 {string} json "{"success":true,"data":{},"msg":"导入成功"}"
+// @Router /rss/loadRssDataList [get]
+export const loadRssDataList = (data) => {
+    return service({
+        url: "/rss/loadRssDataList",
+        method: 'post',
+        data
+    })
+}

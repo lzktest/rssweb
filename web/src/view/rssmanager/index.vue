@@ -31,6 +31,10 @@
                     </el-popover>
                 </el-form-item>
             </el-form>
+            <div>
+                <input type="file" ref="uploadxml" >
+                <el-button size="mini" @click="readXML" type="primary">开始导入</el-button>
+            </div>
         </div>
         <el-table :data="rssDatas" border strip @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
@@ -99,7 +103,8 @@ import {
     getRssDataListById,
     addRssDataList,
     deleteRssDataList,
-    updateRssDataList
+    updateRssDataList,
+    loadRssDataList,
 } from "@/api/rss";
 export default {
     name:"RssManager",
@@ -127,6 +132,30 @@ export default {
         }
     },
     methods: {
+        async readXML(){
+            let filepath = this.$refs.uploadxml.files[0]
+            let reader = new FileReader();
+            reader.readAsText(filepath, "UTF-8");
+            reader.onload = function(evt){
+                var fileString = evt.target.result;
+                var xmlDoc = null;
+                var loadRssList = [];
+                var parser = new DOMParser();
+                xmlDoc = parser.parseFromString(fileString,"text/xml");
+                var xmlnode = xmlDoc.getElementsByTagName("outline");
+                for (var i=0; i<xmlnode.length;i++){
+                    var outline = xmlnode[i];
+                    loadRssList.push({
+                        title: outline.attributes.title.nodeValue,
+                        type: outline.attributes.type.nodeValue,
+                        xmlUrl: outline.attributes.xmlUrl.nodeValue,
+                        htmlUrl: outline.attributes.htmlUrl.nodeValue,
+                    });
+                }
+                console.log(loadRssList)
+                loadRssDataList({ loadRssList })
+            };            
+        },
         //选中rss
         handleSelectionChange(val){
             this.rssids = val;

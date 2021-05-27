@@ -15,4 +15,5 @@ var (
 	ApiVerify		= Rules{"Path":{NotEmpty()},"Description":{NotEmpty()},"ApiGroup":{NotEmpty()},"Method":{NotEmpty()}}
 	RssDatas 	=Rules{"Xmltype":{NotEmpty()},"XmlTitle":{NotEmpty()},"XmlLink":{NotEmpty()},"CycleTime":{NotEmpty()}}
 	RssDatasUpdate 	=Rules{"Id":{NotEmpty()},"Xmltype":{NotEmpty()},"XmlTitle":{NotEmpty()},"XmlLink":{NotEmpty()},"CycleTime":{NotEmpty()}}
+	RssDataLoad =Rules{"titel":{NotEmpty()},"htmlUrl":{NotEmpty()}}
 )

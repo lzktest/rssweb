@@ -150,11 +150,34 @@ func UpdateRssDataList(c *gin.Context){
 func DeleteRssDataList(c *gin.Context){
 	var rssidtmp request.RssIdsReq
 	_ = c.ShouldBindJSON(&rssidtmp)
-	global.GVA_LOG.Error("删除失败!", zap.Any("err", rssidtmp))
+	//global.GVA_LOG.Error("删除失败!", zap.Any("err", rssidtmp))
 	if err := services.DeleteDataList(rssidtmp); err != nil{
 		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
 		response.FailWithMessage("删除失败",c)
 	} else {
 		response.OkWithMessage("删除成功", c)
+	}
+}
+
+// @Tags Rss
+// @Summary 导入rsslist
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body model.LoadRssDataList true "id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"导入成功"}"
+// @Router /rss/loadRssDataList [post]
+func LoadRssDataList(c *gin.Context){
+	var rsstmp model.LoadRssDataList
+	_ = c.ShouldBindJSON(&rsstmp)
+	if err := utils.Verify(rsstmp,utils.RssDataLoad); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	if err := services.LoadRssDataList(rsstmp); err != nil{
+		global.GVA_LOG.Error("导入失败!", zap.Any("err", err))
+		response.FailWithMessage("导入失败",c)
+	} else {
+		response.OkWithMessage("导入成功", c)
 	}
 }

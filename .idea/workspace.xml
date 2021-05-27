@@ -3,6 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="8e2b7e97-091a-4d8a-9cc5-64e404cfef36" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/v1/rss.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/v1/rss.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/docs/docs.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/docs.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/docs/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/docs/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/server/docs/swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/model/rssdata.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/model/rssdata.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/router/rss.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/rss.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/service/getdata.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service/getdata.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/utils/verify.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/utils/verify.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/api/rss.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/api/rss.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/view/rssmanager/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/view/rssmanager/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

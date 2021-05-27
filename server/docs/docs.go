@@ -19,6 +19,7 @@ var doc = `{
         "description": "{{.Description}}",
         "title": "{{.Title}}",
         "contact": {},
+        "license": {},
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -1182,6 +1183,44 @@ var doc = `{
                 }
             }
         },
+        "/rss/loadRssDataList": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Rss"
+                ],
+                "summary": "导入rsslist",
+                "parameters": [
+                    {
+                        "description": "id",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.LoadRssDataList"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"导入成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/rss/updateRssDataList": {
             "post": {
                 "security": [
@@ -1439,6 +1478,34 @@ var doc = `{
         }
     },
     "definitions": {
+        "model.LoadRssDataList": {
+            "type": "object",
+            "properties": {
+                "loadRssList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.LoadRssList"
+                    }
+                }
+            }
+        },
+        "model.LoadRssList": {
+            "type": "object",
+            "properties": {
+                "htmlUrl": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "xmlUrl": {
+                    "type": "string"
+                }
+            }
+        },
         "model.RssDatas": {
             "type": "object",
             "properties": {
@@ -1475,7 +1542,7 @@ var doc = `{
                     "type": "string"
                 },
                 "deletedAt": {
-                    "$ref": "#/definitions/sql.NullTime"
+                    "type": "string"
                 },
                 "description": {
                     "type": "string"
@@ -1563,7 +1630,7 @@ var doc = `{
                     "type": "boolean"
                 },
                 "deletedAt": {
-                    "$ref": "#/definitions/sql.NullTime"
+                    "type": "string"
                 },
                 "hidden": {
                     "type": "boolean"
@@ -1613,7 +1680,7 @@ var doc = `{
                     "type": "string"
                 },
                 "deletedAt": {
-                    "$ref": "#/definitions/sql.NullTime"
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
@@ -1639,6 +1706,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "authority": {
+                    "type": "object",
                     "$ref": "#/definitions/model.SysAuthority"
                 },
                 "authorityId": {
@@ -1648,7 +1716,7 @@ var doc = `{
                     "type": "string"
                 },
                 "deletedAt": {
-                    "$ref": "#/definitions/sql.NullTime"
+                    "type": "string"
                 },
                 "headerImg": {
                     "type": "string"
@@ -1802,7 +1870,7 @@ var doc = `{
                     "type": "string"
                 },
                 "deletedAt": {
-                    "$ref": "#/definitions/sql.NullTime"
+                    "type": "string"
                 },
                 "desc": {
                     "type": "boolean"
@@ -1848,22 +1916,11 @@ var doc = `{
             "type": "object",
             "properties": {
                 "authority": {
+                    "type": "object",
                     "$ref": "#/definitions/model.SysAuthority"
                 },
                 "oldAuthorityId": {
                     "type": "string"
-                }
-            }
-        },
-        "sql.NullTime": {
-            "type": "object",
-            "properties": {
-                "time": {
-                    "type": "string"
-                },
-                "valid": {
-                    "description": "Valid is true if Time is not NULL",
-                    "type": "boolean"
                 }
             }
         }

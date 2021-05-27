@@ -1,5 +1,23 @@
 basePath: /
 definitions:
+  model.LoadRssDataList:
+    properties:
+      loadRssList:
+        items:
+          $ref: '#/definitions/model.LoadRssList'
+        type: array
+    type: object
+  model.LoadRssList:
+    properties:
+      htmlUrl:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      xmlUrl:
+        type: string
+    type: object
   model.RssDatas:
     properties:
       cycletime:
@@ -24,7 +42,7 @@ definitions:
       createdAt:
         type: string
       deletedAt:
-        $ref: '#/definitions/sql.NullTime'
+        type: string
       description:
         type: string
       id:
@@ -82,7 +100,7 @@ definitions:
       defaultMenu:
         type: boolean
       deletedAt:
-        $ref: '#/definitions/sql.NullTime'
+        type: string
       hidden:
         type: boolean
       icon:
@@ -115,7 +133,7 @@ definitions:
       createdAt:
         type: string
       deletedAt:
-        $ref: '#/definitions/sql.NullTime'
+        type: string
       id:
         type: integer
       key:
@@ -133,12 +151,13 @@ definitions:
     properties:
       authority:
         $ref: '#/definitions/model.SysAuthority'
+        type: object
       authorityId:
         type: string
       createdAt:
         type: string
       deletedAt:
-        $ref: '#/definitions/sql.NullTime'
+        type: string
       headerImg:
         type: string
       id:
@@ -237,7 +256,7 @@ definitions:
       createdAt:
         type: string
       deletedAt:
-        $ref: '#/definitions/sql.NullTime'
+        type: string
       desc:
         type: boolean
       description:
@@ -268,20 +287,14 @@ definitions:
     properties:
       authority:
         $ref: '#/definitions/model.SysAuthority'
+        type: object
       oldAuthorityId:
         type: string
-    type: object
-  sql.NullTime:
-    properties:
-      time:
-        type: string
-      valid:
-        description: Valid is true if Time is not NULL
-        type: boolean
     type: object
 info:
   contact: {}
   description: This is a sample Server pets
+  license: {}
   title: Swagger Example API
   version: 0.0.1
 paths:
@@ -983,6 +996,29 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 获取rssxml
+      tags:
+      - Rss
+  /rss/loadRssDataList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.LoadRssDataList'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"导入成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 导入rsslist
       tags:
       - Rss
   /rss/updateRssDataList:

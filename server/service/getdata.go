@@ -153,6 +153,20 @@ func GetRssDataJson(rssdataid string)(atomtmp response.Rss, err error){
 	}
 	return atomtmp,nil
 }
+// 导入rssdata数据
+func LoadRssDataList(list model.LoadRssDataList)(err error){
+	tx, _ := global.GVA_DB.Begin()
+	for _,value := range list.LoadRssList{
+		_,err = tx.Exec("insert into rssdata(xmltype,xmltitle,xmldescription,xmllink,status,cycletime) values($1,$2,$3,$4,$5,$6);","rss-xml",value.Title,value.Title,value.HtmlUrl,true,"1440")
+		if err != nil {
+			global.GVA_LOG.Error("导入rssdata失败!", zap.Any("err", err))
+			err = tx.Rollback()
+			return err
+		}
+	}
+	err = tx.Commit()
+	return err
+}
 //检查xml是否有某个节点
 func CheckTag(src , tag string)(bool, error){
 	decoder := xml.NewDecoder(strings.NewReader(src))
@@ -222,3 +236,4 @@ func GetRssDataListbyId(id string)(rsstmp model.RssDatas,err error){
 	err = global.GVA_DB.QueryRow("select id,xmltype,xmltitle,xmldescription,xmllink,status,cycletime from rssdata where id=$1",id).Scan(&rsstmp.Id,&rsstmp.Xmltype,&rsstmp.XmlTitle,&rsstmp.XmlDescription,&rsstmp.XmlLink,&rsstmp.Status,&rsstmp.CycleTime)
 	return rsstmp, err
 }
+

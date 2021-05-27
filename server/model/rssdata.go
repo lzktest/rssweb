@@ -82,3 +82,12 @@ type RssDatas struct {
 type RssDataList struct{
 	RssDataLists []RssDatas `json:"rssDataList"`
 }
+type LoadRssDataList struct{
+	LoadRssList []LoadRssList `json:"loadRssList"`
+}
+type LoadRssList struct{
+	Title string `json:"title"`
+	Type string `json:"type"`
+	HtmlUrl string `json:"htmlUrl"`
+	XmlUrl string `json:"xmlUrl"`
+}
